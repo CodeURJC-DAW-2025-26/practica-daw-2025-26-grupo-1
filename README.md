@@ -1,78 +1,69 @@
-# [Nombre de la Aplicación]
+# Museoteca
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| [Nombre 1] | [email1]@alumnos.urjc.es | [User1] |
-| [Nombre 2] | [email2]@alumnos.urjc.es | [User2] |
-| [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
-| [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
+| Adrián Villalba Cuello de Oro | a.villalba.2023@alumnos.urjc.es | AdrianVillalba26 |
 
 ---
 
 ## 🎭 **Preparación 1: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+Aplicación sobre una web informativa de un museo. Los usuarios que acceden a la página pueden seleccionar una de las categorías disponibles en la web, de manera que se muestran todos los objetos que posee el museo de dicha categoría. Además de esto, el usuario puede elegir uno de los objetos mostrados de la categoría seleccionada para consultar información de interés acerca del objeto. La finalidad de esta web es que los usuarios puedan aprender y conocer en mayor profundidad la colección del museo de una manera interactiva, sencilla y accesible mediante una experiencia digital intuitiva y educativa.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **Usuario**: Persona que entra a la aplicación web del museo.
+2. **Objeto**: Pieza o elemento que forma parte de la colección del museo y que pertenece a una sección determinada.
+3. **Nota**: Anotación que un usuario puede dejar en un objeto.
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- Usuario - Objeto: Un usuario puede consultar varios objetos, y un objeto puede ser consultado por varios usuarios (N:M). 
+- Usuario - Nota: Un usuario puede dejar varias notas, pero cada nota pertenece a un único usuario (1:N).
+- Objeto - Nota: Un objeto puede contener varias notas, pero cada nota está asociada a un único objeto (1:N).
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
-  - No es dueño de ninguna entidad
+  - Permisos: Puede acceder a una sección, entrar a la página informativa de un objeto y realizar búsquedas.
+  - No es dueño de ninguna entidad.
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos:
+    -> Puede acceder a una sección, entrar a la página informativa de un objeto y realizar búsquedas usando filtros.
+    -> Puede marcar o desmarcar un objeto como visto, y también puede marcar un objeto como favorito, guardando dicho objeto en una lista de favoritos que posee, o desmascarlo.
+    -> Puede dejar una o varias notas en la página informativa de un objeto.
+    -> Puede editar su perfil de usuario.
+  - Es dueño de: Su perfil de usuario, los objetos que marca como vistos, los objetos que marca como favoritos y las notas que deja en un objeto.
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos:
+    -> Puede añadir o eliminar una sección.
+    -> Puede añadir o eliminar un objeto tras acceder a una sección (editar una sección).
+    -> Puede editar un objeto desde la página informativa de este (cambiar foto, nombre o descripción del objeto, además de poder añadir o eliminar una nota).
+  - Es dueño de: Las secciones que muestra el museo en la web, los objetos que muestra cada sección, los datos e imágenes de cada objeto, y las notas que dejan los usuarios. No puede crear ni eliminar usuarios, ni tampoco editar sus datos personales.
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **Usuario**: Una imagen en el perfil, que el usuario puede cambiar por otra o quitarla si lo desea.
+- **Objeto**: Cada objeto tiene una imagen junto a su descripción en la página informativa de dicho objeto. La misma imagen también aparece en el objeto localizado en la lista de objetos que se muestra tras acceder a una sección.
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
-- **Gráfico 2**: [Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
-
-### **Tecnología Complementaria**
-Indicar qué tecnología complementaria se empleará:
-
-- [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
-- [Ej: Generación de PDFs de facturas usando iText o similar]
-- [Ej: Sistema de autenticación OAuth2 o JWT]
-- [Otras tecnologías externas que se integrarán]
+- **Gráfico 1**: Gráfico que muestra cómo se distribuye el total de objetos entre las diferentes secciones (Gráfico de tarta / circular).
+- **Gráfico 2**: Gráfico que representa el número de objetos favoritos que tiene el usuario por cada sección (Gráfico de barras).
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algoritmo/Consulta**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Descripción**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
-- **Alternativa**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
+- **Algoritmo/Consulta**: Cálculo del porcentaje de progreso del usuario por sección.
+- **Descripción**: El sistema calcula el porcentaje de objetos que un usuario registrado ha marcado como "vistos" dentro de cada sección del museo.
+- **Alternativa**: Determinar la sección favorita del usuario calculando el número de objetos marcados como favoritos en cada sección. Si coinciden varias secciones como las favoritas del usuario, se muestran todas las que coincidan.
 
 ---
 
