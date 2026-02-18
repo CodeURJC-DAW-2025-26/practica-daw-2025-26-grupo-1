@@ -102,11 +102,34 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **Diagrama de Navegación**
 
-Solo si ha cambiado.
+Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
+
+![Diagrama de Navegación](images/navigation-diagram.png)
+
+> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
 
 #### **Capturas de Pantalla Actualizadas**
 
-Solo si han cambiado.
+#### **1. Página inicial**
+![Página Principal](screenshots/pagina-inicial.png)
+
+> Página de inicio de la aplicación. En la página, se te da la opción de iniciar sesión, registrarte, o acceder a la web como usuario anónimo. Si accedes como usuario anónimo, arriba se seguirá mostrando las opciones de inicio de sesión y de registro en todas las páginas por las que navegues.
+
+#### **2. Página principal / Home**
+![Página Principal](screenshots/pagina-principal.png)
+
+> Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
+
+#### **3. Página de una sección**
+![Página Principal](screenshots/pagina-de-seccion.png)
+
+> Página que se muestra tras haber seleccionado una sección de las disponibles en la página principal. El usuario puede usar la barra de búsqueda, seleccionar uno de los elementos que se muestran en la página o consultar otros elementos que no están visibles en la página (opción "Ver más").
+
+#### **4. Página informativa**
+![Página Principal](screenshots/info-anonimo.png)
+![Página Principal](screenshots/info-anonimo-relacionados.png)
+
+> Página que se muestra tras haber seleccionado un elemento de las disponibles en la página de la sección. El usuario puede consultar información de interés acerca del elemento que ha seleccionado previamente. También puede seleccionar otro elemento de los que aparecen como relacionados para acceder a sus respectivas páginas informativas.
 
 ### **Instrucciones de Ejecución**
 
