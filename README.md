@@ -115,7 +115,17 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página de inicio de la aplicación. En la página, se te da la opción de iniciar sesión, registrarte, o acceder a la web como usuario anónimo. Si accedes como usuario anónimo, arriba se seguirá mostrando las opciones de inicio de sesión y de registro en todas las páginas por las que navegues.
 
-#### **2. Página principal / Home**
+#### **2. Página de registro**
+![Página Principal](screenshots/)
+
+> Página que se muestra tras haber pulsado la opción "Registrarse" en la barra superior. Se debe poner un nombre de usuario y una contraseña; opcionalmente, se puede poner también una imagen o foto de perfil. Tras esto, al pulsar en "Aceptar" quedas registrado en la aplicación.
+
+#### **3. Página de inicio de sesión**
+![Página Principal](screenshots/pagina-inicio-sesion.png)
+
+> Página que se muestra tras haber pulsado la opción "Iniciar sesión" en la barra superior. Se debe poner un nombre de usuario y una contraseña para poder iniciar tu sesión en la aplicación. 
+
+#### **4. Página principal / Home**
 ![Página Principal](screenshots/pagina-principal.png)
 
 > Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
