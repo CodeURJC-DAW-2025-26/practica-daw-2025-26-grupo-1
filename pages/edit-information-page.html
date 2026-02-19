@@ -37,10 +37,17 @@
                     <li><a href="#" class="nav-link px-2 text-white">Obras de arte</a></li>
                 </ul>
 
-                <div class="text-end">
-                    <a href="../pages/log-in-page.html" class="btn btn-outline-light me-2">Iniciar sesión</a>
-                    <a href="../pages/registration-page.html" class="btn btn-warning">Registrarse</a>
+                <div class="dropdown text-end"> <a href="#"
+                        class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="mdo"
+                            width="45" height="45" class="rounded-circle"> </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Estadísticas y favoritos</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </header>
@@ -52,38 +59,42 @@
 
 
                 <div class="card mb-4 rounded-3 shadow-sm border-primary">
-
                     <div class="card-body">
-                        <div class="fs-5 mb-5">
-                            <label for="object-name-edited">Nombre: </label>
-                            <input type="text" value="Celacanto">
-                        </div>
+                        <form>
+                                <div class="fs-5 mb-3">
+                                    <label for="object-name-edited" class="form-label">Nombre: </label>
+                                    <input type="text" class="form-control" id="object-name-edited" value="Celacanto">
+                                </div>
 
-                        <div class="fs-5 mb-5">
-                            <label for="object-scientific-name-edited">Nombre científico: </label>
-                            <input type="text" value="Coelacanthiformes (Coelacanthimorpha)">
-                        </div>
+                                <div class="fs-5 mb-3">
+                                    <label for="object-name-edited" class="form-label">Nombre científico: </label>
+                                    <input type="text" class="form-control" id="object-name-edited"
+                                        value="Coelacanthiformes (Coelacanthimorpha)">
+                                </div>
 
-                        <div class="fs-5 mb-5">
-                            <label for="object-type">Tipo: </label>
-                            <input type="text" value="Abisales">
-                        </div>
-
+                                <div class="fs-5 mb-3">
+                                    <label for="object-name-edited" class="form-label">Tipo: </label>
+                                    <input type="text" class="form-control" id="object-name-edited" value="Abisales">
+                                </div>
+                        </form>
 
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <img class="card-img-top mb-5 mb-md-0 rounded" src="../proyect-images/fish/deep-sea/celacanto.png"
-                        alt="..." />
+                <div class="col-md-6 d-flex flex-column align-items-center">
+                    <img class="card-img-top mb-4 rounded" src="../proyect-images/fish/deep-sea/celacanto.png"
+                        alt="Celacanto" />
 
-                    <a class="btn btn-secondary mt-auto" href="#">
-                        <i class="bi bi-file-earmark-image"></i>
-                        Cambiar imagen </a>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-secondary" href="#">
+                            <i class="bi bi-file-earmark-image"></i>
+                            Cambiar imagen </a>
 
-                    <a class="btn btn-danger mt-auto" href="#">
-                        <i class="bi bi-x-lg"></i>
-                        Eliminar imagen </a>
+                        <a class="btn btn-danger" href="#">
+                            <i class="bi bi-x-lg"></i>
+                            Eliminar imagen </a>
+                    </div>
+
                 </div>
 
                 <div class="col-md-6">
@@ -93,8 +104,12 @@
                             <h4 class="my-0 fw-normal">Ficha técnica</h4>
                         </div>
                         <div class="card-body">
-                            <label for="object-technical-data">Datos: </label>
-                            <input type="text" value="Nombre científico: Latimeria chalumnae
+                            <div class="fs-5">
+                                <label for="object-technical-data" class="form-label">Datos: </label>
+                            </div>
+
+                            <textarea class="form-control" id="object-technical-data" rows="12">
+Nombre científico: Latimeria chalumnae
 Grupo: Orden Coelancanthiformes
 Longitud: Hasta 2 m
 Peso: Hasta 90 kg
@@ -104,19 +119,21 @@ Dieta: Peces pequeños y cefalópodos
 Reproducción: Vivíparo
 Antigüedad: Linaje de más de 400 millones de años
 Dato destacado: Se creía extinto hasta su redescubrimiento en 1938
-Estado de conservación: En peligro crítico">
+Estado de conservación: En peligro crítico
+                            </textarea>
                         </div>
                     </div>
-
                 </div>
-
 
                 <div class="card mb-4 rounded-3 shadow-sm border-primary">
 
                     <div class="card-body">
-                        <label for="object-technical-data">Información: </label>
-                        <input type="text"
-                            value="El celacanto es un pez marino prehistórico perteneciente al género Latimeria. Durante millones de años solo se conocía por fósiles y se creía extinguido desde el final de la era de los dinosaurios, hasta que en 1938 fue redescubierto un ejemplar vivo en Sudáfrica. Este hallazgo fue uno de los más importantes del siglo XX en el ámbito científico.
+
+                        <div class="fs-5">
+                            <label for="object-technical-data" class="form-label">Información: </label>
+                        </div>
+                        <textarea class="form-control" id="object-technical-data" rows="12">
+El celacanto es un pez marino prehistórico perteneciente al género Latimeria. Durante millones de años solo se conocía por fósiles y se creía extinguido desde el final de la era de los dinosaurios, hasta que en 1938 fue redescubierto un ejemplar vivo en Sudáfrica. Este hallazgo fue uno de los más importantes del siglo XX en el ámbito científico.
 
 Su linaje se remonta a hace aproximadamente 400 millones de años, lo que lo convierte en uno de los grupos de vertebrados más antiguos que aún existen. Es conocido como “fósil viviente” porque su morfología ha cambiado muy poco a lo largo del tiempo geológico.
 
@@ -126,28 +143,37 @@ Una de sus características más destacadas son sus aletas lobuladas y carnosas,
 
 Actualmente existen dos especies vivas: Latimeria chalumnae, localizada en el Océano Índico occidental, y Latimeria menadoensis, en Indonesia. Su reproducción es vivípara y su crecimiento es lento; puede vivir más de 60 años.
 
-Debido a su escasa población y a la pesca accidental, está catalogado como En Peligro Crítico según la UICN, lo que lo convierte en una especie de gran interés científico y de especial importancia para la conservación marina.">
+Debido a su escasa población y a la pesca accidental, está catalogado como En Peligro Crítico según la UICN, lo que lo convierte en una especie de gran interés científico y de especial importancia para la conservación marina.
+                        </textarea>
 
                     </div>
                 </div>
+
 
                 <div class="card mb-4 rounded-3 shadow-sm border-primary">
 
                     <div class="card-body">
 
-                        <label for="object-technical-data">Comentario: </label>
-                        <input type="text" value="Comentario">
-                        <a class="btn btn-secondary mt-auto" href="#">
+                        <div class="fs-5">
+                            <label for="object-technical-data" class="form-label">Comentario: </label>
+                        </div>
+                        <textarea class="form-control flex-grow-1 mb-3" id="object-technical-data" rows="3">
+Comentario
+                        </textarea>
+                        <div class="text-center">
+                            <a class="btn btn-secondary mt-auto" href="#">
                             <i class="bi bi-pencil-square"></i>
                             Editar</a>
                         <a class="btn btn-danger mt-auto" href="#">
                             <i class="bi bi-x-lg"></i>
                             Eliminar</a>
-
-
+                        </div>
+                        
 
                     </div>
                 </div>
+
+
                 <div class="d-flex justify-content-center gap-3">
                     <button class="btn btn-danger px-3" type="button">
                         <i class="bi bi-arrow-left"></i>
@@ -156,6 +182,10 @@ Debido a su escasa población y a la pesca accidental, está catalogado como En 
                     <button class="btn btn-secondary px-3" type="button">
                         <i class="bi bi-card-text"></i>
                         Añadir comentario
+                    </button>
+                    <button class="btn btn-success px-3" type="button">
+                        <i class="bi bi-check2"></i>
+                        Aceptar cambios
                     </button>
 
                 </div>

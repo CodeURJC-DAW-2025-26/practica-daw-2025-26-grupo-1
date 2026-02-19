@@ -28,29 +28,37 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg> </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="../pages/welcome-page-anonymous-user.html" class="nav-link px-2 text-white">Página principal</a></li>
+                    <li><a href="../pages/welcome-page-anonymous-user.html" class="nav-link px-2 text-white">Página
+                            principal</a></li>
                     <li><a href="../pages/section-list-page-user.html" class="nav-link px-2 text-white">Peces</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Insectos</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Fósiles</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Obras de arte</a></li>
                 </ul>
 
-                <div class="text-end"> 
-                    <a href="../pages/log-in-page.html" class="btn btn-outline-light me-2">Iniciar sesión</a>
-                    <a href="../pages/registration-page.html" class="btn btn-warning">Registrarse</a>
+                <div class="dropdown text-end"> <a href="#"
+                        class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="mdo"
+                            width="45" height="45" class="rounded-circle"> </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Estadísticas y favoritos</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </header>
 
     <!-- Header-->
-    <header class="py-5 related-fish">
+    <header class="py-5 related-fish-header">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <div class="d-flex align-items-center justify-content-center justify-content-xl-start">
+                <div class="d-flex align-items-center justify-content-center">
                     <img src="../proyect-images/icons/logo-pez.png" alt="Logo app" class="me-3 rounded-circle"
                         style="height:120px;">
-                    <h1 class="display-4 fw-bolder">Peces y criaturas marinas / acuáticas</h1>
+                    <h1 class="display-4 fw-bolder">Peces y criaturas marinas</h1>
                 </div>
                 <br>
                 <br>
@@ -68,20 +76,32 @@
                         class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
                         <use xlink:href="#bootstrap"></use>
                     </svg> </a>
-
-                <button class="btn bg-success-subtle text-success-emphasis px-3" type="button">Agua dulce</button>
+                
+                <button class="btn bg-info-subtle text-info-emphasis px-3" type="button">Agua dulce</button>
                 <button class="btn bg-primary-subtle text-primary-emphasis px-3" type="button">Mar</button>
                 <button class="btn bg-dark-subtle text-dark-emphasis px-3" type="button">Abisales</button>
 
+                <!--
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ms-lg-auto" role="search"> <input type="search"
-                        class="form-control form-control-dark text-bg-light" placeholder="Search..."
-                        aria-label="Search">
+                        class="form-control form-control-dark text-bg-light" aria-label="Search">
                 </form>
+
+                
                 <button class="btn btn-secondary px-3" type="button">
                     <i class="bi bi-search"></i>
                     Buscar
                 </button>
+                -->
+
+                <form class="card p-2 ms-lg-auto">
+                    <div class="input-group"> <input type="text" class="form-control">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="bi bi-search"></i>
+                            Buscar</button>
+                    </div>
+                </form>
             </div>
+        </div>
     </section>
 
 
@@ -199,7 +219,7 @@
                 </div>
                 <!-- Product actions-->
                 <div class="d-flex justify-content-center gap-3">
-                    <button class="btn btn-success px-3" type="button">
+                    <button class="btn btn-secondary px-3" type="button">
                         <i class="bi bi-plus"></i>
                         Añadir
                     </button>
@@ -208,7 +228,7 @@
                         <i class="bi bi-eye-fill"></i>
                         Ver más
                     </button>
-                    
+
                 </div>
             </div>
         </div>

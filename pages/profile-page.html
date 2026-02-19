@@ -29,71 +29,87 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg> </a>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="../pages/welcome-page-anonymous-user.html" class="nav-link px-2 text-white">Página principal</a></li>
+                    <li><a href="../pages/welcome-page-anonymous-user.html" class="nav-link px-2 text-white">Página
+                            principal</a></li>
                     <li><a href="../pages/section-list-page-user.html" class="nav-link px-2 text-white">Peces</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Insectos</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Fósiles</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Obras de arte</a></li>
                 </ul>
 
-                <div class="text-end"> 
-                    <a href="../pages/log-in-page.html" class="btn btn-outline-light me-2">Iniciar sesión</a>
-                    <a href="../pages/registration-page.html" class="btn btn-warning">Registrarse</a>
+                <div class="dropdown text-end"> <a href="#"
+                        class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="mdo"
+                            width="45" height="45" class="rounded-circle"> </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Estadísticas y favoritos</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </header>
     <!-- Product section-->
-    <section class="py-5 related-museum-header">
+    <section class="py-5 museum-custom-background">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
                 <div class="col-md-6">
 
                     <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3 text-bg-primary border-primary text-center">
-                            <h4 class="my-0 fw-normal">Iniciar sesión</h4>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li><b>Nombre científico: </b><i>Latimeria chalumnae</i></li>
-                                <li><b>Grupo: </b>Orden <i>Coelancanthiformes</i></li>
-                                <li><b>Longitud: </b>Hasta 2 m</li>
-                                <li><b>Peso: </b>Hasta 90 kg</li>
-                                <li><b>Esperanza de vida: </b>Más de 60 años</li>
-                                <li><b>Hábitat: </b>Aguas profundas (150-700 m), cuevas submarinas del Océano Índico
-                                    occidental e Indonesia</li>
-                                <li><b>Dieta: </b>Peces pequeños y cefalópodos</li>
-                                <li><b>Reproducción: </b>Vivíparo</li>
-                                <li><b>Antigüedad: </b>Linaje de más de 400 millones de años</li>
-                                <li><b>Dato destacado: </b>Se creía extinto hasta su redescubrimiento en 1938</li>
-                                <li><b>Estado de conservación: </b>En peligro crítico</li>
-                            </ul>
+
+                        <div class="modal-content rounded-4 shadow">
+                            <div class="modal-header p-5 pb-4 border-bottom-0 justify-content-center">
+                                <h1 class="fw-bold mb-0 fs-2">Su perfil</h1>
+                            </div>
+                            <div class="modal-body p-5 pt-0">
+                                <form class="">
+
+                                    <div class="d-flex justify-content-center">
+                                        <img src="https://github.com/mdo.png" alt="Logo app"
+                                            class="me-3 rounded-circle mb-3" style="height:80px;">
+                                    </div>
+                                    
+                                    <div class="d-flex boton-flex justify-content-center mb-5 gap-3">
+                                        <button type="button" class="btn btn-secondary" onclick=" ">Cambiar
+                                            imagen</button>
+                                        <button type="button" class="btn btn-secondary" onclick=" ">Borrar
+                                            imagen</button>
+                                    </div>
+
+                                    <div class="form-floating mb-3"> <input type="text" class="form-control rounded-3"
+                                            id="floatingInput">
+                                        <label for="floatingInput">Nombre de usuario</label>
+                                    </div>
+                                    <div class="form-floating mb-3"> <input type="password"
+                                            class="form-control rounded-3" id="floatingPassword">
+                                        <label for="floatingPassword">Contraseña</label>
+                                    </div> <a href="" class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
+                                            class="bi bi-check2"></i>
+                                        Aceptar</a>
+
+
+                                </form>
+                            </div>
                         </div>
                     </div>
 
+
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="../pages/welcome-page-anonymous-user.html" class="btn btn-danger px-3" type="button">
+                            <i class="bi bi-arrow-left"></i>
+                            Volver
+                        </a>
+
+                    </div>
+
                 </div>
-
-
-                
-
-                <div class="d-flex justify-content-center gap-3">
-                    <button class="btn btn-danger px-3" type="button">
-                        <i class="bi bi-arrow-left"></i>
-                        Volver
-                    </button>
-
-                    <button class="btn btn-success px-3" type="button">
-                        <i class="bi bi-check2"></i>
-                        Aceptar
-                    </button>
-                    
-                </div>
-
             </div>
-        </div>
     </section>
-    
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">

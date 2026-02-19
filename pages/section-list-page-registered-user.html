@@ -36,63 +36,97 @@
                     <li><a href="#" class="nav-link px-2 text-white">Obras de arte</a></li>
                 </ul>
 
-                <div class="text-end">
-                    <a href="../pages/log-in-page.html" class="btn btn-outline-light me-2">Iniciar sesión</a>
-                    <a href="../pages/registration-page.html" class="btn btn-warning">Registrarse</a>
+                <div class="dropdown text-end"> <a href="#"
+                        class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="mdo"
+                            width="45" height="45" class="rounded-circle"> </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Estadísticas y favoritos</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                    </ul>
                 </div>
+
             </div>
         </div>
     </header>
 
     <!-- Header-->
-    <header class="py-5 related-museum-header">
+    <header class="py-5 related-fish-header">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <div class="d-flex align-items-center justify-content-center">
-
-                    <h1 class="display-4 fw-bolder">¡Bienvenido a Museoteca!</h1>
+                    <img src="../proyect-images/icons/logo-pez.png" alt="Logo app" class="me-3 rounded-circle"
+                        style="height:120px;">
+                    <h1 class="display-4 fw-bolder">Peces y criaturas marinas</h1>
                 </div>
                 <br>
                 <br>
-                <h4 class="text-center text-white">El lugar donde podrá encontrar y aprender acerca de algunas temáticas
-                    que seguro que le resultarán interesantes.</h4>
+                <h4 class="text-center text-white">En esta sección, podrá conocer los diferentes animales que se pueden
+                    encontrar en hábitats de agua dulce, en el mar o en aguas más profundas.</h4>
             </div>
         </div>
     </header>
 
 
-    <section class="p-3 text-bg-dark d-flex align-items-center justify-content-center" style="min-height: 80px;">
+    <section class="p-3 text-bg-dark">
         <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start gap-3"> <a
+                    href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"> <svg
+                        class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg> </a>
+                
+                <button class="btn bg-info-subtle text-info-emphasis px-3" type="button">Agua dulce</button>
+                <button class="btn bg-primary-subtle text-primary-emphasis px-3" type="button">Mar</button>
+                <button class="btn bg-dark-subtle text-dark-emphasis px-3" type="button">Abisales</button>
 
-            <h4 class="text-center text-white m-0">Por favor, seleccione una de las secciones que se muestran a
-                continuación: </h4>
+                <!--
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ms-lg-auto" role="search"> <input type="search"
+                        class="form-control form-control-dark text-bg-light" aria-label="Search">
+                </form>
+
+                
+                <button class="btn btn-secondary px-3" type="button">
+                    <i class="bi bi-search"></i>
+                    Buscar
+                </button>
+                -->
+
+                <form class="card p-2 ms-lg-auto">
+                    <div class="input-group"> <input type="text" class="form-control">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="bi bi-search"></i>
+                            Buscar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
 
     <!-- Section-->
-    <section class="py-5 museum-custom-background">
+    <section class="py-5 fish-custom-background">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="../proyect-images/icons/logo-pez.png" alt="..." />
+                        <img class="card-img-top" src="../proyect-images/fish/sea/pez-napoleon.png" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Peces y criaturas marinas</h5>
-                                <span class="badge bg-info-subtle text-info-emphasis rounded-pill">Agua dulce</span>
+                                <h5 class="fw-bolder">Pez napoleón</h5>
                                 <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">Mar</span>
-                                <span class="badge bg-dark-subtle text-dark-emphasis rounded-pill">Abisales</span>
+
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center"><a class="btn btn-outline-dark mt-auto"
-                                    href="../pages/section-list-page-user.html">Seleccionar</a>
+                                    href="../pages/informative-page-anonymous.html">Seleccionar</a>
                             </div>
                         </div>
                     </div>
@@ -101,45 +135,14 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="../proyect-images/icons/logo-mariposa.png" alt="..." />
+                        <img class="card-img-top" src="../proyect-images/fish/freshwater/koi.png" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Insectos</h5>
-                                <span
-                                    class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Terrestres</span>
-                                <span
-                                    class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Aéreos</span>
-                                <span
-                                    class="badge bg-primary-subtle text-primary-emphasis rounded-pill">Acuáticos</span>
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Seleccionar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="../proyect-images/icons/logo-fosil.png" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fósiles</h5>
-                                <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">Marinos</span>
-                                <span class="badge bg-info-subtle text-info-emphasis rounded-pill">Acuáticos de agua
+                                <h5 class="fw-bolder">Koi</h5>
+                                <span class="badge bg-info-subtle text-info-emphasis rounded-pill">Agua
                                     dulce</span>
-                                <span
-                                    class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Terrestres</span>
-                                <span
-                                    class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">Aéreos</span>
-
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -153,18 +156,35 @@
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="../proyect-images/icons/logo-pintura.png" alt="..." />
+                        <img class="card-img-top" src="../proyect-images/fish/deep-sea/pez-cabeza-transparente.png"
+                            alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Obras de arte</h5>
-                                <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Pintura</span>
-                                <span
-                                    class="badge bg-warning-subtle text-warning-emphasis rounded-pill">Escultura</span>
-                                <span class="badge bg-success-subtle text-success-emphasis rounded-pill">Grabados</span>
-                                <span class="badge bg-info-subtle text-info-emphasis rounded-pill">Textil /
-                                    Cerámica</span>
+                                <h5 class="fw-bolder">Pez cabeza transparente</h5>
+                                <span class="badge bg-dark-subtle text-dark-emphasis rounded-pill">Abisales</span>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Seleccionar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="../proyect-images/fish/freshwater/tetra-neon.png" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Tetra neón</h5>
+                                <span class="badge bg-info-subtle text-info-emphasis rounded-pill">Agua
+                                    dulce</span>
                             </div>
                         </div>
                         <!-- Product actions-->

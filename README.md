@@ -116,7 +116,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página de inicio de la aplicación. En la página, se te da la opción de iniciar sesión, registrarte, o acceder a la web como usuario anónimo. Si accedes como usuario anónimo, arriba se seguirá mostrando las opciones de inicio de sesión y de registro en todas las páginas por las que navegues.
 
 #### **2. Página de registro**
-![Página Principal](screenshots/)
+![Página Principal](screenshots/pagina-registro.png)
 
 > Página que se muestra tras haber pulsado la opción "Registrarse" en la barra superior. Se debe poner un nombre de usuario y una contraseña; opcionalmente, se puede poner también una imagen o foto de perfil. Tras esto, al pulsar en "Aceptar" quedas registrado en la aplicación.
 
@@ -126,20 +126,65 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 > Página que se muestra tras haber pulsado la opción "Iniciar sesión" en la barra superior. Se debe poner un nombre de usuario y una contraseña para poder iniciar tu sesión en la aplicación. 
 
 #### **4. Página principal / Home**
+
+#### **- Página de usuario anónimo**
 ![Página Principal](screenshots/pagina-principal.png)
 
 > Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
 
+#### **- Página de usuario registrado**
+![Página Principal](screenshots/pagina-bienvenida-registrado.png)
+
+#### **- Página del administrador**
+![Página Principal](screenshots/pagina-bienvenida-admin.png)
+
+> Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
+
 #### **3. Página de una sección**
+
+#### **- Página de usuario anónimo**
 ![Página Principal](screenshots/pagina-de-seccion.png)
 
 > Página que se muestra tras haber seleccionado una sección de las disponibles en la página principal. El usuario puede usar la barra de búsqueda, seleccionar uno de los elementos que se muestran en la página o consultar otros elementos que no están visibles en la página (opción "Ver más").
 
+#### **- Página de usuario registrado**
+![Página Principal](screenshots/pagina-seccion-registrado.png)
+
+> Además de lo que puede hacer el usuario anónimo, se pueden buscar elementos por tipos pulsando en los botones disponibles (agua dulce, mar o abisales).
+
+#### **- Página del administrador**
+![Página Principal](screenshots/pagina-seccion-admin.png)
+
+> Se puede además añadir un elemento, y editar o eliminar uno de los disponibles.
+
 #### **4. Página informativa**
+#### **- Página de usuario anónimo**
 ![Página Principal](screenshots/info-anonimo.png)
 ![Página Principal](screenshots/info-anonimo-relacionados.png)
 
 > Página que se muestra tras haber seleccionado un elemento de las disponibles en la página de la sección. El usuario puede consultar información de interés acerca del elemento que ha seleccionado previamente. También puede seleccionar otro elemento de los que aparecen como relacionados para acceder a sus respectivas páginas informativas.
+
+#### **- Página de usuario registrado**
+![Página Principal](screenshots/info-registrado.png)
+
+> Además de lo que puede hacer el usuario anónimo, se puede marcar como visto el elemento, marcarlo como favorito o añadir un comentario en la página informativa. También cuenta con la parte "Relacionado".
+
+#### **- Página del administrador**
+![Página Principal](screenshots/info-edit-admin.png)
+
+> Accede directamente a la página informativa donde puede modificar lo que desee de ella. Aquí no aparece la parte "Relacionado".
+
+#### **-> Para las siguientes páginas, se accede a ellas pulsando una opción de las que hay en el menú desplegable del perfil:**
+
+#### **4. Página de perfil de usuario**
+![Página Principal](screenshots/pagina-perfil.png)
+
+> Página que muestra tu perfil de usuario actual, el cual puedes editar si lo deseas.
+
+#### **4. Página de estadísticas y favoritos**
+![Página Principal](screenshots/pagina-perfil.png)
+
+> Página que muestra los diagramas que recogen las estadísticas de los datos que pueden resultar más relevantes y una lista de elementos favoritos del usuario.
 
 ### **Instrucciones de Ejecución**
 
