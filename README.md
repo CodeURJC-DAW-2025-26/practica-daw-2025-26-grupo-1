@@ -104,9 +104,15 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](images/navigation-diagram.png)
+![Diagrama de Navegación](screenshots/diagrama-pantallas.png)
 
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
+> El usuario accede a la página inicial de la aplicación. A continuación, puede decidir si quiere entrar como usuario anónimo, iniciar sesión o registrarse tanto como usuario registrado como administrador.
+
+> - El usuario anónimo, tras pasar la página inicial, llega a la página principal o home en la versión de usuario anónimo, donde, tras seleccionar una sección, le aparece la página de la sección elegida. En dicha página, si selecciona un elemento de los disponibles, pasa a estar en la página informativa del elemento seleccionado.
+
+> - El usuario que ha iniciado sesión o se ha registrado (tanto como usuario normal como usuario administrador), puede hacer las mismas acciones que el usuario anónimo, más algunas adicionales dependiendo del rol.
+Junto a esto, puede consultar su perfil de usuario desde la página principal o home, desde la página de una sección o desde la página informativa.
+
 
 #### **Capturas de Pantalla Actualizadas**
 
@@ -140,7 +146,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
 
-#### **3. Página de una sección**
+#### **5. Página de una sección**
 
 #### **- Página de usuario anónimo**
 ![Página Principal](screenshots/pagina-de-seccion.png)
@@ -157,7 +163,7 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Se puede además añadir un elemento, y editar o eliminar uno de los disponibles.
 
-#### **4. Página informativa**
+#### **6. Página informativa**
 #### **- Página de usuario anónimo**
 ![Página Principal](screenshots/info-anonimo.png)
 ![Página Principal](screenshots/info-anonimo-relacionados.png)
@@ -176,15 +182,10 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **-> Para las siguientes páginas, se accede a ellas pulsando una opción de las que hay en el menú desplegable del perfil:**
 
-#### **4. Página de perfil de usuario**
+#### **7. Página de perfil de usuario**
 ![Página Principal](screenshots/pagina-perfil.png)
 
 > Página que muestra tu perfil de usuario actual, el cual puedes editar si lo deseas.
-
-#### **4. Página de estadísticas y favoritos**
-![Página Principal](screenshots/pagina-perfil.png)
-
-> Página que muestra los diagramas que recogen las estadísticas de los datos que pueden resultar más relevantes y una lista de elementos favoritos del usuario.
 
 ### **Instrucciones de Ejecución**
 
