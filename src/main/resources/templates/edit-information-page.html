@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> partials/shop-item-template}}
+
+<body>
+    <!-- Navigation-->
+    {{> partials/nav-registered}}
+
+    <!-- Product section-->
+    <section class="py-5 {{background-section}}">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+
+
+                <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                    <div class="card-body">
+                        <form>
+                            <div class="fs-5 mb-3">
+                                <label for="object-name-edited" class="form-label">Nombre: </label>
+                                <input type="text" class="form-control" id="object-name-edited"
+                                    value="{{name-element}}">
+                            </div>
+
+                            <div class="fs-5 mb-3">
+                                <label for="object-name-edited" class="form-label">Nombre científico: </label>
+                                <input type="text" class="form-control" id="object-name-edited"
+                                    value="{{group-name-element}}">
+                            </div>
+
+                            <div class="fs-5 mb-3">
+                                <label for="object-name-edited" class="form-label">Tipo: </label>
+                                <input type="text" class="form-control" id="object-name-edited"
+                                    value="{{categoryName}}">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 d-flex flex-column align-items-center">
+                    <img class="card-img-top mb-4 rounded" src="{{element-image}}" alt="{{name-element}}" />
+
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-secondary" href="#">
+                            <i class="bi bi-file-earmark-image"></i>
+                            Cambiar imagen </a>
+
+                        <a class="btn btn-danger" href="#">
+                            <i class="bi bi-x-lg"></i>
+                            Eliminar imagen </a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                        <div class="card-header py-3 text-bg-secondary border-secondary text-center">
+                            <h4 class="my-0 fw-normal">Ficha técnica</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="fs-5">
+                                <label for="object-technical-data" class="form-label">Datos: </label>
+                            </div>
+
+                            <textarea class="form-control" id="object-technical-data" rows="12">
+                                {{technical-data}}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+
+                    <div class="card-body">
+
+                        <div class="fs-5">
+                            <label for="object-technical-data" class="form-label">Información: </label>
+                        </div>
+                        <textarea class="form-control" id="object-technical-data" rows="12">
+                            {{description-element}}
+                        </textarea>
+
+                    </div>
+                </div>
+
+
+                <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                    <div class="card-body">
+                        <div class="fs-5">
+                            <label class="form-label">Comentarios:</label>
+                        </div>
+
+                        <!-- Bucle para cada comentario -->
+                        {{#comments}}
+                        <div class="card mb-3">
+                            <textarea class="form-control" rows="3">{{text}}</textarea>
+                            <div class="text-center mt-2">
+                                <a class="btn btn-secondary" href="#"><i class="bi bi-pencil-square"></i> Editar</a>
+                                <a class="btn btn-danger" href="#"><i class="bi bi-x-lg"></i> Eliminar</a>
+                            </div>
+                        </div>
+                        {{/comments}}
+
+                        <!-- Botón para añadir un nuevo comentario siempre visible -->
+                        <div class="text-center mt-3">
+                            <a class="btn btn-secondary" href="#"><i class="bi bi-plus-lg"></i> Añadir comentario</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-danger px-3" type="button">
+                        <i class="bi bi-arrow-left"></i>
+                        Volver
+                    </button>
+                    <!--<button class="btn btn-secondary px-3" type="button">
+                        <i class="bi bi-card-text"></i>
+                        Añadir comentario
+                    </button>-->
+                    <button class="btn btn-success px-3" type="button">
+                        <i class="bi bi-check2"></i>
+                        Aceptar cambios
+                    </button>
+
+                </div>
+
+    </section>
+
+    <!-- Footer-->
+    {{> partials/footer}}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

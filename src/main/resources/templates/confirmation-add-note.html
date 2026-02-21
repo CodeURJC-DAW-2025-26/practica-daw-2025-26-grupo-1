@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> partials/shop-item-template}}
+
+<body>
+    <!-- Navigation-->
+    {{> partials/nav-registered}}
+    <!-- Product section-->
+    <section class="py-5 related-museum-header">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
+
+                <div class="col-md-6">
+
+                    <div class="card mb-4 rounded-3 shadow-sm border-success">
+                        <div class="card-header py-3 text-bg-success border-success text-center">
+                            <h4 class="my-0 fw-normal">Operación realizada</h4>
+                        </div>
+                        <div class="card-body ">
+
+                            {{confirmation-text}}
+                            <div class="d-flex justify-content-center gap-3 mt-3">
+                                <a href="" class="btn btn-success px-3"
+                                    type="button">
+                                    <i class="bi bi-check2"></i>
+                                    Aceptar
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer-->
+    {{> partials/footer}}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

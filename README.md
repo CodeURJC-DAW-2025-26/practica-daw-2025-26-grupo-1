@@ -166,19 +166,17 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 #### **6. Página informativa**
 #### **- Página de usuario anónimo**
 ![Página Principal](screenshots/info-anonimo.png)
-![Página Principal](screenshots/info-anonimo-relacionados.png)
 
-> Página que se muestra tras haber seleccionado un elemento de las disponibles en la página de la sección. El usuario puede consultar información de interés acerca del elemento que ha seleccionado previamente. También puede seleccionar otro elemento de los que aparecen como relacionados para acceder a sus respectivas páginas informativas.
-
+> Página que se muestra tras haber seleccionado un elemento de los disponibles en la página de la sección. El usuario puede consultar información de interés acerca del elemento que ha seleccionado previamente. 
 #### **- Página de usuario registrado**
 ![Página Principal](screenshots/info-registrado.png)
 
-> Además de lo que puede hacer el usuario anónimo, se puede marcar como visto el elemento, marcarlo como favorito o añadir un comentario en la página informativa. También cuenta con la parte "Relacionado".
+> Además de lo que puede hacer el usuario anónimo, se puede marcar como visto el elemento, marcarlo como favorito o añadir un comentario en la página informativa. 
 
 #### **- Página del administrador**
 ![Página Principal](screenshots/info-edit-admin.png)
 
-> Accede directamente a la página informativa donde puede modificar lo que desee de ella. Aquí no aparece la parte "Relacionado".
+> Accede directamente a la página informativa donde puede modificar lo que desee de ella. 
 
 #### **-> Para las siguientes páginas, se accede a ellas pulsando una opción de las que hay en el menú desplegable del perfil:**
 
@@ -224,62 +222,6 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ![Diagrama de Clases](images/classes-diagram.png)
 
 > [Descripción opcional del diagrama y relaciones principales]
-
-### **Participación de Miembros en la Práctica 1**
-
-#### **Alumno 1 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 2 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 3 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
 ---
 

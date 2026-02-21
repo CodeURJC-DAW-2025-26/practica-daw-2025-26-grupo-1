@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> partials/dashboard-sb-template}}
+
+<body class="sb-nav-fixed">
+    {{> partials/nav-registered}}
+
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Estadísticas y favoritos</h1>
+
+                <h4>Tu progreso: </h4>
+
+                <div class="row">
+
+                    {{#progress}}
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-secondary text-white mb-4">
+                            <div class="card-body">{{section-name}}: {{percentage}} %</div>
+                        </div>
+                    </div>
+                    {{/progress}}
+
+                </div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+
+                                Total de objetos en el museo (por sección):
+                            </div>
+                            <div class="card-body">
+                                <img src="{{areaChartImageUrl}}" class="img-fluid"><canvas
+                                    id="myAreaChart" width="100%" height="40">
+
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar me-1"></i>
+                                Tus objetos favoritos (por sección):
+                            </div>
+                            <div class="card-body">
+                                <img src="{{barChartImageUrl}}" class="img-fluid"><canvas
+                                    id="myBarChart" width="100%" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Favoritos:
+                    </div>
+                    <div class="card-body">
+                        {{#favorites}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{category}}</td>
+                            <td>{{dateAdded}}</td>
+                        </tr>
+                        {{/favorites}}
+                    </div>
+                </div>
+            </div>
+        </main>
+        {{> partials/footer}}
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+</body>
+
+</html>
