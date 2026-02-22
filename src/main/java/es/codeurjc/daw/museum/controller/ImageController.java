@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.controller;
+/*package es.codeurjc.daw.library.controller;
 
 import java.sql.SQLException;
 
@@ -34,3 +34,4 @@ public class ImageController {
                 .body(imageFile);
     }
 }
+    */

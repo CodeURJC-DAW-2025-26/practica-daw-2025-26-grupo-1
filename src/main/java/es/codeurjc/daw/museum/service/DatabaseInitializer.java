@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.service;
+/*package es.codeurjc.daw.library.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -89,4 +89,4 @@ public class DatabaseInitializer {
 		Image createdImage = imageService.createImage(image.getInputStream());
 		book.setImage(createdImage);
 	}
-}
+}*/

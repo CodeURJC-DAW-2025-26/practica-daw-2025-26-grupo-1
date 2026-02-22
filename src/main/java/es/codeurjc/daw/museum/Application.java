@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library;
+package es.codeurjc.daw.museum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
