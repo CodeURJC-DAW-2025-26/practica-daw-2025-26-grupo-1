@@ -6,4 +6,6 @@ import es.codeurjc.daw.museum.model.Note;
 
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
+    
+
 }

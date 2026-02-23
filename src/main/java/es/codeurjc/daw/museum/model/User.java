@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity(name = "UserTable")
-public class MuseumUser {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,10 +37,10 @@ public class MuseumUser {
 	@ManyToMany
 	private List<Object> seen;
 
-	public MuseumUser() {
+	public User() {
 	}
 
-	public MuseumUser(String name, String encodedPassword, String[] roles, byte[] userImage, List<Note> notes, List<Object> favourites, List<Object> seen) {
+	public User(String name, String encodedPassword, String[] roles, byte[] userImage, List<Note> notes, List<Object> favourites, List<Object> seen) {
 		this.name = name;
 		this.encodedPassword = encodedPassword;
 		this.roles = List.of(roles);

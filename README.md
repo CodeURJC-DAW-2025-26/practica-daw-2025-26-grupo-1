@@ -68,30 +68,6 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
 ---
 
-## 🛠 **Preparación 2: Maquetación de páginas con HTML y CSS**
-
-### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
-> Vídeo mostrando las principales funcionalidades de la aplicación web.
-
-### **Diagrama de Navegación**
-Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
-
-![Diagrama de Navegación](images/navigation-diagram.png)
-
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
-
-### **Capturas de Pantalla y Descripción de Páginas**
-
-#### **1. Página Principal / Home**
-![Página Principal](images/home-page.png)
-
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
-
-#### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
-
----
-
 ## 🛠 **Práctica 1: Web con HTML generado en servidor y AJAX**
 
 ### **Vídeo de Demostración**

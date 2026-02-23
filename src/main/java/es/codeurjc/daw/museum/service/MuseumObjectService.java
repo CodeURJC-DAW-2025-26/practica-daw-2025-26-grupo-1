@@ -13,31 +13,41 @@ import es.codeurjc.daw.museum.repository.MuseumObjectRepository;
 public class MuseumObjectService {
 
 	@Autowired
-	private MuseumObjectRepository repository;
+	private MuseumObjectRepository objectRepository;
+
+	public boolean exist(long id) {
+		return objectRepository.existsById(id);
+	}
 
 	public Optional<MuseumObject> findById(long id) {
-		return repository.findById(id);
+		return objectRepository.findById(id);
 	}
+
+	public List<MuseumObject> findAll() {
+		return objectRepository.findAll();
+	}
+
+	public List<MuseumObject> findByType(String type) {
+		return objectRepository.findByType(type);
+	}
+
+	public List<MuseumObject> findByCategory(String category) {
+		return objectRepository.findByCategory(category);
+	}
+
+
 
 	/*public Optional<MuseumObject> findBy... (...) {
 		return repository.findBy...(...);
 	}
 
 	*/
-	
-	public boolean exist(long id) {
-		return repository.existsById(id);
-	}
-
-	public List<MuseumObject> findAll() {
-		return repository.findAll();
-	}
 
 	public void saveObject(MuseumObject museumObject) {
-		repository.save(museumObject);
+		objectRepository.save(museumObject);
 	}
 
 	public void deleteObject(long id) {
-		repository.deleteById(id);
+		objectRepository.deleteById(id);
 	}
 }
