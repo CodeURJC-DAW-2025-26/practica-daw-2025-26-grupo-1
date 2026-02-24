@@ -1,16 +1,19 @@
 package es.codeurjc.daw.museum.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "UserTable")
 public class User {
@@ -25,26 +28,36 @@ public class User {
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
-	@Lob
-	private byte[] userImage;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_id")
+	private Image image;
 
 	@OneToMany
 	private List<Note> notes;
 
 	@ManyToMany
-	private List<Object> favourites;
+	private List<MuseumObject> favourites;
 
 	@ManyToMany
-	private List<Object> seen;
+	private List<MuseumObject> seen;
 
 	public User() {
 	}
 
-	public User(String name, String encodedPassword, String[] roles, byte[] userImage, List<Note> notes, List<Object> favourites, List<Object> seen) {
+	public User(String name, String encodedPassword, List<String> roles) {
+		this.name = name;
+		this.encodedPassword = encodedPassword;
+		this.roles = roles;
+		this.notes = new ArrayList<>();
+		this.favourites = new ArrayList<>();
+		this.seen = new ArrayList<>();
+	}
+
+	public User(String name, String encodedPassword, String[] roles, Image userImage, List<Note> notes, List<MuseumObject> favourites, List<MuseumObject> seen) {
 		this.name = name;
 		this.encodedPassword = encodedPassword;
 		this.roles = List.of(roles);
-		this.userImage = userImage;
+		this.image = userImage;
 		this.notes = notes;
 		this.favourites = favourites;
 		this.seen = seen;
@@ -82,12 +95,12 @@ public class User {
 		this.roles = roles;
 	}
 
-	public byte[] getUserImage() {
-		return userImage;
+	public Image getUserImage() {
+		return image;
 	}
 
-	public void setUserImage(byte[] userImage) {
-		this.userImage = userImage;
+	public void setUserImage(Image userImage) {
+		this.image = userImage;
 	}
 
 	public List<Note> getNotes() {
@@ -98,19 +111,19 @@ public class User {
 		this.notes = notes;
 	}
 
-	public List<Object> getFavourites() {
+	public List<MuseumObject> getFavourites() {
 		return favourites;
 	}
 
-	public void setFavourites(List<Object> favourites) {
+	public void setFavourites(List<MuseumObject> favourites) {
 		this.favourites = favourites;
 	}
 
-	public List<Object> getSeen() {
+	public List<MuseumObject> getSeen() {
 		return seen;
 	}
 
-	public void setSeen(List<Object> seen) {
+	public void setSeen(List<MuseumObject> seen) {
 		this.seen = seen;
 	}
 

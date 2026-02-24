@@ -21,10 +21,15 @@ public class MuseumObjectService {
 
 	public Optional<MuseumObject> findById(long id) {
 		return objectRepository.findById(id);
+
 	}
 
 	public List<MuseumObject> findAll() {
 		return objectRepository.findAll();
+	}
+
+	public List<MuseumObject> findByName(String name) {
+		return objectRepository.findByObjectName(name);
 	}
 
 	public List<MuseumObject> findByType(String type) {
@@ -35,19 +40,38 @@ public class MuseumObjectService {
 		return objectRepository.findByCategory(category);
 	}
 
+	public MuseumObject saveObject(MuseumObject object) {
 
+		if(object.getObjectName() == null || object.getObjectName().isEmpty()){
+			throw new RuntimeException("An object name is required.");
+		}
 
-	/*public Optional<MuseumObject> findBy... (...) {
-		return repository.findBy...(...);
-	}
+		if(object.getGroupName() == null || object.getGroupName().isEmpty()){
+			throw new RuntimeException("A group name is required.");
+		}
 
-	*/
+		if(object.getTechnicalData() == null || object.getTechnicalData().isEmpty()){
+			throw new RuntimeException("Information of technical data is required.");
+		}
 
-	public void saveObject(MuseumObject museumObject) {
-		objectRepository.save(museumObject);
+		if(object.getDescription() == null || object.getDescription().isEmpty()){
+			throw new RuntimeException("A description is required.");
+		}
+
+		if(object.getCategory() == null || object.getCategory().isEmpty()){
+			throw new RuntimeException("A category is required.");
+		}
+
+		return objectRepository.save(object);
 	}
 
 	public void deleteObject(long id) {
-		objectRepository.deleteById(id);
+    	MuseumObject obj = objectRepository.findById(id)
+        	.orElseThrow(() -> new RuntimeException("Object not found with id: " + id));
+    	objectRepository.delete(obj);
+	}
+
+	public List<String> findAllTypes() {
+    	return objectRepository.findDistinctTypes();
 	}
 }

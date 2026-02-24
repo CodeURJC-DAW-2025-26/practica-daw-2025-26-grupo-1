@@ -7,8 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class MuseumObject {
@@ -24,18 +25,20 @@ public class MuseumObject {
 	private String type;
 	private String category;
 
-	@Lob
-	private byte[] image;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn (name = "image_id")
+	private Image image;
 
-	@OneToMany(mappedBy="MuseumObject", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="museumObject", cascade = CascadeType.ALL)
 	private List <Note> objectNotes;
 
 	public MuseumObject() {
 	}
 
-	public MuseumObject(String objectName, String groupName, String technicalData, String description, String type, String category, List<Note> objectNotes) {
+	public MuseumObject(String objectName, String groupName, Image image, String technicalData, String description, String type, String category, List<Note> objectNotes) {
 		this.objectName = objectName;
 		this.groupName = groupName;
+		this.image = image;
 		this.technicalData = technicalData;
 		this.description = description;
 		this.type = type;
@@ -99,11 +102,11 @@ public class MuseumObject {
 		this.category = category;
 	}
 
-	public byte[] getImage() {
+	public Image getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(Image image) {
 		this.image = image;
 	}
 

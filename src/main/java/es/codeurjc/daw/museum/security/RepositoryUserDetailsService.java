@@ -1,4 +1,4 @@
-/*package es.codeurjc.daw.library.security;
+package es.codeurjc.daw.museum.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +11,30 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.library.model.User;
-import es.codeurjc.daw.library.repository.UserRepository;
+import es.codeurjc.daw.museum.model.User;
+import es.codeurjc.daw.museum.repository.UserRepository;
 
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User user = userRepository.findByName(username)
-				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findByName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-		List<GrantedAuthority> roles = new ArrayList<>();
-		for (String role : user.getRoles()) {
-			roles.add(new SimpleGrantedAuthority("ROLE_" + role));
-		}
+        List<GrantedAuthority> roles = new ArrayList<>();
+        for (String role : user.getRoles()) {
+            roles.add(new SimpleGrantedAuthority("ROLE_" + role));
+        }
 
-		return new org.springframework.security.core.userdetails.User(user.getName(), 
-				user.getEncodedPassword(), roles);
-
-	}
+        return new org.springframework.security.core.userdetails.User(
+                user.getName(),
+                user.getEncodedPassword(),
+                roles
+        );
+    }
 }
-*/

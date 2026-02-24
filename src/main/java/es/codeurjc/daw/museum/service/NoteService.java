@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.codeurjc.daw.museum.model.User;
+import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.repository.NoteRepository;
 
@@ -23,7 +25,7 @@ public class NoteService {
 		return noteRepository.findById(id);
 	}
 
-	public List<Note> findById(List<Long> ids){
+	public List<Note> findAllById(List<Long> ids){
 		return noteRepository.findAllById(ids);
 	}
 
@@ -32,11 +34,11 @@ public class NoteService {
 	}
 
 	public List<Note> findAllByUser(User user){
-		return noteRepository.findByMuseumUser(user);
+		return noteRepository.findByUser(user.getName());
 	}
 
 	public List<Note> findAllByObject(MuseumObject object){
-		return noteRepository.findByMuseumObject(object);
+		return noteRepository.findByMuseumObject(object.getObjectName());
 	}
 
 
@@ -45,7 +47,9 @@ public class NoteService {
 	}
 
 	public void deleteNoteById(long id) {
-		noteRepository.deleteById(id);
+    	Note note = noteRepository.findById(id)
+        	.orElseThrow(() -> new RuntimeException("Note not found with id: " + id));
+    	noteRepository.delete(note);
 	}
 
 	

@@ -17,16 +17,19 @@ public class Note {
 	private String text;
 
 	@ManyToOne
- 	private User museumUser;
+ 	private User user;
+
+	@ManyToOne
+ 	private User owner;
 
 	@ManyToOne
  	private MuseumObject museumObject;
 
 	public Note() {}
 
-	public Note(String text, User museumUser, MuseumObject museumObject) {
+	public Note(String text, User user, MuseumObject museumObject) {
 		this.text = text;
-		this.museumUser = museumUser;
+		this.user = user;
 		this.museumObject = museumObject;
 	}
 
@@ -46,12 +49,12 @@ public class Note {
 		this.text = text;
 	}
 
-	public User getMuseumUser() {
-		return museumUser;
+	public User getUser() {
+		return user;
 	}
 
-	public void setMuseumUser(User museumUser) {
-		this.museumUser = museumUser;
+	public void setMuseumUser(User user) {
+		this.user = user;
 	}
 
 	public MuseumObject getMuseumObject() {

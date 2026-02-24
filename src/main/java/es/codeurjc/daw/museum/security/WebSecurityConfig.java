@@ -1,4 +1,4 @@
-/*package es.codeurjc.daw.library.security;
+package es.codeurjc.daw.museum.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,51 +14,58 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-	@Autowired
-	RepositoryUserDetailsService userDetailsService;
+    @Autowired
+    private RepositoryUserDetailsService userDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-		authProvider.setPasswordEncoder(passwordEncoder());
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
 
-		return authProvider;
-	}
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(authenticationProvider());
 
-		http.authenticationProvider(authenticationProvider());
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                // Páginas públicas → accesibles a todos (anónimos incluidos)
+                .requestMatchers("/", "/sections", "/sections/**").permitAll()
+                .requestMatchers("/images/**").permitAll()
+                .requestMatchers("/assets/**").permitAll() // CSS, JS, imágenes estáticas
+                .requestMatchers("/favicon.ico").permitAll()
+                .requestMatchers("/login", "/register", "/loginerror").permitAll()
+                
+                // Acciones de usuario registrado (USER)
+                .requestMatchers("/objects/*/favorite").hasRole("USER")
+                .requestMatchers("/objects/*/seen").hasRole("USER")
+                .requestMatchers("/notes/**").hasRole("USER")
+                .requestMatchers("/profile/**").hasRole("USER")
+                
+                // Acciones de administrador (ADMIN)
+                .requestMatchers("/objects/new", "/objects/edit/**").hasRole("ADMIN")
+                .requestMatchers("/objects/delete/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+            )
+            .formLogin(formLogin -> formLogin
+                .loginPage("/login")
+                .failureUrl("/loginerror")
+                .defaultSuccessUrl("/")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+            );
 
-		http
-				.authorizeHttpRequests(authorize -> authorize
-						// PUBLIC PAGES
-						.requestMatchers("/").permitAll()
-						.requestMatchers("/images/**").permitAll()
-						.requestMatchers("/books/**").permitAll()
-						.requestMatchers("/assets/**").permitAll() // Allow access to static resources
-						.requestMatchers("/favicon.ico").permitAll()
-						// PRIVATE PAGES
-						.requestMatchers("/newbook").hasAnyRole("USER")
-						.requestMatchers("/editbook").hasAnyRole("USER")
-						.requestMatchers("/editbook/*").hasAnyRole("USER")
-						.requestMatchers("/removebook/*").hasAnyRole("ADMIN"))
-				.formLogin(formLogin -> formLogin
-						.loginPage("/login")
-						.failureUrl("/loginerror")
-						.defaultSuccessUrl("/")
-						.permitAll())
-				.logout(logout -> logout
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/")
-						.permitAll());
-
-		return http.build();
-	}
+        return http.build();
+    }
 }
-*/

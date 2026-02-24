@@ -1,4 +1,4 @@
-/*package es.codeurjc.daw.library.controller;
+package es.codeurjc.daw.museum.controller;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import es.codeurjc.daw.library.service.ImageService;
+import es.codeurjc.daw.museum.service.ImageService;
 
 @Controller
 public class ImageController {
@@ -26,7 +26,7 @@ public class ImageController {
 
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(imageFile)
-                .orElse(MediaType.IMAGE_JPEG);
+                .orElse(MediaType.IMAGE_PNG); // como tú usas png
 
         return ResponseEntity
                 .ok()
@@ -34,4 +34,3 @@ public class ImageController {
                 .body(imageFile);
     }
 }
-    */
