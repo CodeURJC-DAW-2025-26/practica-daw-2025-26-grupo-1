@@ -34,18 +34,16 @@ public class UserController {
     public String addFavorite(@PathVariable long id, HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
         User user = userService.findByUsername(principal.getName()).get();
-        
         MuseumObject object = objectService.findById(id).orElseThrow();
         userService.addFavourite(user, object);
+        // Volver a la ficha del objeto
         return "redirect:/objects/" + id;
     }
 
     @PostMapping("/objects/{id}/unfavorite")
     public String removeFavorite(@PathVariable long id, HttpServletRequest request) {
-
         Principal principal = request.getUserPrincipal();
         User user = userService.findByUsername(principal.getName()).get();
-
         MuseumObject object = objectService.findById(id).orElseThrow();
         userService.removeFavourite(user, object);
         return "redirect:/objects/" + id;
@@ -53,14 +51,55 @@ public class UserController {
 
     @PostMapping("/objects/{id}/seen")
     public String markSeen(@PathVariable long id, HttpServletRequest request) {
-
         Principal principal = request.getUserPrincipal();
         User user = userService.findByUsername(principal.getName()).get();
-        
         MuseumObject object = objectService.findById(id).orElseThrow();
         userService.markSeen(user, object);
         return "redirect:/objects/" + id;
     }
 
-    //definir la ruta ("/")
+    @GetMapping("/objects/{id}")
+    public String viewObject(@PathVariable long id, Model model, Principal principal) {
+        MuseumObject object = objectService.findById(id)
+            .orElseThrow(() -> new RuntimeException("Object not found"));
+        model.addAttribute("object", object);
+
+        String userType = "anonymous";
+        User user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName()).get();
+            model.addAttribute("user", user);
+            if (user.getRoles().contains("ADMIN")) {
+                userType = "admin";
+            } else {
+                userType = "registered";
+            }
+        }
+
+        // URL de “Volver” según tipo de usuario
+        String backUrl;
+        if ("admin".equals(userType)) {
+            backUrl = "/sections/admin";
+        } else if ("registered".equals(userType)) {
+            backUrl = "/sections/registered";
+        } else {
+            backUrl = "/sections/anonymous";
+        }
+        model.addAttribute("backUrl", backUrl);
+
+        // Escoger la plantilla según tipo de usuario
+        if ("admin".equals(userType)) {
+            return "edit-information-page"; // admin
+        } else if ("registered".equals(userType)) {
+            return "informative-page"; // registrado
+        } else {
+            return "informative-anonymous-page"; // anónimo
+        }
+    }
+
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        return "main-page";
+    }
 }

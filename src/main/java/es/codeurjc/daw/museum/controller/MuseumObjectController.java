@@ -9,17 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
 
-@Controller
+// This controller has been deprecated because its URL mapping collided
+// with the more elaborate viewObject method in UserController.  The
+// logic for displaying an object is now handled there, which also adds
+// user-specific attributes for logged-in users.
+//
+// Keeping the class around for reference, but without the
+// @Controller annotation Spring will ignore it and the duplicate
+// mapping error disappears.
+//@Controller
 public class MuseumObjectController {
 
-    @Autowired
-    private MuseumObjectService objectService;
-
-    @GetMapping("/objects/{id}")
-    public String viewObject(@PathVariable Long id, Model model) {
-        MuseumObject object = objectService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Object not found"));
-        model.addAttribute("object", object);
-        return "object_detail";
-    }
+    // not used at runtime
 }

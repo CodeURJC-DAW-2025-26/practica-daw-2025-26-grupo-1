@@ -19,7 +19,7 @@ import jakarta.persistence.OneToOne;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
@@ -53,7 +53,7 @@ public class User {
 		this.seen = new ArrayList<>();
 	}
 
-	public User(String name, String encodedPassword, String[] roles, Image userImage, List<Note> notes, List<MuseumObject> favourites, List<MuseumObject> seen) {
+	/*public User(String name, String encodedPassword, String[] roles, Image userImage, List<Note> notes, List<MuseumObject> favourites, List<MuseumObject> seen) {
 		this.name = name;
 		this.encodedPassword = encodedPassword;
 		this.roles = List.of(roles);
@@ -61,7 +61,7 @@ public class User {
 		this.notes = notes;
 		this.favourites = favourites;
 		this.seen = seen;
-	}
+	}*/
 
 	public Long getId() {
 		return id;

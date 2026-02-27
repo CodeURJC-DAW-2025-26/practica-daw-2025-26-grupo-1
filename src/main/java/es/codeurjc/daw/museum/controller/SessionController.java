@@ -21,26 +21,30 @@ public class SessionController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        return "log-in-page";
     }
 
     @GetMapping("/loginerror")
-    public String loginerror() {
-        return "loginerror";
+    public String loginerror(Model model) {
+        model.addAttribute("errorMessage", "Usuario o contraseña incorrectos.");
+        return "error-page";
     }
 
     @GetMapping("/register")
     public String registerForm(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
         model.addAttribute("user", new User());
-        return "register";
+        return "registration-page";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@ModelAttribute User user, Model model) {
 
         if (userService.findByUsername(user.getName()).isPresent()) {
-            return "register"; // usuario ya existe
+            model.addAttribute("registrationError", "El usuario ya existe.");
+            return "registration-page"; 
         }
 
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
@@ -51,5 +55,24 @@ public class SessionController {
         return "redirect:/login";
     }
 
-    //Revisar URLs
+    @GetMapping("/welcome-anonymous")
+    public String welcomeAnonymous(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+        return "welcome-page-anonymous";
+    }
+
+    @GetMapping("/welcome-registered")
+    public String welcomeRegistered(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+        return "welcome-page-registered-user";
+    }
+
+    @GetMapping("/welcome-admin")
+    public String welcomeAdmin(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+        return "welcome-page-admin";
+    }
 }

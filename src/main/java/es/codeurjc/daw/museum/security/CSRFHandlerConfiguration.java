@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.security;
+/*package es.codeurjc.daw.museum.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,4 +33,4 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
 			}
 		}
 	}
-}
+}	*/

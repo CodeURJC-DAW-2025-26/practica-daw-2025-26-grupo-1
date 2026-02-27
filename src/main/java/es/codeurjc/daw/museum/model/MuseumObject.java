@@ -15,7 +15,7 @@ import jakarta.persistence.OneToOne;
 public class MuseumObject {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String objectName;

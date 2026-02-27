@@ -7,7 +7,7 @@
     <!-- Navigation-->
     {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5 related-museum-header">
+    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
@@ -20,13 +20,13 @@
                                 <h1 class="fw-bold mb-0 fs-2">Registro del usuario</h1>
                             </div>
                             <div class="modal-body p-5 pt-0">
-                                <form class="">
+                                <form action="/register">
 
                                     <div class="d-flex justify-content-center">
-                                        <img src="{{profileImage}}" alt="Logo app"
-                                            class="me-3 rounded-circle mb-3" style="height:80px;">
+                                        <img src="{{profileImage}}" alt="Logo app" class="me-3 rounded-circle mb-3"
+                                            style="height:80px;">
                                     </div>
-                                    
+
                                     <div class="d-flex boton-flex justify-content-center mb-5 gap-3">
                                         <button type="button" class="btn btn-secondary" onclick=" ">Cambiar
                                             imagen</button>
@@ -35,13 +35,21 @@
                                     </div>
 
                                     <div class="form-floating mb-3"> <input type="text" class="form-control rounded-3"
-                                            id="floatingInput">
+                                            id="floatingInput" name="name" required>
                                         <label for="floatingInput">Nombre de usuario</label>
                                     </div>
                                     <div class="form-floating mb-3"> <input type="password"
-                                            class="form-control rounded-3" id="floatingPassword">
+                                            class="form-control rounded-3" id="floatingPassword" name="encodedPassword" required>
                                         <label for="floatingPassword">Contraseña</label>
-                                    </div> <a href="" class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
+                                    </div>
+
+                                    {{#registrationError}}
+                                    <div class="alert alert-danger text-center" role="alert">
+                                        {{registrationError}}
+                                    </div>
+                                    {{/registrationError}}
+
+                                    <a href="" class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
                                             class="bi bi-check2"></i>
                                         Aceptar</a>
                                     <small class="text-body-secondary">Al hacer clic en "Aceptar", aceptas las

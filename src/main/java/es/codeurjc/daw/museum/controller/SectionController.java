@@ -58,9 +58,21 @@ public class SectionController {
             }
         }
 
+        // 5️⃣ Añadir backUrl según el tipo de usuario
+        String backUrl;
+        if ("admin".equals(userType)) {
+            backUrl = "/sections/admin";
+        } else if ("registered".equals(userType)) {
+            backUrl = "/sections/registered";
+        } else {
+            backUrl = "/sections/anonymous";
+        }
+
         model.addAttribute("userType", userType);
         model.addAttribute("sections", sections);
+        model.addAttribute("backUrl", backUrl);
 
+        // Plantilla genérica; luego puedes crear vistas separadas si quieres
         return "sections";
     }
 

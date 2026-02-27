@@ -7,8 +7,17 @@ body {
     flex-direction: column;
 }
 
-section {
-    flex: 1;
+/* Ensure main content stretches to push footer to bottom
+   Some templates use <section>, others use <main> or a .content wrapper */
+section, main, .content {
+    /* allow these containers to grow to fill available space */
+    flex: 1 0 auto;
+}
+
+/* Ensure footer is pushed to the bottom when content is short */
+footer {
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 .dropdown-toggle::after {

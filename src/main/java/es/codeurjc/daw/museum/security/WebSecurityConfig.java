@@ -37,13 +37,13 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests(authorize -> authorize
                 // Páginas públicas → accesibles a todos (anónimos incluidos)
-                .requestMatchers("/", "/sections", "/sections/**").permitAll()
+                .requestMatchers("/sections", "/sections/**").permitAll()
                 .requestMatchers("/images/**").permitAll()
                 .requestMatchers("/assets/**").permitAll() // CSS, JS, imágenes estáticas
                 .requestMatchers("/favicon.ico").permitAll()
-                .requestMatchers("/login", "/register", "/loginerror").permitAll()
+                .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous").permitAll()
                 
-                // Acciones de usuario registrado (USER)
+                // Acciones de usuario registrado (USER)*/
                 .requestMatchers("/objects/*/favorite").hasRole("USER")
                 .requestMatchers("/objects/*/seen").hasRole("USER")
                 .requestMatchers("/notes/**").hasRole("USER")
@@ -69,3 +69,4 @@ public class WebSecurityConfig {
         return http.build();
     }
 }
+    
