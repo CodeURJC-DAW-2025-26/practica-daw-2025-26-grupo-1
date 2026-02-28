@@ -25,7 +25,7 @@ public class NoteService {
 		return noteRepository.findById(id);
 	}
 
-	public List<Note> findAllById(List<Long> ids){
+	public List<Note> findAllById(List<Long> ids) {
 		return noteRepository.findAllById(ids);
 	}
 
@@ -33,26 +33,22 @@ public class NoteService {
 		return noteRepository.findAll();
 	}
 
-	public List<Note> findAllByUser(User user){
-		return noteRepository.findByUser(user.getName());
+	public List<Note> findAllByUser(User user) {
+		return noteRepository.findByUser(user);
 	}
 
-	public List<Note> findAllByObject(MuseumObject object){
-		return noteRepository.findByMuseumObject(object.getObjectName());
+	public List<Note> findAllByObject(MuseumObject object) {
+		return noteRepository.findByMuseumObject(object);
 	}
-
 
 	public Note save(Note note) {
 		return noteRepository.save(note);
 	}
 
 	public void deleteNoteById(long id) {
-    	Note note = noteRepository.findById(id)
-        	.orElseThrow(() -> new RuntimeException("Note not found with id: " + id));
-    	noteRepository.delete(note);
+		Note note = noteRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Note not found with id: " + id));
+		noteRepository.delete(note);
 	}
 
-	
 }
-
-

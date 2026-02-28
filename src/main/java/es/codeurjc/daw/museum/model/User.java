@@ -32,7 +32,7 @@ public class User {
 	@JoinColumn(name = "image_id")
 	private Image image;
 
-	@OneToMany
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Note> notes;
 
 	@ManyToMany

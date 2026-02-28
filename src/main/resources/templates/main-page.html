@@ -7,35 +7,31 @@
     <!-- Navigation-->
     {{> partials/nav-anonymous}}
     <!-- Product section-->
-    {{> partials/hero-welcome}}
-
+    <header class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); 
+background-size: cover; background-position: center; background-repeat: no-repeat; height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
+            <div class="text-center text-white">
+                <div class="container h-100 d-flex flex-column align-items-center justify-content-center">
 
-
-
-                <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">¡Bienvenido a Museoteca!</h1>
-
-                    <br>
-                    <br>
-                    <h4 class="text-center text-white">El lugar donde podrá encontrar y aprender acerca de algunas
-                        temáticas
-                        que seguro que le resultarán interesantes.</h4>
                 </div>
+                <br>
+                <br>
+                <h4 class="text-center text-white">El lugar donde podrá encontrar y aprender acerca de algunas temáticas
+                    que seguro que le resultarán interesantes.</h4>
 
-
+                <br>
+                <br>
                 <div class="text-center">
                     <a href="/welcome-anonymous" class="btn btn-success px-3" type="button">
-                    Empezar
-                </a>
+                        Empezar
+                    </a>
                 </div>
-                
-
             </div>
 
         </div>
-    </section>
+    </header>
+
 
     <!-- Footer-->
     {{> partials/footer}}

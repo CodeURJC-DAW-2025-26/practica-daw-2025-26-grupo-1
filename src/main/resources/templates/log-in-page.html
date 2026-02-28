@@ -7,7 +7,7 @@
     <!-- Navigation-->
     {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
@@ -20,19 +20,20 @@
                                 <h1 class="fw-bold mb-0 fs-2">Iniciar sesión</h1>
                             </div>
                             <div class="modal-body p-5 pt-0">
-                                <form class="">
+                                <form action="/login" method="post">
 
                                     <div class="form-floating mb-3"> <input type="text" class="form-control rounded-3"
-                                            id="floatingInput">
+                                            id="floatingInput" name="username" required>
                                         <label for="floatingInput">Nombre de usuario</label>
                                     </div>
-                                    <div class="form-floating mb-3"> <input type="password"
-                                            class="form-control rounded-3" id="floatingPassword">
+                                    <div class="form-floating mb-3"> 
+                                        <input type="password"
+                                            class="form-control rounded-3" id="floatingPassword" name="password" required>
                                         <label for="floatingPassword">Contraseña</label>
-                                    </div> <a href="" class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
+                                    </div> <button class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
                                             class="bi bi-check2"></i>
-                                        Aceptar</a>
-                                    <small class="text-body-secondary">Al hacer clic en "Aceptar", aceptas las
+                                        Aceptar</button>
+                                    <small class="text-body-secondary text-center">Al hacer clic en "Aceptar", aceptas las
                                         condiciones de uso.</small>
 
 
@@ -44,7 +45,7 @@
 
 
                     <div class="d-flex justify-content-center gap-3">
-                        <a href="../pages/welcome-page-anonymous-user.html" class="btn btn-danger px-3" type="button">
+                        <a href="/welcome-anonymous" class="btn btn-danger px-3" type="button">
                             <i class="bi bi-arrow-left"></i>
                             Volver
                         </a>

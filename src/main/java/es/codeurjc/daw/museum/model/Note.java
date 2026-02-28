@@ -19,8 +19,8 @@ public class Note {
 	@ManyToOne
  	private User user;
 
-	@ManyToOne
- 	private User owner;
+	/*@ManyToOne
+ 	private User owner;*/
 
 	@ManyToOne
  	private MuseumObject museumObject;
@@ -53,7 +53,7 @@ public class Note {
 		return user;
 	}
 
-	public void setMuseumUser(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

@@ -36,6 +36,7 @@ public class SessionController {
     public String registerForm(Model model) {
         model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
         model.addAttribute("user", new User());
+        model.addAttribute("profileImage", "/assets/images/perfil-sin-foto.png");
         return "registration-page";
     }
 
@@ -52,7 +53,7 @@ public class SessionController {
 
         userService.saveUser(user);
 
-        return "redirect:/login";
+        return "redirect:/welcome-registered";
     }
 
     @GetMapping("/welcome-anonymous")
