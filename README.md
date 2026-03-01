@@ -177,7 +177,17 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
    cd [nombre-repositorio]
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+2. **Haber instalado MySQL Workbench**
+
+3. **Haber instalado el Extension Pack of Java y el Spring Boot Extension Pack en el Visual Studio Code**
+
+4. **En Visual Studio Code, cuando se tenga la aplicación lista para ejecutar, pulsar en el botón "Run"**
+
+5. **Esperar a que Spring termine de realizar el procesamiento de datos**
+
+6. **Una vez que Spring termine, abrir un navegador y escribir en la barra de búsqueda la ruta https://localhost:8443**
+
+7. **Pulsar la tecla Intro tras haber escrito esa ruta y esperar a que la página de la aplicación aparezca en pantalla**
 
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin`, contraseña: `admin`
@@ -187,9 +197,12 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+![Diagrama Entidad-Relación](screenshots/diagrama-entidades.png)
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> El diagrama muestra las entidades principales que han sido necesarias para el desarrollo de esta aplicación, que serían: User, MuseumObject, Note e Image. Como se puede ver, tanto User como MuseumObject dependen de Application. 
+> - Además, User y MuseumObject necesitan conocerse, de manera que un User puede acceder a muchos MuseumObjects, y a un MuseumObject pueden acceder muchos Users (N:M).
+> - Un User puede escribir muchas Notes en un MuseumObject, y un MuseumObject puede tener muchas Notes. Tanto User como MuseumObject conocen a Note. Sin embargo, Note depende de User y de MuseumObject, por lo que también necesita conocer al User que la ha escrito (que solo puede ser uno) y el MuseumObject donde ha sido escrita (que solo puede ser uno también) (1:N) y (1:N).
+> - Tanto User como MuseumObject conocen a Image, ya que ambos solo pueden tener una Image y una Image solo pertence a un User y a un MuseumObject (1:1) y (1:1).
 
 ### **Diagrama de Clases y Templates**
 

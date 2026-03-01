@@ -11,9 +11,9 @@ public class NavController {
    @ModelAttribute
     public void addMenuUrls(Model model) {
         model.addAttribute("homeUrl", "/");
-        model.addAttribute("pecesUrl", "/peces");
-        model.addAttribute("insectosUrl", "/insectos");
-        model.addAttribute("fosilesUrl", "/fosiles");
-        model.addAttribute("obrasArteUrl", "/obras-arte");
+        model.addAttribute("pecesUrl", "/section/peces");
+        model.addAttribute("insectosUrl", "/section/insectos");
+        model.addAttribute("fosilesUrl", "/section/fosiles");
+        model.addAttribute("obrasArteUrl", "/section/arte");
     }
 }

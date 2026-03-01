@@ -5,61 +5,91 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class WelcomeController {
 
-    /*@GetMapping("/welcome-anonymous")
-    public String welcomeAnonymous(Model model) {
+        public class Category {
+                private String type;
+                private String text;
 
-        List<Map<String, Object>> userSections = new ArrayList<>();
+                public Category(String type, String text) {
+                        this.type = type;
+                        this.text = text;
+                }
 
-        Map<String, Object> pecesSection = new HashMap<>();
-        pecesSection.put("nameSection", "Peces");
-        pecesSection.put("image", "/assets/images/icons/logo-pez.png");
-        pecesSection.put("link", "/peces");
-        pecesSection.put("categories", List.of(
-                Map.of("type", "badge-primary", "text", "Mar"),
-                Map.of("type", "badge-info", "text", "Agua dulce"),
-                Map.of("type", "badge-dark", "text", "Abisales")));
-        userSections.add(pecesSection);
+                public String getType() {
+                        return type;
+                }
 
-        Map<String, Object> insectosSection = new HashMap<>();
-        insectosSection.put("nameSection", "Insectos");
-        insectosSection.put("image", "/assets/images/icons/logo-mariposa.png");
-        insectosSection.put("link", "/insectos");
-        insectosSection.put("categories", List.of(
-                Map.of("type", "badge-success", "text", "Terrestre"),
-                Map.of("type", "badge-warning", "text", "Aéreos"),
-                Map.of("type", "badge-primary", "text", "Acuáticos")));
-        userSections.add(insectosSection);
+                public String getText() {
+                        return text;
+                }
+        }
 
-        Map<String, Object> fosilesSection = new HashMap<>();
-        fosilesSection.put("nameSection", "Fósiles");
-        fosilesSection.put("image", "/assets/images/icons/logo-fosil.png");
-        fosilesSection.put("link", "/fosiles");
-        fosilesSection.put("categories", List.of(
-                Map.of("type", "badge-secondary", "text", "Prehistórico"),
-                Map.of("type", "badge-dark", "text", "Mineral")));
-        userSections.add(fosilesSection);
+        public class UserSection {
+                private String nameSection;
+                private String image;
+                private String link;
+                private List<Category> categories;
 
-        Map<String, Object> obrasArteSection = new HashMap<>();
-        obrasArteSection.put("nameSection", "Obras de arte");
-        obrasArteSection.put("image", "/assets/images/icons/logo-pintura.png");
-        obrasArteSection.put("link", "/obras-arte");
-        obrasArteSection.put("categories", List.of(
-                Map.of("type", "badge-danger", "text", "Pintura"),
-                Map.of("type", "badge-warning", "text", "Escultura"),
-                Map.of("type", "badge-info", "text", "Grabados"),
-                Map.of("type", "badge-primary", "text", "Cerámica")));
-        userSections.add(obrasArteSection);
+                public UserSection(String nameSection, String image, String link, List<Category> categories) {
+                        this.nameSection = nameSection;
+                        this.image = image;
+                        this.link = link;
+                        this.categories = categories;
+                }
 
-        model.addAttribute("userSections", userSections);
+                public String getNameSection() {
+                        return nameSection;
+                }
 
-        return "welcome-page-anonymous";
-    }*/
+                public String getImage() {
+                        return image;
+                }
+
+                public String getLink() {
+                        return link;
+                }
+
+                public List<Category> getCategories() {
+                        return categories;
+                }
+
+        }
+
+        @GetMapping("/welcome-anonymous")
+        public String welcomeAnonymous(Model model) {
+
+                model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+                model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+
+                List<UserSection> userSections = new ArrayList<>();
+
+                userSections.add(new UserSection("Peces", "/assets/images/icons/logo-pez.png", "/section/peces",
+                                List.of(new Category("badge-primary", "Mar"),
+                                                new Category("badge-info", "Agua dulce"),
+                                                new Category("badge-dark", "Abisales"))));
+
+                userSections.add(new UserSection("Insectos", "/assets/images/icons/logo-mariposa.png", "/section/insectos",
+                                List.of(new Category("badge-primary", "Terrestres"),
+                                                new Category("badge-info", "Aéreos"),
+                                                new Category("badge-dark", "Acuáticos"))));
+
+                userSections.add(new UserSection("Fósiles", "/assets/images/icons/logo-fosil.png", "/section/fosiles",
+                                List.of(new Category("badge-primary", "Prehistóricos"),
+                                                new Category("badge-info", "Minerales"))));
+
+                userSections.add(new UserSection("Obras de arte", "/assets/images/icons/logo-pintura.png", "/section/arte",
+                                List.of(new Category("badge-primary", "Pintura"),
+                                                new Category("badge-info", "Escultura"),
+                                                new Category("badge-dark", "Cerámica"))));
+
+                model.addAttribute("userSections", userSections);
+
+                return "welcome-page-anonymous";
+        }
 
 }

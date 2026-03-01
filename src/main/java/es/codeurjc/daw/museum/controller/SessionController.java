@@ -56,13 +56,6 @@ public class SessionController {
         return "redirect:/welcome-registered";
     }
 
-    @GetMapping("/welcome-anonymous")
-    public String welcomeAnonymous(Model model) {
-        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
-        return "welcome-page-anonymous";
-    }
-
     @GetMapping("/welcome-registered")
     public String welcomeRegistered(Model model) {
         model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");

@@ -36,28 +36,40 @@ public class WebSecurityConfig {
 
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // Páginas públicas → accesibles a todos (anónimos incluidos)
+                        // Public pages
                         .requestMatchers("/sections", "/sections/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/assets/**").permitAll() // CSS, JS, imágenes estáticas
+                        .requestMatchers("/assets/**").permitAll() 
                         .requestMatchers("/favicon.ico").permitAll()
-                        .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous", "/section/peces", "/section/insectos", "/section/fosiles", "/section/arte").permitAll()
 
-                        // Acciones de usuario registrado (USER)*/
+                        // Registered user (USER)
+                        .requestMatchers("/welcome-registered").hasRole("USER")
                         .requestMatchers("/objects/*/favorite").hasRole("USER")
                         .requestMatchers("/objects/*/seen").hasRole("USER")
                         .requestMatchers("/notes/**").hasRole("USER")
                         .requestMatchers("/profile/**").hasRole("USER")
 
-                        // Acciones de administrador (ADMIN)
+                        // Admin (ADMIN)
                         .requestMatchers("/objects/new", "/objects/edit/**").hasRole("ADMIN")
                         .requestMatchers("/objects/delete/**").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN"))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/loginerror")
-                        .defaultSuccessUrl("/")
-                        .permitAll())
+                        /* .defaultSuccessUrl("/") */
+                        .successHandler((request, response, authentication) -> {
+        var authorities = authentication.getAuthorities();
+
+        if (authorities.stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            response.sendRedirect("/welcome-admin");
+        } else {
+            response.sendRedirect("/welcome-registered");
+        }
+    })
+    .permitAll())
+            
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")

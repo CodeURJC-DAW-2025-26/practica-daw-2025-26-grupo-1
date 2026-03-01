@@ -1,5 +1,6 @@
 package es.codeurjc.daw.museum.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -25,12 +26,12 @@ public class MuseumObject {
 	private String type;
 	private String category;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne  /*(cascade = CascadeType.ALL)*/
 	@JoinColumn (name = "image_id")
 	private Image image;
 
 	@OneToMany(mappedBy="museumObject", cascade = CascadeType.ALL)
-	private List <Note> objectNotes;
+	private List <Note> objectNotes = new ArrayList<>();
 
 	public MuseumObject() {
 	}

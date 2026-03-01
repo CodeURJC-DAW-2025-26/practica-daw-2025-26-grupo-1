@@ -7,19 +7,19 @@
     <!-- Navigation-->
     {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5 related-museum-header">
+    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
                 <div class="col-md-6">
 
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                    <div class="card mb-4 rounded-3 shadow-sm border-danger">
                         <div class="card-header py-3 text-bg-danger border-danger text-center">
                             <h4 class="my-0 fw-normal">Error en el sistema</h4>
                         </div>
                         <div class="card-body ">
 
-                            {{error-text}}
+                            {{errorText}}
                             <div class="d-flex justify-content-center gap-3 mt-3">
                                 <a href="{{backLink}}" class="btn btn-danger px-3" type="button">
                                     <i class="bi bi-arrow-left"></i>
