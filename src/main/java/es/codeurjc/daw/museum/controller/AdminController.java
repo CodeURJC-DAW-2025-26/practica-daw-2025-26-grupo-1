@@ -19,14 +19,14 @@ public class AdminController {
     @Autowired
     private NoteService noteService;
 
-    // Página para ver todos los objetos (admin)
+    // Page with all the objects (admin)
     @GetMapping("/objects")
     public String listObjects(Model model) {
         model.addAttribute("objects", objectService.findAll());
         return "admin/objects";  // Mustache: admin/objects.html
     }
 
-    // Crear objeto nuevo
+    // Create new object
     @GetMapping("/objects/new")
     public String newObjectForm(Model model) {
         model.addAttribute("object", new MuseumObject());
@@ -39,7 +39,7 @@ public class AdminController {
         return "redirect:/admin/objects";
     }
 
-    // Editar objeto
+    // Edit object
     @GetMapping("/objects/{id}/edit")
     public String editObjectForm(@PathVariable long id, Model model) {
         MuseumObject object = objectService.findById(id).orElseThrow();
@@ -54,14 +54,14 @@ public class AdminController {
         return "redirect:/admin/objects";
     }
 
-    // Borrar objeto
+    // Delete object
     @PostMapping("/objects/{id}/delete")
     public String deleteObject(@PathVariable long id) {
         objectService.deleteObject(id);
         return "redirect:/admin/objects";
     }
 
-    // Borrar nota
+    // Delete note
     @PostMapping("/notes/{id}/delete")
     public String deleteNote(@PathVariable long id) {
         noteService.deleteNoteById(id);

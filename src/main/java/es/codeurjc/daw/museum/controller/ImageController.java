@@ -26,7 +26,7 @@ public class ImageController {
 
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(imageFile)
-                .orElse(MediaType.IMAGE_PNG); // como tú usas png
+                .orElse(MediaType.IMAGE_PNG); 
 
         return ResponseEntity
                 .ok()

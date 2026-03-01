@@ -35,38 +35,35 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http
-            .authorizeHttpRequests(authorize -> authorize
-                // Páginas públicas → accesibles a todos (anónimos incluidos)
-                .requestMatchers("/sections", "/sections/**").permitAll()
-                .requestMatchers("/images/**").permitAll()
-                .requestMatchers("/assets/**").permitAll() // CSS, JS, imágenes estáticas
-                .requestMatchers("/favicon.ico").permitAll()
-                .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous").permitAll()
-                
-                // Acciones de usuario registrado (USER)*/
-                .requestMatchers("/objects/*/favorite").hasRole("USER")
-                .requestMatchers("/objects/*/seen").hasRole("USER")
-                .requestMatchers("/notes/**").hasRole("USER")
-                .requestMatchers("/profile/**").hasRole("USER")
-                
-                // Acciones de administrador (ADMIN)
-                .requestMatchers("/objects/new", "/objects/edit/**").hasRole("ADMIN")
-                .requestMatchers("/objects/delete/**").hasRole("ADMIN")
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-            )
-            .formLogin(formLogin -> formLogin
-                .loginPage("/login")
-                .failureUrl("/loginerror")
-                .defaultSuccessUrl("/")
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
-            );
+                .authorizeHttpRequests(authorize -> authorize
+                        // Páginas públicas → accesibles a todos (anónimos incluidos)
+                        .requestMatchers("/sections", "/sections/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/assets/**").permitAll() // CSS, JS, imágenes estáticas
+                        .requestMatchers("/favicon.ico").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous").permitAll()
+
+                        // Acciones de usuario registrado (USER)*/
+                        .requestMatchers("/objects/*/favorite").hasRole("USER")
+                        .requestMatchers("/objects/*/seen").hasRole("USER")
+                        .requestMatchers("/notes/**").hasRole("USER")
+                        .requestMatchers("/profile/**").hasRole("USER")
+
+                        // Acciones de administrador (ADMIN)
+                        .requestMatchers("/objects/new", "/objects/edit/**").hasRole("ADMIN")
+                        .requestMatchers("/objects/delete/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN"))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/loginerror")
+                        .defaultSuccessUrl("/")
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .permitAll());
 
         return http.build();
     }
+
 }
-    

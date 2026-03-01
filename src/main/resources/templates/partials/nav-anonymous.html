@@ -6,9 +6,15 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg> </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                {{#menuItems}}
-                <li><a href="{{url}}" class="nav-link px-2 text-white">{{name-section}}</a></li>
-                {{/menuItems}}
+                <!--{{#menuItems}}-->
+                <li>
+                    <a href="{{initialUrl}}" class="nav-link px-2 text-white">Página de inicio</a>
+                    <a href="{{pecesUrl}}" class="nav-link px-2 text-white">Peces</a>
+                    <a href="{{insectosUrl}}" class="nav-link px-2 text-white">Insectos</a>
+                    <a href="{{fosilesUrl}}" class="nav-link px-2 text-white">Fósiles</a>
+                    <a href="{{obrasArteUrl}}" class="nav-link px-2 text-white">Obras de arte</a>
+                </li>
+                <!--{{/menuItems}}-->
             </ul>
 
             <div class="text-end">

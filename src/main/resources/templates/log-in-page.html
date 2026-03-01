@@ -30,7 +30,9 @@
                                         <input type="password"
                                             class="form-control rounded-3" id="floatingPassword" name="password" required>
                                         <label for="floatingPassword">Contraseña</label>
-                                    </div> <button class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
+                                    </div> 
+                                    <input type="hidden" name="_csrf" value="{{token}}">
+                                    <button class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
                                             class="bi bi-check2"></i>
                                         Aceptar</button>
                                     <small class="text-body-secondary text-center">Al hacer clic en "Aceptar", aceptas las

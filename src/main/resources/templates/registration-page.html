@@ -20,7 +20,7 @@
                                 <h1 class="fw-bold mb-0 fs-2">Registro del usuario</h1>
                             </div>
                             <div class="modal-body p-5 pt-0">
-                                <form action="/register">
+                                <form action="/register" method="post">
 
                                     <div class="d-flex justify-content-center">
                                         <img src="{{profileImage}}" alt="Logo app" class="me-3 rounded-circle mb-3"
@@ -39,9 +39,11 @@
                                         <label for="floatingInput">Nombre de usuario</label>
                                     </div>
                                     <div class="form-floating mb-3"> <input type="password"
-                                            class="form-control rounded-3" id="floatingPassword" name="encodedPassword" required>
+                                            class="form-control rounded-3" id="floatingPassword" name="password" required>
                                         <label for="floatingPassword">Contraseña</label>
                                     </div>
+
+                                    <input type="hidden" name="_csrf" value="{{token}}">
 
                                     {{#registrationError}}
                                     <div class="alert alert-danger text-center" role="alert">

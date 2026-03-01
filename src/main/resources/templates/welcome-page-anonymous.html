@@ -19,7 +19,7 @@
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-                {{#user-sections}}
+                {{#userSections}}
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
@@ -28,7 +28,7 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">{{name-section}}</h5>
+                                <h5 class="fw-bolder">{{nameSection}}</h5>
                                 {{#categories}}
                                 <span class="badge {{type}} rounded-pill">{{text}}</span>
                                 {{/categories}}
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                {{/user-sections}}
+                {{/userSections}}
 
                 <!-- Product actions-->
                 <div class="d-flex justify-content-center">
