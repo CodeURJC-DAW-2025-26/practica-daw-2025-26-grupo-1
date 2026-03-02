@@ -71,8 +71,37 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 ## 🛠 **Práctica 1: Web con HTML generado en servidor y AJAX**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/PVULrZABfDQ)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
+
+**GUÍA DEL VÍDEO**
+1
+00:00:00,000 --> 00:00:21,000
+Introducción
+
+2
+00:00:22,000 --> 00:00:37,000
+Página inicial
+
+3
+00:00:38,000 --> 00:00:50,000
+Página principal o menú
+
+4
+00:00:51,000 --> 00:01:16,000
+Página de inicio de sesión
+
+5
+00:01:17,000 --> 00:01:57,000
+Página de registro
+
+6
+00:01:58,000 --> 00:03:28,000
+Selección y visualización de las pantalla de cada sección
+
+7
+00:03:29,000 --> 00:03:57,000
+Página de error
 
 ### **Navegación y Capturas de Pantalla**
 
