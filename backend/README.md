@@ -173,21 +173,23 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git
+   cd practica-daw-2025-26-grupo-1
    ```
 
 2. **Haber instalado MySQL Workbench**
 
 3. **Haber instalado el Extension Pack of Java y el Spring Boot Extension Pack en el Visual Studio Code**
 
-4. **En Visual Studio Code, cuando se tenga la aplicación lista para ejecutar, pulsar en el botón "Run"**
+4. **Crear una base de datos en MySQL Workbench y modificar las application.properties en el Visual Studio Code para adaptarlas a dicha base de datos y que la aplicación pueda funcionar**
+
+4. **En Visual Studio Code, cuando se tenga la aplicación lista para ejecutar, pulsar en el botón "Run" (a ser posible, desde el archivo Application.java o accediendo al Spring Dashboard)**
 
 5. **Esperar a que Spring termine de realizar el procesamiento de datos**
 
 6. **Una vez que Spring termine, abrir un navegador y escribir en la barra de búsqueda la ruta https://localhost:8443**
 
-7. **Pulsar la tecla Intro tras haber escrito esa ruta y esperar a que la página de la aplicación aparezca en pantalla**
+7. **Tras esto, pulsar la tecla Intro y esperar a que la página inicial de la aplicación aparezca en pantalla**
 
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin`, contraseña: `admin`
@@ -208,9 +210,9 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+![Diagrama de Clases](screenshots/diagrama-clases-templates.png)
 
-> [Descripción opcional del diagrama y relaciones principales]
+> Este diagrama es una representación que muestra todas las clases y templates que se han usado, así como las relaciones entre ellas. Esta representación sería sobre el progreso que se ha tenido hasta ahora del proyecto, pero no es el diagrama definitivo del mismo. Esto se debe a que puede estar sujeto a cambios por mejoras y ampliaciones del proyecto o por implementaciones que no se han podido realizar.
 
 ---
 
