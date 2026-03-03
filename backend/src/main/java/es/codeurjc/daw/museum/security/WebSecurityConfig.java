@@ -41,10 +41,11 @@ public class WebSecurityConfig {
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/assets/**").permitAll() 
                         .requestMatchers("/favicon.ico").permitAll()
-                        .requestMatchers("/", "/login", "/register", "/loginerror", "/welcome-anonymous", "/section/peces", "/section/insectos", "/section/fosiles", "/section/arte").permitAll()
+                        .requestMatchers("/", "/error", "/login", "/register",  "/loginerror", "/welcome-anonymous", "/section/peces", "/section/insectos", "/section/fosiles", "/section/arte").permitAll()
 
                         // Registered user (USER)
-                        .requestMatchers("/welcome-registered").hasRole("USER")
+                        //.requestMatchers("/newbook").hasAnyRole("USER")
+                        .requestMatchers("/welcome-registered").hasAnyRole("USER")
                         .requestMatchers("/objects/*/favorite").hasRole("USER")
                         .requestMatchers("/objects/*/seen").hasRole("USER")
                         .requestMatchers("/notes/**").hasRole("USER")

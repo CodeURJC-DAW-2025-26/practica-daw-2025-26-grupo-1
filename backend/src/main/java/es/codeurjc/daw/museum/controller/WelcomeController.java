@@ -92,4 +92,5 @@ public class WelcomeController {
                 return "welcome-page-anonymous";
         }
 
+
 }
