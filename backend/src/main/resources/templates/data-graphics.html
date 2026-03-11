@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{> partials/dashboard-sb-template}}
+
+<body class="sb-nav-fixed">
+    {{> partials/nav-anonymous}}
+
+    <div id="layoutSidenav_content" style="min-height: 80vh;">
+        <!--<main> -->
+        <div class="container-fluid px-4">
+
+            <div class="row align-items-center mt-4 mb-4">
+
+                <div class="col-3">
+                    <a href="/welcome-user" class="btn btn-danger px-3" type="button">
+                        <i class="bi bi-arrow-left"></i>
+                        Volver
+                    </a>
+                </div>
+
+                <div class="col-6 text-center">
+                    <h1 class="mt-4">Estadísticas y favoritos</h1>
+                </div>
+
+                <div class="col-3"></div>
+
+            </div>
+
+
+            <h4>Tu progreso: </h4>
+
+            <div class="row">
+
+                {{#progress}}
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-secondary text-white mb-4">
+                        <div class="card-body">{{sectionName}}: {{percentage}} %</div>
+                    </div>
+                </div>
+                {{/progress}}
+
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+
+                            Total de objetos en el museo (por sección):
+                        </div>
+
+
+                        <div class="card-body">
+                            <canvas id="graficaObjetos" width="50%" margin="auto" height="40">
+                            </canvas>
+                            <div>
+
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                                <script>
+                                    
+                                    const ctx = document.getElementById('graficaMuseo');
+                                    
+                                    const datosMuseo = {
+                                        labels: ['Peces', 'Insectos', 'Fósiles', 'Arte'],
+                                        datasets: [{
+                                            label: 'Cantidad de objetos',
+                                            data: [{{fishObjects}}, {{insectObjects}}, {{fossilObjects}}, {{artObjects}}], 
+                                    backgroundColor: [
+                                        'rgb(54, 162, 235)',
+                                        'rgb(75, 192, 192)',
+                                        'rgb(255, 205, 86)',
+                                        'rgb(255, 99, 132)'
+                                    ]
+                                        }]
+                                    };
+
+                                    new Chart(ctx, {
+                                        type: 'pie',
+                                        data: datosMuseo
+                                    });
+                                </script>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar me-1"></i>
+                                Tus objetos favoritos (por sección):
+                            </div>
+                            <div class="card-body">
+                                {{#ok}}
+                                <!--<img src="{{barChartImageUrl}}" class="img-fluid"><canvas
+                                    id="myBarChart" width="100%" height="40"></canvas>-->
+                                {{/ok}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Favoritos:
+                    </div>
+                    <div class="card-body">
+                        <!--{{#favorites}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{category}}</td>
+                            <td>{{dateAdded}}</td>
+                        </tr>
+                        {{/favorites}}-->
+                    </div>
+                </div>
+            </div>
+            <!--</main>-->
+            {{> partials/footer}}
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+            crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+            crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+</body>
+
+</html>

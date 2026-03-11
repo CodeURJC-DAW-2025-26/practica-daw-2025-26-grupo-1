@@ -35,7 +35,7 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
   - Permisos: 
   
       -> Puede acceder a una sección, entrar a la página informativa de un objeto y realizar búsquedas usando filtros.  
-      -> Puede marcar o desmarcar un objeto como visto, y también puede marcar un objeto como favorito, guardando dicho objeto en una lista de favoritos que posee, o desmascarlo.  
+      -> Puede marcar o desmarcar un objeto como visto, y también puede marcar un objeto como favorito, guardando dicho objeto en una lista de favoritos que posee, o desmarcarlo.  
       -> Puede dejar una o varias notas en la página informativa de un objeto.  
       -> Puede editar su perfil de usuario.
   - Es dueño de: Su perfil de usuario, los objetos que marca como vistos, los objetos que marca como favoritos y las notas que deja en un objeto.
@@ -43,9 +43,9 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 * **Administrador**: 
   - Permisos: 
   
-      -> Puede añadir o eliminar una sección.  Puede añadir o eliminar un objeto tras acceder a una sección (editar una sección).  
+      -> Puede añadir o eliminar un objeto tras acceder a una sección.  
       -> Puede editar un objeto desde la página informativa de este (cambiar foto, nombre o descripción del objeto, además de poder añadir o eliminar una nota).
-  - Es dueño de: Las secciones que muestra el museo en la web, los objetos que muestra cada sección, los datos e imágenes de cada objeto, y las notas que dejan los usuarios. No puede crear ni eliminar usuarios, ni tampoco editar sus datos personales.
+  - Es dueño de: Los objetos que muestra cada sección, los datos e imágenes de cada objeto, y las notas que dejan los usuarios. No puede crear ni eliminar usuarios, ni tampoco editar sus datos personales.
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
@@ -75,6 +75,8 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 **GUÍA DEL VÍDEO**
+<br>
+<br>
 1
 00:00:00,000 --> 00:00:21,000
 Introducción

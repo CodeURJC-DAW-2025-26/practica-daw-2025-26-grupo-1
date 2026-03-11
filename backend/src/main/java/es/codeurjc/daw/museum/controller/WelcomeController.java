@@ -60,8 +60,8 @@ public class WelcomeController {
 
         }
 
-        @GetMapping("/welcome-anonymous")
-        public String welcomeAnonymous(Model model) {
+        @GetMapping("/welcome-user")
+        public String welcomeRegistered(Model model) {
 
                 model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
                 model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
@@ -69,28 +69,27 @@ public class WelcomeController {
                 List<UserSection> userSections = new ArrayList<>();
 
                 userSections.add(new UserSection("Peces", "/assets/images/icons/logo-pez.png", "/section/peces",
-                                List.of(new Category("badge-primary", "Mar"),
-                                                new Category("badge-info", "Agua dulce"),
-                                                new Category("badge-dark", "Abisales"))));
+                                List.of(new Category("bg-secondary", "Mar"),
+                                                new Category("bg-secondary", "Agua dulce"),
+                                                new Category("bg-secondary", "Abisales"))));
 
                 userSections.add(new UserSection("Insectos", "/assets/images/icons/logo-mariposa.png", "/section/insectos",
-                                List.of(new Category("badge-primary", "Terrestres"),
-                                                new Category("badge-info", "Aéreos"),
-                                                new Category("badge-dark", "Acuáticos"))));
+                                List.of(new Category("bg-secondary", "Terrestres"),
+                                                new Category("bg-secondary", "Aéreos"),
+                                                new Category("bg-secondary", "Acuáticos"))));
 
                 userSections.add(new UserSection("Fósiles", "/assets/images/icons/logo-fosil.png", "/section/fosiles",
-                                List.of(new Category("badge-primary", "Prehistóricos"),
-                                                new Category("badge-info", "Minerales"))));
+                                List.of(new Category("bg-secondary", "Prehistóricos"),
+                                                new Category("bg-secondary", "Minerales"))));
 
                 userSections.add(new UserSection("Obras de arte", "/assets/images/icons/logo-pintura.png", "/section/arte",
-                                List.of(new Category("badge-primary", "Pintura"),
-                                                new Category("badge-info", "Escultura"),
-                                                new Category("badge-dark", "Cerámica"))));
+                                List.of(new Category("bg-secondary", "Pintura"),
+                                                new Category("bg-secondary", "Escultura"),
+                                                new Category("bg-secondary", "Cerámica"))));
 
                 model.addAttribute("userSections", userSections);
 
-                return "welcome-page-anonymous";
+                return "welcome-page";
         }
-
 
 }

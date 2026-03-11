@@ -1,5 +1,6 @@
 package es.codeurjc.daw.museum.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class SessionController {
@@ -19,6 +21,22 @@ public class SessionController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @ModelAttribute
+    public void addAttributes(Model model, HttpServletRequest request) {
+
+        Principal principal = request.getUserPrincipal();
+
+        if (principal != null) {
+
+            model.addAttribute("logged", true);
+            model.addAttribute("userName", principal.getName());
+            model.addAttribute("admin", request.isUserInRole("ADMIN"));
+
+        } else {
+            model.addAttribute("logged", false);
+        }
+    }
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -45,7 +63,9 @@ public class SessionController {
 
         if (userService.findByUsername(user.getName()).isPresent()) {
             model.addAttribute("registrationError", "El usuario ya existe.");
-            return "registration-page"; 
+            model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+            model.addAttribute("profileImage", "/assets/images/perfil-sin-foto.png");
+            return "registration-page";
         }
 
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
@@ -53,20 +73,22 @@ public class SessionController {
 
         userService.saveUser(user);
 
-        return "redirect:/welcome-registered";
+        return "redirect:/welcome-user";
     }
 
-    @GetMapping("/welcome-registered")
+    /*@GetMapping("/welcome-user")
     public String welcomeRegistered(Model model) {
         model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
         model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
-        return "welcome-page-registered-user";
-    }
+        return "welcome-page";
+    }*/
 
-    @GetMapping("/welcome-admin")
-    public String welcomeAdmin(Model model) {
-        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
-        return "welcome-page-admin";
-    }
+    /*
+     * @GetMapping("/welcome-admin")
+     * public String welcomeAdmin(Model model) {
+     * model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+     * model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+     * return "welcome-page-admin";
+     * }
+     */
 }

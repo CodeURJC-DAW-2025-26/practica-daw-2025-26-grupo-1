@@ -6,9 +6,12 @@
                     <use xlink:href="#bootstrap"></use>
                 </svg> </a>
 
+            {{#logged}}
             {{#buttons}}
             <button class="btn {{type}} px-3" type="button">{{text}}</button>
             {{/buttons}}
+            {{/logged}}
+
             
 
             <form class="card p-2 ms-lg-auto">
@@ -18,6 +21,8 @@
                         Buscar</button>
                 </div>
             </form>
+            
+
         </div>
     </div>
 </section>

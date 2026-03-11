@@ -36,47 +36,47 @@ public class WebSecurityConfig {
 
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        // Public pages
-                        .requestMatchers("/sections", "/sections/**").permitAll()
-                        .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/assets/**").permitAll() 
-                        .requestMatchers("/favicon.ico").permitAll()
-                        .requestMatchers("/", "/error", "/login", "/register",  "/loginerror", "/welcome-anonymous", "/section/peces", "/section/insectos", "/section/fosiles", "/section/arte").permitAll()
+                        // 1. PÁGINAS PÚBLICAS (Accesibles para TODO el mundo, incluso tras logout)
+                        .requestMatchers("/sections", "/sections/**", "/images/**", "/assets/**", "/favicon.ico")
+                        .permitAll()
+                        .requestMatchers("/section/*/more/*").permitAll()  
+                        .requestMatchers("/", "/error", "/login", "/register", "/loginerror", "/confirmation")
+                        .permitAll()
+                        .requestMatchers("/section/peces", "/section/insectos", "/section/fosiles", "/section/arte", "/welcome-user")
+                        .permitAll()
 
-                        // Registered user (USER)
-                        //.requestMatchers("/newbook").hasAnyRole("USER")
-                        .requestMatchers("/welcome-registered").hasAnyRole("USER")
-                        .requestMatchers("/objects/*/favorite").hasRole("USER")
-                        .requestMatchers("/objects/*/seen").hasRole("USER")
-                        .requestMatchers("/notes/**").hasRole("USER")
-                        .requestMatchers("/profile/**").hasRole("USER")
+                        // 2. PÁGINAS PARA LOGUEADOS (USER o ADMIN)
+                        .requestMatchers( "/statistics").hasAnyRole("USER", "ADMIN")
 
-                        // Admin (ADMIN)
-                        .requestMatchers("/objects/new", "/objects/edit/**").hasRole("ADMIN")
-                        .requestMatchers("/objects/delete/**").hasRole("ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN"))
+                        // 3. SOLO PARA USUARIOS (USER)
+                        //.requestMatchers("/objects/*/favorite", "/objects/*/seen").hasRole("USER")
+                        .requestMatchers("/notes/**", "/profile/**").hasRole("USER")
+
+                        // 4. SOLO PARA ADMINISTRADORES (ADMIN)
+                        .requestMatchers("/objects/new", "/objects/edit/**", "/objects/delete/**", "/admin/**")
+                        .hasRole("ADMIN")
+
+                        // Cualquier otra ruta no especificada requiere autenticación
+                        .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/loginerror")
-                        /* .defaultSuccessUrl("/") */
                         .successHandler((request, response, authentication) -> {
-        var authorities = authentication.getAuthorities();
-
-        if (authorities.stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-            response.sendRedirect("/welcome-admin");
-        } else {
-            response.sendRedirect("/welcome-registered");
-        }
-    })
-    .permitAll())
-            
+                            // Simplificado: Ambos van al mismo sitio
+                            response.sendRedirect("/welcome-user");
+                        })
+                        .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/confirmation?action=logout")
+                        .invalidateHttpSession(true) // Borra la sesión
+                        .deleteCookies("JSESSIONID") // Borra la cookie
                         .permitAll());
 
         return http.build();
     }
 
-}
+}         
+
+
+

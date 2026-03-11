@@ -5,9 +5,9 @@
 
 <body>
     <!-- Navigation-->
-    {{> partials/nav-registered}}
+    {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5 related-museum-header">
+    <section class="py-5 " style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
@@ -19,9 +19,9 @@
                         </div>
                         <div class="card-body ">
 
-                            {{confirmation-text}}
+                            {{confirmationText}}
                             <div class="d-flex justify-content-center gap-3 mt-3">
-                                <a href="" class="btn btn-success px-3"
+                                <a href="{{nextUrl}}" class="btn btn-success px-3"
                                     type="button">
                                     <i class="bi bi-check2"></i>
                                     Aceptar

@@ -1,6 +1,8 @@
 package es.codeurjc.daw.museum.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +24,72 @@ public class UserController {
     @Autowired
     private MuseumObjectService objectService;
 
-    @GetMapping("/users/{id}")
-    public String viewProfile(@PathVariable Long id, Model model) {
-        User user = userService.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+
+    public static class Progress {
+        private String sectionName;
+        private int percentage;
+
+        public Progress(String sectionName, int percentage) {
+            this.sectionName = sectionName;
+            this.percentage = percentage;
+        }
+
+        public String getSectionName() {
+            return sectionName;
+        }
+
+        public int getPercentage() {
+            return percentage;
+        }
+    }
+
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        return "main-page";
+    }
+
+    @GetMapping("/profile")
+    public String viewProfile(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName()).get();
         model.addAttribute("user", user);
+        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
+        model.addAttribute("profileImage", "/assets/images/perfil-sin-foto.png");
+        model.addAttribute("profileImage", "/assets/images/perfil-sin-foto.png");
         return "profile-page";
     }
+
+    /*@GetMapping("/statistics")
+    public String viewStatistics(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName()).get();
+        model.addAttribute("user", user);
+
+        List<Progress> progressList = new ArrayList<>();
+
+        progressList = List.of(
+            new Progress("Peces", 80),
+            new Progress("Insectos", 50),
+            new Progress("Fósiles", 30),
+            new Progress("Obras de arte", 70)
+        );
+
+        model.addAttribute("progress", progressList);
+
+        return "data-graphics";
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @PostMapping("/objects/{id}/favorite")
     public String addFavorite(@PathVariable long id, HttpServletRequest request) {
@@ -61,7 +122,7 @@ public class UserController {
     @GetMapping("/objects/{id}")
     public String viewObject(@PathVariable long id, Model model, Principal principal) {
         MuseumObject object = objectService.findById(id)
-            .orElseThrow(() -> new RuntimeException("Object not found"));
+                .orElseThrow(() -> new RuntimeException("Object not found"));
         model.addAttribute("object", object);
 
         String userType = "anonymous";
@@ -97,9 +158,4 @@ public class UserController {
         }
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-        return "main-page";
-    }
 }
