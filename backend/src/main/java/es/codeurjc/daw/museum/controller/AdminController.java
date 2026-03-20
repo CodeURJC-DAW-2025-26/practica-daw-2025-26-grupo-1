@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+/*package es.codeurjc.daw.museum.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,4 +67,4 @@ public class AdminController {
         noteService.deleteNoteById(id);
         return "redirect:/admin/objects";
     }
-}
+}*/

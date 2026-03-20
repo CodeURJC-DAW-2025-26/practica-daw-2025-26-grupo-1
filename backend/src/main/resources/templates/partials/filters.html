@@ -8,20 +8,21 @@
 
             {{#logged}}
             {{#buttons}}
-            <button class="btn {{type}} px-3" type="button">{{text}}</button>
+            <a href="/section/{{sectionName}}?category={{text}}" class="btn {{type}} px-3"> {{text}} </a>
             {{/buttons}}
             {{/logged}}
 
-            
 
-            <form class="card p-2 ms-lg-auto">
-                <div class="input-group"> <input type="text" class="form-control">
+
+            <form class="card p-2 ms-lg-auto" action="/section/{{sectionName}}" method="get">
+                <div class="input-group"> 
+                    <input type="text" name="searchName" class="form-control">
                     <button type="submit" class="btn btn-secondary">
                         <i class="bi bi-search"></i>
                         Buscar</button>
                 </div>
             </form>
-            
+
 
         </div>
     </div>

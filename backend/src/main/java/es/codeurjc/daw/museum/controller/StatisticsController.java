@@ -23,7 +23,7 @@ public class StatisticsController {
         
         int fishObjects = objectService.countByType("peces");
         int insectObjects = objectService.countByType("insectos");
-        int fossilObjects = objectService.countByType("fósiles");
+        int fossilObjects = objectService.countByType("fosiles");
         int artObjects = objectService.countByType("arte");
 
         model.addAttribute("fishObjects", fishObjects);

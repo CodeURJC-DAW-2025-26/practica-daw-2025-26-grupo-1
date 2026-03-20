@@ -19,9 +19,6 @@ public class Note {
 	@ManyToOne
  	private User user;
 
-	/*@ManyToOne
- 	private User owner;*/
-
 	@ManyToOne
  	private MuseumObject museumObject;
 

@@ -42,15 +42,22 @@ public class MuseumObjectService {
 	 * }
 	 */
 
-	public Page<MuseumObject> findByType(String type, int page) {
-
-		Pageable pageable = PageRequest.of(page, 4); 
-
-		return objectRepository.findByType(type, pageable);
-	}
-
 	public List<MuseumObject> findByCategory(String category) {
 		return objectRepository.findByCategory(category);
+	}
+
+	public Page<MuseumObject> findByCategory(String category, int page) {
+		Pageable pageable = PageRequest.of(page, 4);
+		return objectRepository.findByCategoryOrderByIdAsc(category, pageable);
+	}
+
+	public Page<MuseumObject> findByType(String type, int page) {
+		Pageable pageable = PageRequest.of(page, 4);
+		return objectRepository.findByTypeOrderByIdAsc(type, pageable);
+	}
+
+	public List<MuseumObject> findByTypeAndName(String type, String name) {
+		return objectRepository.findByTypeAndObjectNameContainingIgnoreCase(type, name);
 	}
 
 	public MuseumObject saveObject(MuseumObject object) {
@@ -84,11 +91,20 @@ public class MuseumObjectService {
 		objectRepository.delete(obj);
 	}
 
-	/*public List<String> findAllTypes() {
-		return objectRepository.findDistinctTypes();
-	}*/
+	/*
+	 * public List<MuseumObject> findByTypeAndCategory(String type, String category)
+	 * {
+	 * return objectRepository.findByTypeAndCategory(type, category);
+	 * }
+	 */
 
-	/*public int countByType(String type) {
-		return objectRepository.countByType(type);
-	}*/
+	/*
+	 * public List<String> findAllTypes() {
+	 * return objectRepository.findDistinctTypes();
+	 * }
+	 */
+
+	public int countByType(String type) {
+	  return objectRepository.countByType(type);
+	  }
 }

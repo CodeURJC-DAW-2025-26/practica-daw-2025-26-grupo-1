@@ -76,19 +76,4 @@ public class SessionController {
         return "redirect:/welcome-user";
     }
 
-    /*@GetMapping("/welcome-user")
-    public String welcomeRegistered(Model model) {
-        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-        model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
-        return "welcome-page";
-    }*/
-
-    /*
-     * @GetMapping("/welcome-admin")
-     * public String welcomeAdmin(Model model) {
-     * model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-     * model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");
-     * return "welcome-page-admin";
-     * }
-     */
 }

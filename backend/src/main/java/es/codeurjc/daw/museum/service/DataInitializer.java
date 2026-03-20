@@ -381,7 +381,7 @@ public class DataInitializer {
                         MuseumObject trilobite = new MuseumObject();
                         trilobite.setObjectName("Trilobite");
                         trilobite.setGroupName("Trilobita");
-                        trilobite.setType("fósiles");
+                        trilobite.setType("fosiles");
                         trilobite.setCategory("Prehistóricos");
                         trilobite.setTechnicalData(
                                         "Edad: 521-250 millones de años. Longitud: 2-70 cm. Ubicación: sedimentos marinos fósiles.");
@@ -397,7 +397,7 @@ public class DataInitializer {
                         MuseumObject dienteTiburon = new MuseumObject();
                         dienteTiburon.setObjectName("Diente de Tiburón");
                         dienteTiburon.setGroupName("Tiburón");
-                        dienteTiburon.setType("fósiles");
+                        dienteTiburon.setType("fosiles");
                         dienteTiburon.setCategory("Prehistóricos");
                         dienteTiburon.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -413,7 +413,7 @@ public class DataInitializer {
                         MuseumObject amatista = new MuseumObject();
                         amatista.setObjectName("Amatista");
                         amatista.setGroupName("Minerales");
-                        amatista.setType("fósiles");
+                        amatista.setType("fosiles");
                         amatista.setCategory("Minerales");
                         amatista.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -429,7 +429,7 @@ public class DataInitializer {
                         MuseumObject ammonites = new MuseumObject();
                         ammonites.setObjectName("Ammonites");
                         ammonites.setGroupName("Prehistóricos");
-                        ammonites.setType("fósiles");
+                        ammonites.setType("fosiles");
                         ammonites.setCategory("Prehistóricos");
                         ammonites.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -445,7 +445,7 @@ public class DataInitializer {
                         MuseumObject olivino = new MuseumObject();
                         olivino.setObjectName("Olivino");
                         olivino.setGroupName("Minerales");
-                        olivino.setType("fósiles");
+                        olivino.setType("fosiles");
                         olivino.setCategory("Minerales");
                         olivino.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -461,7 +461,7 @@ public class DataInitializer {
                         MuseumObject helecho = new MuseumObject();
                         helecho.setObjectName("Helecho");
                         helecho.setGroupName("Prehistóricos");
-                        helecho.setType("fósiles");
+                        helecho.setType("fosiles");
                         helecho.setCategory("Prehistóricos");
                         helecho.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -477,7 +477,7 @@ public class DataInitializer {
                         MuseumObject dientesDeSable = new MuseumObject();
                         dientesDeSable.setObjectName("Tigre dientes de sable");
                         dientesDeSable.setGroupName("Prehistóricos");
-                        dientesDeSable.setType("fósiles");
+                        dientesDeSable.setType("fosiles");
                         dientesDeSable.setCategory("Prehistóricos");
                         dientesDeSable.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");
@@ -493,7 +493,7 @@ public class DataInitializer {
                         MuseumObject mamut = new MuseumObject();
                         mamut.setObjectName("Mamut");
                         mamut.setGroupName("Prehistóricos");
-                        mamut.setType("fósiles");
+                        mamut.setType("fosiles");
                         mamut.setCategory("Prehistóricos");
                         mamut.setTechnicalData(
                                         "Edad: 10-20 millones de años. Longitud: 10-20 cm. Ubicación: sedimentos marinos fósiles.");

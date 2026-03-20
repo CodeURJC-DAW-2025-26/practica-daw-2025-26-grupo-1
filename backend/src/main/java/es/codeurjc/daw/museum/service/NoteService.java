@@ -51,4 +51,8 @@ public class NoteService {
 		noteRepository.delete(note);
 	}
 
+	public List<Note> findAllByUserAndMuseumObject(User user, MuseumObject object) {
+		return noteRepository.findAllByUserAndMuseumObject(user, object);
+	}
+
 }

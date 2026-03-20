@@ -5,9 +5,10 @@
 
 <body>
     <!-- Navigation-->
-    {{> partials/nav-registered}}
+    {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumRoomImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
+    <section class="py-5"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumRoomImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
@@ -20,50 +21,91 @@
                                 <h1 class="fw-bold mb-0 fs-2">Su perfil</h1>
                             </div>
                             <div class="modal-body p-5 pt-0">
-                                <form class="">
+                                <form action="/edit-profile" method="post" enctype="multipart/form-data">
 
-                                    <div class="d-flex justify-content-center">
-                                        <img src="{{profileImage}}" alt="Logo app"
+                                    <div class="justify-content-center">
+                                        {{^user.image}}
+                                        <div class="d-flex justify-content-center">
+                                            <img src="/assets/images/perfil-sin-foto.png" alt="Logo app"
                                             class="me-3 rounded-circle mb-3" style="height:80px;">
-                                    </div>
-                                    
-                                    <div class="d-flex boton-flex justify-content-center mb-5 gap-3">
-                                        <button type="button" class="btn btn-secondary" onclick=" ">Cambiar
-                                            imagen</button>
-                                        <button type="button" class="btn btn-secondary" onclick=" ">Borrar
-                                            imagen</button>
-                                    </div>
-
-                                    <div class="form-floating mb-3"> <input type="text" class="form-control rounded-3"
-                                            id="floatingInput" value="{{user.name}}">
-                                        <label for="floatingInput">Nombre de usuario</label>
+                                        </div>
                                         
+
+                                        <div class="mb-3">
+                                            <label for="imageField" class="form-label">Cambiar imagen:</label>
+
+                                            <input type="file" name="imageField" id="imageField" class="form-control"
+                                                accept=".png" />
+                                            <!--<input type="submit" value="Save" />-->
+
+                                        </div>
+                                        {{/user.image}}
+
+                                        {{#user.image}}
+                                        <div class="d-flex justify-content-center">
+                                            <img src="/images/{{user.image.id}}" alt="Logo app"
+                                            class="me-3 rounded-circle mb-3" style="height:80px;">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="imageField" class="form-label">Cambiar imagen:</label>
+
+                                            <input type="file" name="imageField" id="imageField" class="form-control"
+                                                accept=".png" />
+                                            <!--<input type="submit" value="Save" />-->
+
+                                        </div>
+
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" form="deleteImageForm"
+                                            class="btn btn-danger btn-sm mb-4">
+                                            <i class="bi bi-trash"></i> Eliminar
+                                        </button>
+                                        </div>
+                                        
+                                        {{/user.image}}
+
+
+                                        <div class="form-floating mb-3"> <input type="text" name="name"
+                                                class="form-control rounded-3" id="floatingInput" value="{{user.name}}">
+                                            <label for="floatingInput">Nombre de usuario</label>
+
+                                        </div>
+                                        <div class="form-floating mb-3"> <input type="password"
+                                                class="form-control rounded-3" name="encodedPassword"
+                                                id="floatingPassword">
+                                            <label for="floatingPassword">Contraseña</label>
+
+                                            <input type="hidden" name="_csrf" value="{{token}}">
+
+
+                                        </div> 
+                                        
+                                        <div class="d-flex justify-content-center">
+                                            <input type="submit" value="Aceptar"></input>
+                                        </div>
                                     </div>
-                                    <div class="form-floating mb-3"> <input type="password"
-                                            class="form-control rounded-3" id="floatingPassword" value="{{user.encodedPassword}}">
-                                        <label for="floatingPassword">Contraseña</label>
-                                    </div> <a href="" class="w-100 mb-2 btn rounded-3 btn-success" type="submit"><i
-                                            class="bi bi-check2"></i>
-                                        Aceptar</a>
-
-
                                 </form>
                             </div>
                         </div>
                     </div>
 
+                </div>
 
-                    <div class="d-flex justify-content-center gap-3">
-                        <a href="/welcome-user" class="btn btn-danger px-3" type="button">
-                            <i class="bi bi-arrow-left"></i>
-                            Volver
-                        </a>
-
-                    </div>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/welcome-user" class="btn btn-danger px-3" type="button">
+                        <i class="bi bi-arrow-left"></i>
+                        Volver
+                    </a>
 
                 </div>
             </div>
+        </div>
     </section>
+
+    <form id="deleteImageForm" action="/remove-profile-image" method="post" style="display:none;">
+        <input type="hidden" name="_csrf" value="{{token}}" />
+    </form>
 
     <!-- Footer-->
     {{> partials/footer}}

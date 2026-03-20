@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> partials/shop-item-template}}
+
+<body>
+    {{> partials/nav-anonymous}}
+
+    <section class="py-5"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{formImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
+
+        <div class="container px-4 px-lg-5 my-5">
+            <form action="/newNote/{{object.id}}" method="post">
+                <input type="hidden" name="_csrf" value="{{token}}">
+
+                <input type="hidden" name="sectionName" value="{{sectionName}}">
+
+                <div class="row gx-4 gx-lg-5 align-items-start">
+
+                        <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                            <div class="card-body">
+                                <label>Escribe una nota:</label>
+                                <textarea class="form-control" id="newNote" name="text" rows="6" required></textarea>
+
+                            </div>
+                        </div>
+
+                    
+                </div>
+
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <a href="/section/{{sectionName}}/{{object.id}}" class="btn btn-danger px-5">
+                        <i class="bi bi-arrow-left"></i> Volver
+                    </a>
+
+                    <button class="btn btn-success px-5" type="submit">
+                        <i class="bi bi-check2"></i> Crear y guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    {{> partials/footer}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/createObjectFormLogic.js"></script>
+</body>
+
+</html>

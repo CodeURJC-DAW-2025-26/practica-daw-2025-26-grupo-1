@@ -7,7 +7,8 @@
     <!-- Navigation-->
     {{> partials/nav-anonymous}}
     <!-- Product section-->
-    <section class="py-5" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
+    <section class="py-5"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{museumHeroImage}}); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 80vh;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
@@ -27,19 +28,20 @@
                                             style="height:80px;">
                                     </div>
 
-                                    <div class="d-flex boton-flex justify-content-center mb-5 gap-3">
-                                        <button type="button" class="btn btn-secondary" onclick=" ">Cambiar
-                                            imagen</button>
-                                        <button type="button" class="btn btn-secondary" onclick=" ">Borrar
-                                            imagen</button>
+                                    <div class="mb-3">
+                                        <label for="imageField" class="form-label">Cambiar imagen:</label>
+                                        <input type="file" name="imageField" id="imageField" class="form-control"
+                                            accept=".png" />
                                     </div>
+
 
                                     <div class="form-floating mb-3"> <input type="text" class="form-control rounded-3"
                                             id="floatingInput" name="name" required>
                                         <label for="floatingInput">Nombre de usuario</label>
                                     </div>
                                     <div class="form-floating mb-3"> <input type="password"
-                                            class="form-control rounded-3" id="floatingPassword" name="password" required>
+                                            class="form-control rounded-3" id="floatingPassword" name="password"
+                                            required>
                                         <label for="floatingPassword">Contraseña</label>
                                     </div>
 

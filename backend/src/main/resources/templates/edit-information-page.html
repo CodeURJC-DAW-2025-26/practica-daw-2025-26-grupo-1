@@ -23,7 +23,7 @@
                             </div>
 
                             <div class="fs-5 mb-3">
-                                <label for="object-name-edited" class="form-label">Nombre científico: </label>
+                                <label for="object-name-edited" class="form-label">Dato de interés: </label>
                                 <input type="text" class="form-control" id="object-name-edited"
                                     value="{{group-name-element}}">
                             </div>
@@ -86,40 +86,13 @@
                 </div>
 
 
-                <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-                    <div class="card-body">
-                        <div class="fs-5">
-                            <label class="form-label">Comentarios:</label>
-                        </div>
-
-                        <!-- Bucle para cada comentario -->
-                        {{#comments}}
-                        <div class="card mb-3">
-                            <textarea class="form-control" rows="3">{{text}}</textarea>
-                            <div class="text-center mt-2">
-                                <a class="btn btn-secondary" href="#"><i class="bi bi-pencil-square"></i> Editar</a>
-                                <a class="btn btn-danger" href="#"><i class="bi bi-x-lg"></i> Eliminar</a>
-                            </div>
-                        </div>
-                        {{/comments}}
-
-                        <!-- Botón para añadir un nuevo comentario siempre visible -->
-                        <div class="text-center mt-3">
-                            <a class="btn btn-secondary" href="#"><i class="bi bi-plus-lg"></i> Añadir comentario</a>
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="d-flex justify-content-center gap-3">
                     <a href="{{backUrl}}" class="btn btn-danger px-3" type="button">
                         <i class="bi bi-arrow-left"></i>
                         Volver
                     </a>
-                    <!--<button class="btn btn-secondary px-3" type="button">
-                        <i class="bi bi-card-text"></i>
-                        Añadir comentario
-                    </button>-->
+
                     <button class="btn btn-success px-3" type="button">
                         <i class="bi bi-check2"></i>
                         Aceptar cambios

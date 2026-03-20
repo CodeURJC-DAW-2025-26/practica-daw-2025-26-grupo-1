@@ -5,15 +5,15 @@
 
 <body>
     <!-- Navigation-->
-    
+
     {{> partials/nav-anonymous}}
-    
+
     <!-- Header-->
     {{> partials/hero-section}}
 
-    
+
     {{> partials/filters}}
-    
+
 
     <!-- Section-->
     <section class="py-5"
@@ -30,18 +30,23 @@
 
             <div class="d-flex justify-content-center">
 
-                {{#admin}}
-                    <button id="loadItems" class="btn btn-secondary px-3" type="button">
-                    <i class="bi bi-plus-lg"></i>
-                    Añadir 
-                </button>
-                {{/admin}}
 
-            
-                <button id="loadItems" class="btn btn-secondary px-3" type="button">
-                    <i class="bi bi-eye-fill"></i>
-                    Ver más
-                </button>
+                {{^searchName}}
+                {{#admin}}
+                <div class="d-flex gap-3">
+                    <a href="/admin/objects/new?sectionName={{sectionName}}" class="btn btn-secondary px-3">
+                        <i class="bi bi-plus"></i>
+                        Añadir
+                    </a>
+                    {{/admin}}
+
+
+                    <button id="loadItems" class="btn btn-secondary px-3" type="button">
+                        <i class="bi bi-eye-fill"></i>
+                        Ver más
+                    </button>
+                </div>
+                {{/searchName}}
             </div>
 
             <div id="spinner" style="display:none; text-align:center; margin-top:20px;">

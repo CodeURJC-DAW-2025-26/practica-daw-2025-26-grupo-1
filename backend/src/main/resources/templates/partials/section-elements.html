@@ -16,9 +16,15 @@
         
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
+                
                 <a class="btn btn-outline-dark mt-auto" href="{{goToElement}}">Seleccionar</a>
                 {{#admin}}
-                <a class="btn btn-danger mt-auto" href="{{goToElement}}">Eliminar</a>
+                <form action="/objects/delete/{{id}}" method="post" style="display:inline">
+                    <input type="hidden" name="_csrf" value="{{token}}">
+                    <button type="submit" class="btn btn-danger mt-auto">
+                        Eliminar
+                    </button>
+                </form>
                 {{/admin}}
             </div>
         </div>

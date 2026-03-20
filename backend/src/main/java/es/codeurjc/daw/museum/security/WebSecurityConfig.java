@@ -37,12 +37,16 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         // 1. PÁGINAS PÚBLICAS (Accesibles para TODO el mundo, incluso tras logout)
-                        .requestMatchers("/sections", "/sections/**", "/images/**", "/assets/**", "/favicon.ico")
+                        .requestMatchers("/section", "/section/**", "/images/**", "/assets/**", "/favicon.ico")
+                        .permitAll()
+                        .requestMatchers("/search")
                         .permitAll()
                         .requestMatchers("/section/*/more/*").permitAll()  
-                        .requestMatchers("/", "/error", "/login", "/register", "/loginerror", "/confirmation")
+                        .requestMatchers("/", "/error", "/login", "/register", "/loginerror", "/confirmation", "/system-error", "/search")
                         .permitAll()
                         .requestMatchers("/section/peces", "/section/insectos", "/section/fosiles", "/section/arte", "/welcome-user")
+                        .permitAll()
+                        .requestMatchers("/object/*")
                         .permitAll()
 
                         // 2. PÁGINAS PARA LOGUEADOS (USER o ADMIN)
@@ -50,7 +54,7 @@ public class WebSecurityConfig {
 
                         // 3. SOLO PARA USUARIOS (USER)
                         //.requestMatchers("/objects/*/favorite", "/objects/*/seen").hasRole("USER")
-                        .requestMatchers("/notes/**", "/profile/**").hasRole("USER")
+                        .requestMatchers("/notes/**", "/profile/**", "/edit-profile").hasRole("USER")
 
                         // 4. SOLO PARA ADMINISTRADORES (ADMIN)
                         .requestMatchers("/objects/new", "/objects/edit/**", "/objects/delete/**", "/admin/**")
