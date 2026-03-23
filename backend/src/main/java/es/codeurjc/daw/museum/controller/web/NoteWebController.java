@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -19,7 +19,7 @@ import es.codeurjc.daw.museum.service.NoteService;
 import es.codeurjc.daw.museum.service.UserService;
 
 @Controller
-public class NoteController {
+public class NoteWebController {
 
     @Autowired
     private NoteService noteService;

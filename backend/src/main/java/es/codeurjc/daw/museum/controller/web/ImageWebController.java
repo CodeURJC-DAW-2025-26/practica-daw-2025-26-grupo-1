@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.sql.SQLException;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.codeurjc.daw.museum.service.ImageService;
 
 @Controller
-public class ImageController {
+public class ImageWebController {
 
     @Autowired
     private ImageService imageService;

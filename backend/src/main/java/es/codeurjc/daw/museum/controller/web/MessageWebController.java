@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class MessageController {
+public class MessageWebController {
 
     @GetMapping("/confirmation") 
 

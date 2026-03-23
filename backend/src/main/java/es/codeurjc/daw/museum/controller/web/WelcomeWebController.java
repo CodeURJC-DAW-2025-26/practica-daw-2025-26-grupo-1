@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class WelcomeController {
+public class WelcomeWebController {
 
         public class Category {
                 private String type;
@@ -61,7 +61,7 @@ public class WelcomeController {
         }
 
         @GetMapping("/welcome-user")
-        public String welcomeRegistered(Model model) {
+        public String welcomeStart(Model model) {
 
                 model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
                 model.addAttribute("museumRoomImage", "/assets/images/sala-del-museo.png");

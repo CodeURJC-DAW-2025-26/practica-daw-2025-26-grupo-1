@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.security.Principal;
 
@@ -12,7 +12,7 @@ import es.codeurjc.daw.museum.service.MuseumObjectService;
 import java.util.List;
 
 @Controller
-public class StatisticsController {
+public class StatisticsWebController {
     
 
     @Autowired
@@ -21,10 +21,10 @@ public class StatisticsController {
     @GetMapping("/statistics")
     public String countObjects(Model model) {
         
-        int fishObjects = objectService.countByType("peces");
-        int insectObjects = objectService.countByType("insectos");
-        int fossilObjects = objectService.countByType("fosiles");
-        int artObjects = objectService.countByType("arte");
+        long fishObjects = objectService.countByType("peces");
+        long insectObjects = objectService.countByType("insectos");
+        long fossilObjects = objectService.countByType("fosiles");
+        long artObjects = objectService.countByType("arte");
 
         model.addAttribute("fishObjects", fishObjects);
         model.addAttribute("insectObjects", insectObjects);

@@ -31,9 +31,6 @@ public class RepositoryUserDetailsService implements UserDetailsService {
             roles.add(new SimpleGrantedAuthority("ROLE_" + role));
         }
 
-        System.out.println("Buscando usuario: " + username);
-        System.out.println("Contraseña en DB: " + user.getEncodedPassword());
-
         return new org.springframework.security.core.userdetails.User(
                 user.getName(),
                 user.getEncodedPassword(),

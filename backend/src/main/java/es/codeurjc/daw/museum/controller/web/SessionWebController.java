@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.security.Principal;
 import java.util.List;
@@ -14,7 +14,7 @@ import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class SessionController {
+public class SessionWebController {
 
     @Autowired
     private UserService userService;

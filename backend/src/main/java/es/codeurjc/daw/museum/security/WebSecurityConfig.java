@@ -3,84 +3,158 @@ package es.codeurjc.daw.museum.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import es.codeurjc.daw.museum.security.jwt.JwtRequestFilter;
+import es.codeurjc.daw.museum.security.jwt.JwtTokenProvider;
+import es.codeurjc.daw.museum.security.jwt.UnauthorizedHandlerJwt;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Autowired
-    private RepositoryUserDetailsService userDetailsService;
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Autowired
+	public RepositoryUserDetailsService userDetailService;
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
+	@Autowired
+	private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-        http.authenticationProvider(authenticationProvider());
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+		return authConfig.getAuthenticationManager();
+	}
 
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        // 1. PÁGINAS PÚBLICAS (Accesibles para TODO el mundo, incluso tras logout)
-                        .requestMatchers("/section", "/section/**", "/images/**", "/assets/**", "/favicon.ico")
-                        .permitAll()
-                        .requestMatchers("/search")
-                        .permitAll()
-                        .requestMatchers("/section/*/more/*").permitAll()  
-                        .requestMatchers("/", "/error", "/login", "/register", "/loginerror", "/confirmation", "/system-error", "/search")
-                        .permitAll()
-                        .requestMatchers("/section/peces", "/section/insectos", "/section/fosiles", "/section/arte", "/welcome-user")
-                        .permitAll()
-                        .requestMatchers("/object/*")
-                        .permitAll()
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailService);
+		authProvider.setPasswordEncoder(passwordEncoder());
 
-                        // 2. PÁGINAS PARA LOGUEADOS (USER o ADMIN)
-                        .requestMatchers( "/statistics").hasAnyRole("USER", "ADMIN")
+		return authProvider;
+	}
 
-                        // 3. SOLO PARA USUARIOS (USER)
-                        //.requestMatchers("/objects/*/favorite", "/objects/*/seen").hasRole("USER")
-                        .requestMatchers("/notes/**", "/profile/**", "/edit-profile").hasRole("USER")
+	@Bean
+	@Order(1)
+	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 
-                        // 4. SOLO PARA ADMINISTRADORES (ADMIN)
-                        .requestMatchers("/objects/new", "/objects/edit/**", "/objects/delete/**", "/admin/**")
-                        .hasRole("ADMIN")
+		http.authenticationProvider(authenticationProvider());
 
-                        // Cualquier otra ruta no especificada requiere autenticación
-                        .anyRequest().authenticated())
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .failureUrl("/loginerror")
-                        .successHandler((request, response, authentication) -> {
-                            // Simplificado: Ambos van al mismo sitio
-                            response.sendRedirect("/welcome-user");
-                        })
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/confirmation?action=logout")
-                        .invalidateHttpSession(true) // Borra la sesión
-                        .deleteCookies("JSESSIONID") // Borra la cookie
-                        .permitAll());
+		http
+				.securityMatcher("/api/**")
+				.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
-        return http.build();
-    }
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers("/api/v1/users/me/**").hasAnyRole("USER", "ADMIN")
 
-}         
+						// --- 2. OBJETOS DEL MUSEO ---
+						// Cualquier usuario puede ver los objetos y las secciones
+						.requestMatchers(HttpMethod.GET, "/api/v1/objects/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/v1/menu-page/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/v1/statistics/").permitAll()
 
+						// Crear o editar objetos: Solo ADMIN
+						.requestMatchers(HttpMethod.POST, "/api/v1/objects/").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.PUT, "/api/v1/objects/**").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/api/v1/objects/**").hasRole("ADMIN")
 
+						// --- 3. NOTAS ---
+						// Solo usuarios registrados pueden dejar notas o borrarlas
+						.requestMatchers(HttpMethod.POST, "/api/v1/notes/**").hasRole("USER")
+						.requestMatchers(HttpMethod.DELETE, "/api/v1/notes/**").hasRole("USER")
 
+						// --- 4. REGISTRO Y LOGIN (PÚBLICO) ---
+						// El POST a /users/ es para registrarse, tiene que ser público
+						.requestMatchers(HttpMethod.POST, "/api/v1/users/").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
+
+						// Todo lo demás de la API que no hayamos dicho, por seguridad, que pida login
+						.anyRequest().authenticated());
+
+		// Disable Form login Authentication
+		http.formLogin(formLogin -> formLogin.disable());
+
+		// Disable CSRF protection (it is difficult to implement in REST APIs)
+		http.csrf(csrf -> csrf.disable());
+
+		// Disable Basic Authentication
+		http.httpBasic(httpBasic -> httpBasic.disable());
+
+		// Stateless session
+		http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+		// Add JWT Token filter
+		http.addFilterBefore(new JwtRequestFilter(userDetailService, jwtTokenProvider),
+				UsernamePasswordAuthenticationFilter.class);
+
+		return http.build();
+	}
+
+	@Bean
+	@Order(2)
+	public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
+
+		http.authenticationProvider(authenticationProvider());
+
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						// PUBLIC PAGES
+						.requestMatchers("/section", "/section/**", "/images/**", "/assets/**", "/favicon.ico")
+						.permitAll()
+						.requestMatchers("/search").permitAll()
+						.requestMatchers("/section/*/more/*").permitAll()
+						.requestMatchers("/", "/error", "/login", "/register", "/loginerror", "/confirmation",
+								"/system-error", "/search")
+						.permitAll()
+						.requestMatchers("/section/peces", "/section/insectos", "/section/fosiles", "/section/arte",
+								"/welcome-user")
+						.permitAll()
+						.requestMatchers("/object/*").permitAll()
+
+						// PRIVATE PAGES
+						.requestMatchers("/statistics").hasAnyRole("USER", "ADMIN")
+						.requestMatchers("/notes/**", "/profile/**", "/edit-profile").hasRole("USER")
+						.requestMatchers("/objects/new", "/objects/edit/**", "/objects/delete/**", "/admin/**")
+						.hasRole("ADMIN")
+
+						// OpenAPI
+						.requestMatchers("/v3/api-docs*/**").permitAll()
+						.requestMatchers("/swagger-ui.html").permitAll()
+						.requestMatchers("/swagger-ui/**").permitAll())
+
+				.formLogin(formLogin -> formLogin
+						.loginPage("/login")
+						.failureUrl("/loginerror")
+						.successHandler((request, response, authentication) -> {
+							response.sendRedirect("/welcome-user");
+						})
+						.permitAll())
+				.logout(logout -> logout
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/confirmation?action=logout")
+						.invalidateHttpSession(true) // Delete session
+						.deleteCookies("JSESSIONID") // Delete cookie
+						.permitAll());
+
+		return http.build();
+	}
+
+}

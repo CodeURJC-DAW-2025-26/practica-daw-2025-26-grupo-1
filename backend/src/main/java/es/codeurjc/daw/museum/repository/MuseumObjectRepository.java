@@ -25,6 +25,9 @@ public interface MuseumObjectRepository extends JpaRepository<MuseumObject, Long
 
     List<MuseumObject> findByTypeAndObjectNameContainingIgnoreCase(String type, String objectName);
 
+    Page<MuseumObject> findByTypeAndCategoryOrderByIdAsc(String type, String category, Pageable pageable);
+
+    Page<MuseumObject> findByObjectNameContainingIgnoreCase(String objectName, Pageable pageable);
 
     //List<MuseumObject> findByTypeAndCategory(String type, String category);
 
@@ -35,7 +38,7 @@ public interface MuseumObjectRepository extends JpaRepository<MuseumObject, Long
     // museum_object.category OR category=NULL OR category=" ")
     // List<MuseumObject> findDistinctTypes();
 
-      int countByType(String type);
+      long countByTypeIgnoreCase(String type);
      
 
 }

@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class UserController {
+public class UserWebController {
 
     @Autowired
     private UserService userService;
@@ -34,7 +34,7 @@ public class UserController {
     private ImageService imageService;
 
 
-    public static class Progress {
+    /*public static class Progress {
         private String sectionName;
         private int percentage;
 
@@ -50,7 +50,7 @@ public class UserController {
         public int getPercentage() {
             return percentage;
         }
-    }
+    }*/
 
     @GetMapping("/")
     public String index(Model model) {

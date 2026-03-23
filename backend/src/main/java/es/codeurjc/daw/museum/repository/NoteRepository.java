@@ -14,6 +14,8 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     List <Note> findByUser (User user);
     List <Note> findByMuseumObject (MuseumObject museumObject);
 
+    List <Note> findByMuseumObjectId (Long id);
+
     List <Note> findAllByUserAndMuseumObject (User user, MuseumObject museumObject);
 
 }

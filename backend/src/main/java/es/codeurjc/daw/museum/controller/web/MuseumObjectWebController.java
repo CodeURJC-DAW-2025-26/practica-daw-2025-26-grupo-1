@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.util.Optional;
 import java.io.IOException;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.PageRequest;
+
+import es.codeurjc.daw.museum.controller.web.SectionWebController.SectionElement;
 
 import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
@@ -36,7 +39,7 @@ import jakarta.servlet.http.HttpServletRequest;
 // mapping error disappears.
 
 @Controller
-public class MuseumObjectController {
+public class MuseumObjectWebController {
 
     @Autowired
     private UserService userService;
@@ -173,7 +176,7 @@ public class MuseumObjectController {
         } else {
 
             List<MuseumObject> objects = objectService
-                    .findByType(section, 0)
+                    .findByType(section, PageRequest.of(0,4))
                     .getContent();
 
             model.addAttribute("sectionName", sectionName);
@@ -184,10 +187,10 @@ public class MuseumObjectController {
         }
     }
 
-    private List<SectionController.SectionElement> convertToSectionElement(List<MuseumObject> objects,
+    private List<SectionWebController.SectionElement> convertToSectionElement(List<MuseumObject> objects,
             String sectionName) {
         return objects.stream()
-                .map(obj -> new SectionController.SectionElement(obj.getId(),
+                .map(obj -> new SectionWebController.SectionElement(obj.getId(),
                         obj.getObjectName(),
                         "/images/" + obj.getImage().getId(),
                         obj.getCategory(),

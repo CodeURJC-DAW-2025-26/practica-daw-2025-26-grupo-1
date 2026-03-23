@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller;
+package es.codeurjc.daw.museum.controller.web;
 
 import java.security.Principal;
 import java.security.cert.PKIXRevocationChecker.Option;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.PageRequest;
 
-import es.codeurjc.daw.museum.controller.SectionController.Button;
 import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.User;
@@ -26,7 +26,7 @@ import es.codeurjc.daw.museum.service.MuseumObjectService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class SectionController {
+public class SectionWebController {
 
     @Autowired
     private MuseumObjectService objectService;
@@ -171,9 +171,9 @@ public class SectionController {
             objectsInSection = objectService.findByTypeAndName(section, searchName);
             model.addAttribute("searchName", searchName);
         } else if (category != null && !category.isEmpty()) {
-            objectsInSection = objectService.findByCategory(category, 0).getContent();
+            objectsInSection = objectService.findByCategory(category, PageRequest.of(0,4)).getContent();
         } else {
-            objectsInSection = objectService.findByType(section, 0).getContent();
+            objectsInSection = objectService.findByType(section, PageRequest.of(0,4)).getContent();
         }
 
         if (objectsInSection.isEmpty()) {
@@ -234,7 +234,7 @@ public class SectionController {
                 return "error-page";
         }
 
-        return "section-list-page-anonymous";
+        return "section-list-page";
     }
 
     /*
@@ -315,10 +315,10 @@ public class SectionController {
         // 1. Usamos el Service para traer SOLO lo que necesitamos de la BD
         if (category != null && !category.isEmpty()) {
             // Pedimos la página X de esa categoría específica
-            objects = objectService.findByCategory(category, page).getContent();
+            objects = objectService.findByCategory(category, PageRequest.of(0,4)).getContent();
         } else {
             // Pedimos la página X de toda la sección
-            objects = objectService.findByType(section, page).getContent();
+            objects = objectService.findByType(section, PageRequest.of(0,4)).getContent();
         }
 
         // 2. Convertimos y mandamos a la plantilla
