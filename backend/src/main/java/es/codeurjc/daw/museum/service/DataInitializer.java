@@ -38,34 +38,18 @@ public class DataInitializer {
 
         @Autowired
         private PasswordEncoder passwordEncoder;
-
-        /*
-         * @EventListener(ApplicationReadyEvent.class)
-         * public void init() throws IOException, URISyntaxException, SQLException {
-         * // Create only demo users - the app will have data from other sources
-         * if (userRepository.count() == 0) {
-         * userRepository.save(new User("user", passwordEncoder.encode("pass"),
-         * List.of("USER")));
-         * userRepository.save(new User("admin", passwordEncoder.encode("adminpass"),
-         * List.of("USER", "ADMIN")));
-         * }
-         * }
-         */
+        
 
         @PostConstruct
         public void init() throws IOException, URISyntaxException {
                 if (userRepository.count() == 0) {
                         userRepository.save(new User("user", passwordEncoder.encode("pass"), List.of("USER")));
+                        userRepository.save(new User("pepe", passwordEncoder.encode("123"), List.of("USER")));
                         userRepository.save(new User("admin", passwordEncoder.encode("adminpass"),
                                         List.of("USER", "ADMIN")));
                 }
 
                 if (objectService.findAll().isEmpty()) {
-
-                        /*
-                         * var stream = getClass().getClassLoader()
-                         * .getResourceAsStream("project-images/fish/sea/pez-napoleon.png");
-                         */
 
                         // FISH
                         Image imagePezNapoleon = imageService
@@ -212,21 +196,6 @@ public class DataInitializer {
                         pezLinterna.setImage(imagePezLinterna);
                         objectService.saveObject(pezLinterna);
 
-                        /*Image imageCanastaFloresVenus = imageService
-                                        .createImage(getClass().getResourceAsStream(
-                                                        "/project-images/fish/deep-sea/canasta-flores-venus.png"));
-
-                        MuseumObject canastaFloresVenus = new MuseumObject();
-                        canastaFloresVenus.setObjectName("Canasta de flores de Venus");
-                        canastaFloresVenus.setGroupName("Passiflora caerulea");
-                        canastaFloresVenus.setType("plantas");
-                        canastaFloresVenus.setCategory("Abisales");
-                        canastaFloresVenus.setTechnicalData(
-                                        "Tamaño: hasta 1 metro. Peso: hasta 10 kg. Hábitat: bosques y praderas.");
-                        canastaFloresVenus.setDescription(
-                                        "La canasta de flores de Venus es una especie de planta conocida por sus flores grandes y vistosas.");
-                        canastaFloresVenus.setImage(imageCanastaFloresVenus);
-                        objectService.saveObject(canastaFloresVenus);*/
 
                         // INSECTS
                         Image imageMariposaMonarca = imageService

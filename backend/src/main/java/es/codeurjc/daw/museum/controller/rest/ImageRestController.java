@@ -2,9 +2,13 @@ package es.codeurjc.daw.museum.controller.rest;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import es.codeurjc.daw.museum.model.Image;
 
 import es.codeurjc.daw.museum.dto.ImageDTO;
 import es.codeurjc.daw.museum.dto.ImageMapper;
@@ -41,14 +47,24 @@ public class ImageRestController {
         Resource imageFile = imageService.getImageFile(id);
 
         MediaType mediaType = MediaTypeFactory
-                    .getMediaType(imageFile)
-                    .orElse(MediaType.IMAGE_JPEG);
+                .getMediaType(imageFile)
+                .orElse(MediaType.IMAGE_JPEG);
 
         return ResponseEntity
                 .ok()
                 .contentType(mediaType)
                 .body(imageFile);
 
+    }
+
+    // List of all images
+    @GetMapping("/all")
+    public ResponseEntity<Page<ImageDTO>> getAllImages(Pageable pageable) {
+        Page<Image> images = imageService.getImages(pageable);
+
+        Page <ImageDTO> imagesDTOs = images.map(imageMapper::toDTO);
+
+        return ResponseEntity.ok(imagesDTOs);
     }
 
     @PutMapping("/{id}/media")

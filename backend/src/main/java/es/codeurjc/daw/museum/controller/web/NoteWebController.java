@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.Note;
@@ -33,12 +34,25 @@ public class NoteWebController {
     // Add common atributes to all the views
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
+
         Principal principal = request.getUserPrincipal();
+
         if (principal != null) {
             model.addAttribute("logged", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
+
+            // Loads full user entity from database
+            Optional<User> userOpt = userService.findByUsername(principal.getName());
+
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                // Adds user object to model (used for navbar/profile rendering)
+                model.addAttribute("user", user); 
+            }
+
         } else {
+            // Marks user as not authenticated
             model.addAttribute("logged", false);
         }
     }
@@ -46,6 +60,8 @@ public class NoteWebController {
 
     @GetMapping("/object/{id}/add-note")
     public String showNewNotePage(@PathVariable Long id, Model model) {
+
+        // Load a page where you can write a note about the object 
         MuseumObject item = objectService.findById(id).orElseThrow();
         String sectionName = item.getType().toLowerCase();
         String imageName;
@@ -80,6 +96,7 @@ public class NoteWebController {
     public String newNote(@PathVariable Long id, @RequestParam String text, Principal principal,
             @RequestParam String sectionName, Model model) throws IOException {
 
+        // Creates a new note with the provided text, associated to the current user and the specified object
         Optional<MuseumObject> objectOpt = objectService.findById(id);
         if (objectOpt.isEmpty()) {
             return "redirect:/system-error?action=objectNotFound";
@@ -101,101 +118,19 @@ public class NoteWebController {
         return "redirect:/confirmation?action=addNote&section=" + item.getType().toLowerCase() + "&id=" + item.getId();
     }
 
-    // Create note
-    /*
-     * @PostMapping("/objects/{id}/notes")
-     * public String addNote(@PathVariable Long id,
-     * 
-     * @RequestParam String text,
-     * Principal principal) {
-     * 
-     * Optional<MuseumObject> objectOpt = objectService.findById(id);
-     * if (objectOpt.isEmpty()) {
-     * return "redirect:/"; // objeto no encontrado
-     * }
-     * 
-     * if (principal != null) {
-     * User user = userService.findByUsername(principal.getName()).orElse(null);
-     * if (user != null) {
-     * Note note = new Note(text, user, objectOpt.get());
-     * noteService.save(note);
-     * }
-     * }
-     * 
-     * return "redirect:/objects/" + id;
-     * }
-     * 
-     * // Form to edit note
-     * 
-     * @GetMapping("/notes/{id}/edit")
-     * public String editNoteForm(@PathVariable Long id, Model model, Principal
-     * principal) {
-     * 
-     * Optional<Note> noteOpt = noteService.findById(id);
-     * if (noteOpt.isEmpty() || principal == null) {
-     * return "redirect:/";
-     * }
-     * 
-     * Note note = noteOpt.get();
-     * User user = userService.findByUsername(principal.getName()).orElse(null);
-     * 
-     * if (user == null || !note.getUser().getId().equals(user.getId())) {
-     * return "redirect:/objects/" + note.getMuseumObject().getId(); // no
-     * autorizado
-     * }
-     * 
-     * model.addAttribute("note", note);
-     * return "editNotePage"; // plantilla estilo clase
-     * }
-     * 
-     * // Save note changes
-     * 
-     * @PostMapping("/notes/{id}/edit")
-     * public String editNote(@PathVariable Long id,
-     * 
-     * @RequestParam String text,
-     * Principal principal) {
-     * 
-     * Optional<Note> noteOpt = noteService.findById(id);
-     * if (noteOpt.isEmpty() || principal == null) {
-     * return "redirect:/";
-     * }
-     * 
-     * Note note = noteOpt.get();
-     * User user = userService.findByUsername(principal.getName()).orElse(null);
-     * 
-     * if (user == null || !note.getUser().getId().equals(user.getId())) {
-     * return "redirect:/objects/" + note.getMuseumObject().getId();
-     * }
-     * 
-     * note.setText(text);
-     * noteService.save(note);
-     * 
-     * return "redirect:/objects/" + note.getMuseumObject().getId();
-     * }
-     * 
-     * // Delete note
-     * 
-     * @PostMapping("/notes/{id}/delete")
-     * public String deleteNote(@PathVariable Long id, Principal principal) {
-     * 
-     * Optional<Note> noteOpt = noteService.findById(id);
-     * if (noteOpt.isEmpty() || principal == null) {
-     * return "redirect:/";
-     * }
-     * 
-     * Note note = noteOpt.get();
-     * User user = userService.findByUsername(principal.getName()).orElse(null);
-     * 
-     * if (user != null && (note.getUser().getId().equals(user.getId()) ||
-     * user.getRoles().contains("ADMIN"))) {
-     * Long objectId = note.getMuseumObject().getId();
-     * noteService.deleteNoteById(id);
-     * return "redirect:/objects/" + objectId;
-     * }
-     * 
-     * return "redirect:/objects/" + note.getMuseumObject().getId();
-     * }
-     */
+    @PostMapping("/deleteNote/{id}")
+    public String deleteNote(@PathVariable Long id, @RequestParam String sectionName, @RequestParam long objectId, Principal principal) {
+
+        // Deletes the note with the specified id if it belongs to the current user
+        User user = userService.findByUsername(principal.getName()).orElseThrow();
+
+        try {
+            noteService.deleteNote(id, user);
+            return "redirect:/confirmation?action=deleteNote";
+
+        } catch (ResponseStatusException exception) {
+            return "redirect:/system-error?action=deleteNote";
+        }
+    }
 
 }

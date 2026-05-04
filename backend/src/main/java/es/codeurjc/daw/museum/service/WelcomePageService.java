@@ -20,7 +20,7 @@ public class WelcomePageService {
                                 List.of("Terrestres", "Aéreos", "Acuáticos")));
                                    
                 sections.add(new SectionDTO("Fósiles", "/assets/images/icons/logo-fosil.png", "/section/fosiles",
-                                List.of("Prehistóricos, Minerales")));
+                                List.of("Prehistóricos", "Minerales")));
                                     
                 sections.add(new SectionDTO("Obras de arte", "/assets/images/icons/logo-pintura.png", "/section/arte",
                                 List.of("Pintura", "Escultura", "Cerámica")));       

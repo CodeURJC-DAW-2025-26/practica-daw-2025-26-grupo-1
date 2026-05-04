@@ -12,9 +12,11 @@ public interface NoteMapper {
 
 	NoteDTO toDTO(Note note);
 
+    NoteBasicDTO toBasicDTO(Note note);
+
     List <NoteDTO> toDTOs (Collection <Note> notes);
 
-    @Mapping(target = "user.favourites", ignore = true)
+    
     @Mapping(target = "user.seen", ignore = true)
     Note toEntity(NoteDTO noteDTO);
 

@@ -2,6 +2,7 @@ package es.codeurjc.daw.museum.controller.web;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,33 +26,48 @@ public class SessionWebController {
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
 
+        // Retrieves authenticated user and adds common attributes for all views
         Principal principal = request.getUserPrincipal();
 
         if (principal != null) {
-
             model.addAttribute("logged", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
 
+            // Loads full user entity from database
+            Optional<User> userOpt = userService.findByUsername(principal.getName());
+
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                // Adds user object to model (used for navbar/profile rendering)
+                model.addAttribute("user", user);
+            }
+
         } else {
+            // Marks user as not authenticated
             model.addAttribute("logged", false);
         }
     }
 
     @GetMapping("/login")
     public String login(Model model) {
+        // Displays login page
         model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
         return "log-in-page";
     }
 
     @GetMapping("/loginerror")
     public String loginerror(Model model) {
-        model.addAttribute("errorMessage", "Usuario o contraseña incorrectos.");
+        // Displays error page for failed login attempts
+        model.addAttribute("errorText", "Usuario o contraseña incorrectos.");
+        model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
+        model.addAttribute("backLink", "/welcome-user");
         return "error-page";
     }
 
     @GetMapping("/register")
     public String registerForm(Model model) {
+        // Displays user registration form
         model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
         model.addAttribute("user", new User());
         model.addAttribute("profileImage", "/assets/images/perfil-sin-foto.png");
@@ -60,6 +76,10 @@ public class SessionWebController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
+
+        // Registers a new user
+        // Validates username uniqueness
+        // Encodes password and assigns default role
 
         if (userService.findByUsername(user.getName()).isPresent()) {
             model.addAttribute("registrationError", "El usuario ya existe.");

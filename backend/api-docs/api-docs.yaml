@@ -1,0 +1,876 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/v1/users/{id}:
+    put:
+      tags:
+      - user-rest-controller
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserBasicDTO"
+    delete:
+      tags:
+      - user-rest-controller
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserBasicDTO"
+  /api/v1/users/profile:
+    put:
+      tags:
+      - user-rest-controller
+      operationId: updateProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserBasicDTO"
+  /api/v1/objects/{id}:
+    get:
+      tags:
+      - museum-object-rest-controller
+      operationId: getObject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MuseumObjectDTO"
+    put:
+      tags:
+      - museum-object-rest-controller
+      operationId: replaceObject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MuseumObjectDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MuseumObjectDTO"
+    delete:
+      tags:
+      - museum-object-rest-controller
+      operationId: deleteObject
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MuseumObjectDTO"
+  /api/v1/objects/{id}/image:
+    put:
+      tags:
+      - museum-object-rest-controller
+      operationId: updateObjectImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+    post:
+      tags:
+      - museum-object-rest-controller
+      operationId: createObjectImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+    delete:
+      tags:
+      - museum-object-rest-controller
+      operationId: deleteObjectImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/v1/images/{id}/media:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImageFile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+      - image-rest-controller
+      operationId: replaceImageFile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/v1/users/me/seen/{id}:
+    post:
+      tags:
+      - user-rest-controller
+      operationId: markSeen
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MuseumObjectBasicDTO"
+  /api/v1/users/:
+    post:
+      tags:
+      - user-rest-controller
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserBasicDTO"
+  /api/v1/objects/:
+    get:
+      tags:
+      - museum-object-rest-controller
+      operationId: getObjects
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelElementDTO"
+    post:
+      tags:
+      - museum-object-rest-controller
+      operationId: createObject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MuseumObjectDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MuseumObjectDTO"
+  /api/v1/notes/object/{objectId}:
+    get:
+      tags:
+      - note-rest-controller
+      operationId: getNotesByObject
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NoteBasicDTO"
+    post:
+      tags:
+      - note-rest-controller
+      operationId: createNote
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteBasicDTO"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NoteBasicDTO"
+  /api/v1/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logOut
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/v1/users/me:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: me
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/v1/users/me/statistics:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getMyStats
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserStatisticsDTO"
+  /api/v1/users/all:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getAllUsers
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelUserBasicDTO"
+  /api/v1/objects/all:
+    get:
+      tags:
+      - museum-object-rest-controller
+      operationId: getObjectsWithoutPage
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ElementDTO"
+  /api/v1/notes/all:
+    get:
+      tags:
+      - note-rest-controller
+      operationId: getAllNotes
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelNoteDTO"
+  /api/v1/menu-page/welcome-user:
+    get:
+      tags:
+      - welcome-rest-controller
+      operationId: getSections
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SectionDTO"
+  /api/v1/images/{id}:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/v1/images/all:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getAllImages
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/Pageable"
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PagedModelImageDTO"
+  /api/v1/notes/{id}:
+    delete:
+      tags:
+      - note-rest-controller
+      operationId: deleteNote
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Not Found
+        "200":
+          description: OK
+components:
+  schemas:
+    ElementDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        nameElement:
+          type: string
+        objectSectionImage:
+          $ref: "#/components/schemas/ImageDTO"
+        category:
+          type: string
+        goToElement:
+          type: string
+    ImageDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        password:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        seen:
+          type: array
+          items:
+            $ref: "#/components/schemas/ElementDTO"
+    UserBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    MuseumObjectDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        objectName:
+          type: string
+        groupName:
+          type: string
+        technicalData:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        notes:
+          type: array
+          items:
+            $ref: "#/components/schemas/NoteDTO"
+        isSeen:
+          type: boolean
+    NoteDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        text:
+          type: string
+        user:
+          $ref: "#/components/schemas/UserDTO"
+        museumObject:
+          $ref: "#/components/schemas/MuseumObjectDTO"
+    MuseumObjectBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        objectName:
+          type: string
+        groupName:
+          type: string
+        technicalData:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        isSeen:
+          type: boolean
+    NoteBasicDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        text:
+          type: string
+        user:
+          $ref: "#/components/schemas/UserDTO"
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    CategoryStatsDTO:
+      type: object
+      properties:
+        categoryName:
+          type: string
+        seenCount:
+          type: integer
+          format: int32
+        totalInCategory:
+          type: integer
+          format: int32
+        percentage:
+          type: number
+          format: double
+    UserStatisticsDTO:
+      type: object
+      properties:
+        userName:
+          type: string
+        globalTotalSeen:
+          type: integer
+          format: int64
+        statsByCategory:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryStatsDTO"
+        globalTotals:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+    Pageable:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          minimum: 0
+        size:
+          type: integer
+          format: int32
+          minimum: 1
+        sort:
+          type: array
+          items:
+            type: string
+    PageMetadata:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int64
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+    PagedModelUserBasicDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserBasicDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    PagedModelElementDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ElementDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    PagedModelNoteDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/NoteDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"
+    SectionDTO:
+      type: object
+      properties:
+        nameSection:
+          type: string
+        iconUrl:
+          type: string
+        link:
+          type: string
+        categories:
+          type: array
+          items:
+            type: string
+    PagedModelImageDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/ImageDTO"
+        page:
+          $ref: "#/components/schemas/PageMetadata"

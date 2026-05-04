@@ -67,14 +67,28 @@
                     {{#logged}}
                     <div class="d-flex justify-content-center gap-3">
 
-                        <button class="btn btn-success px-3" type="button">
+
+                        {{#isSeen}}
+
+                        <button class="btn btn-success px-3" type="button" disabled>
                             <i class="bi bi-check2"></i>
-                            Visto
+                            Ya visto
                         </button>
-                        <button class="btn btn-success px-3" type="button">
-                            <i class="bi bi-heart-fill"></i>
-                            Favorito
-                        </button>
+
+                        {{/isSeen}}
+
+                        {{^isSeen}}
+                        <form action="/objects/{{elementId}}/seen" method="post">
+                            <input type="hidden" name="_csrf" value="{{token}}">
+                            <button class="btn btn-success px-3" type="submit">
+                                 <i class="bi bi-check2"></i>
+                                 Visto
+                            </button>
+                        </form>
+
+                        {{/isSeen}}
+
+                        
                         <a href="/object/{{elementId}}/add-note" class="btn btn-secondary px-3">
                             <i class="bi bi-card-text"></i>
                             Añadir nota
@@ -90,33 +104,30 @@
                     <h1 class="display-5 fw-bolder text-center mt-3 mb-3">Tus notas:</h1>
 
                     {{#userNotes}}
+                    <div class="card mb-4 rounded-3 shadow-sm border-secondary mx-3">
+                        <div class="card-body">
+                            <p>{{text}}</p>
 
-                    <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                            <div class="d-flex justify-content-end">
+                                <form action="/deleteNote/{{id}}" method="post">
+                                    <input type="hidden" name="sectionName" value="{{type}}">
+                                    <input type="hidden" name="objectId" value="{{elementId}}">
+                                    <input type="hidden" name="_csrf" value="{{token}}">
 
-                        <div class="card-body">{{text}}</div>
-
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Borrar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                    {{/userNotes}}
 
-                    <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-
-                        <a href="{{backUrl}}" class="btn btn-danger px-3" type="button">
-                            <i class="bi bi-arrow-left"></i>
-                            Volver
-                        </a>
-
-                    </div>
+                    {{^userNotes}}
+                    <p class="text-center text-muted pb-3">Aún no has escrito ninguna nota sobre este objeto.</p>
                     {{/userNotes}}
                 </div>
                 {{/logged}}
-
-                <!--{{#userNotes}}
-                    
-                    <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-
-                        <div class="card-body">{{text}}</div>
-
-                    </div>
-                {{/userNotes}}-->
 
 
                 {{/admin}}
@@ -127,93 +138,76 @@
 
 
         {{#admin}}
-        <div class="card mb-4 rounded-3 shadow-sm border-secondary col-md-6 mx-auto">
-            <div class="card-body">
-                <form>
+        <form action="/objects/edit/{{elementId}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="{{token}}">
 
-
+            <div class="card mb-4 rounded-3 shadow-sm border-secondary col-md-6 mx-auto">
+                <div class="card-body">
                     <div class="fs-5 mb-3">
-                        <label for="object-name-edited" class="form-label">Nombre: </label>
-                        <input type="text" class="form-control" id="object-name-edited" value="{{nameElement}}">
+                        <label class="form-label">Nombre: </label>
+                        <input type="text" name="objectName" class="form-control" value="{{nameElement}}">
                     </div>
 
                     <div class="fs-5 mb-3">
-                        <label for="object-name-edited" class="form-label">Dato de interés: </label>
-                        <input type="text" class="form-control" id="object-interest-data-edited"
-                            value="{{groupNameElement}}">
+                        <label class="form-label">Dato de interés: </label>
+                        <input type="text" name="groupName" class="form-control" value="{{groupNameElement}}">
                     </div>
 
                     <div class="fs-5 mb-3">
-                        <label for="object-name-edited" class="form-label">Tipo: </label>
-                        <input type="text" class="form-control" id="object-type-edited" value="{{categoryName}}">
+                        <label class="form-label">Tipo: </label>
+                        <input type="text" name="category" class="form-control" value="{{categoryName}}">
                     </div>
-
-                </form>
-
-            </div>
-        </div>
-
-        <div class="col-md-6 mt-3 mb-5 mx-auto d-flex flex-column align-items-center">
-            <img class="card-img-top mb-5 mb-md-0 rounded" src="/images/{{elementImage}}" alt="{{nameElement}}" />
-
-            <div class="d-flex gap-2">
-                <a class="btn btn-secondary" href="#">
-                    <i class="bi bi-file-earmark-image"></i>
-                    Cambiar imagen </a>
-
-                <a class="btn btn-danger" href="#">
-                    <i class="bi bi-x-lg"></i>
-                    Eliminar imagen </a>
-            </div>
-
-        </div>
-
-        <div class="col-md-6 mx-auto">
-
-            <div class="card mb-4 rounded-3 shadow-sm border-secondary">
-                <div class="card-header py-3 text-bg-secondary border-secondary text-center">
-                    <h4 class="my-0 fw-normal">Ficha técnica</h4>
                 </div>
+            </div>
+
+            <div class="col-md-6 mt-3 mb-5 mx-auto d-flex flex-column align-items-center">
+                <img class="card-img-top mb-5 mb-md-0 rounded" src="/images/{{elementImage}}" alt="{{nameElement}}" />
+
+                <div class="d-flex gap-2 mt-3">
+                    <label class="btn btn-secondary m-0">
+                        <i class="bi bi-file-earmark-image"></i>
+                        Cambiar imagen
+                        <input type="file" name="imageField" style="display: none;">
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 mx-auto">
+                <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                    <div class="card-header py-3 text-bg-secondary border-secondary text-center">
+                        <h4 class="my-0 fw-normal">Ficha técnica</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="fs-5">
+                            <label class="form-label">Datos: </label>
+                        </div>
+                        <textarea name="technicalData" class="form-control" rows="12">{{technicalData}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4 rounded-3 shadow-sm border-secondary col-md-6 mx-auto">
                 <div class="card-body">
                     <div class="fs-5">
-                        <label for="object-technical-data" class="form-label">Datos: </label>
+                        <label class="form-label">Información: </label>
                     </div>
-
-                    <textarea class="form-control" id="object-technical-data" rows="12">
-                                {{technicalData}}
-                            </textarea>
+                    <textarea name="description" class="form-control" rows="12">{{descriptionElement}}</textarea>
                 </div>
             </div>
-        </div>
 
-        <div class="card mb-4 rounded-3 shadow-sm border-secondary col-md-6 mx-auto">
+            <div class="d-flex justify-content-center gap-3 mb-5">
+                <a href="{{backUrl}}" class="btn btn-danger px-3">
+                    <i class="bi bi-arrow-left"></i>
+                    Volver
+                </a>
 
-            <div class="card-body">
-
-                <div class="fs-5">
-                    <label for="object-technical-data" class="form-label">Información: </label>
-                </div>
-                <textarea class="form-control" id="object-technical-data" rows="12">
-                            {{descriptionElement}}
-                        </textarea>
-
+                <button class="btn btn-success px-3" type="submit">
+                    <i class="bi bi-check2"></i>
+                    Aceptar cambios
+                </button>
             </div>
-        </div>
-
-        <div class="d-flex justify-content-center gap-3">
-
-            <a href="{{backUrl}}" class="btn btn-danger px-3" type="button">
-                <i class="bi bi-arrow-left"></i>
-                Volver
-            </a>
-
-
-            <button class="btn btn-success px-3" type="button">
-                <i class="bi bi-check2"></i>
-                Aceptar cambios
-            </button>
-
-        </div>
+        </form>
         {{/admin}}
 
     </section>

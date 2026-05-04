@@ -1,6 +1,6 @@
 services:
   web:
-    image: adrian/museum:latest
+    image: adrianvillalba26/museum:latest
     ports:
       - 8443:8443
     environment:

@@ -1,7 +1,6 @@
 package es.codeurjc.daw.museum.controller.web;
 
 import java.security.Principal;
-import java.security.cert.PKIXRevocationChecker.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,7 @@ import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
+import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -31,6 +31,10 @@ public class SectionWebController {
     @Autowired
     private MuseumObjectService objectService;
 
+    @Autowired
+    private UserService userService;
+
+    // DTO used to transfer object data to the view layer
     public static class SectionElement {
         private Long id;
         private String nameElement;
@@ -70,6 +74,7 @@ public class SectionWebController {
         }
     }
 
+    // Represents UI button with style and label for filtering
     public class Button {
         private String type;
         private String text;
@@ -100,35 +105,61 @@ public class SectionWebController {
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
 
+        // Retrieves authenticated user and adds common attributes for all views
         Principal principal = request.getUserPrincipal();
 
         if (principal != null) {
-
             model.addAttribute("logged", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
 
+            // Loads full user entity from database
+            Optional<User> userOpt = userService.findByUsername(principal.getName());
+
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                // Adds user object to model (used for navbar/profile rendering)
+                model.addAttribute("user", user);
+            }
+
         } else {
+            // Marks user as not authenticated
             model.addAttribute("logged", false);
         }
     }
 
     private List<SectionElement> convertToSectionElement(List<MuseumObject> objects, String sectionName) {
-        return objects.stream()
-                .map(obj -> new SectionElement(obj.getId(),
-                        obj.getObjectName(),
-                        "/images/" + obj.getImage().getId(),
-                        obj.getCategory(),
-                        "bg-secondary",
-                        "/section/" + sectionName + "/" + obj.getId()))
-                .toList();
+
+        // Converts MuseumObject entities into DTO-like objects for view rendering
+        List<SectionElement> sectionElements = new ArrayList<>();
+
+        for (MuseumObject obj : objects) {
+
+            String imageRoute;
+
+            if (obj.getImage() == null) {
+                imageRoute = "/images/no_image.png";
+            } else {
+                imageRoute = "/images/" + obj.getImage().getId();
+            }
+
+            sectionElements.add(new SectionElement(
+                    obj.getId(), obj.getObjectName(), imageRoute, obj.getCategory(), "bg-secondary",
+                    "/section/" + sectionName + "/" + obj.getId()));
+
+        }
+
+        return sectionElements;
+
     }
 
-    // Se podría cambiar por una variable booleana que se meta en el mustache
     @GetMapping("/section/{sectionName}")
     public String viewSection(@PathVariable String sectionName, @RequestParam(required = false) String category,
             @RequestParam(required = false) String searchName,
-            Model model) {
+            Model model, Principal principal) {
+
+        // Loads objects based on section, category, or search filter and configures UI
+        // elements (buttons, images, descriptions)
 
         String section = sectionName.toLowerCase();
 
@@ -171,11 +202,12 @@ public class SectionWebController {
             objectsInSection = objectService.findByTypeAndName(section, searchName);
             model.addAttribute("searchName", searchName);
         } else if (category != null && !category.isEmpty()) {
-            objectsInSection = objectService.findByCategory(category, PageRequest.of(0,4)).getContent();
+            objectsInSection = objectService.findByCategory(category, PageRequest.of(0, 4)).getContent();
         } else {
-            objectsInSection = objectService.findByType(section, PageRequest.of(0,4)).getContent();
+            objectsInSection = objectService.findByType(section, PageRequest.of(0, 4)).getContent();
         }
 
+        // Handles empty results with error page
         if (objectsInSection.isEmpty()) {
             model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
             model.addAttribute("errorText",
@@ -234,73 +266,29 @@ public class SectionWebController {
                 return "error-page";
         }
 
+        if (principal != null) {
+            User user = userService.findByUsername(principal.getName()).orElse(null);
+            if (user != null) {
+
+                List<MuseumObject> allInThisSection = objectService.findByTypeAll(section);
+                int totalCount = allInThisSection.size();
+
+                if (totalCount > 0) {
+
+                    long seenCount = user.getSeen().stream()
+                            .filter(obj -> obj.getType().equalsIgnoreCase(section))
+                            .count();
+
+                    int percentage = (int) ((seenCount * 100) / totalCount);
+
+                    model.addAttribute("showProgress", true);
+                    model.addAttribute("progressPercentage", percentage);
+                }
+            }
+        }
+
         return "section-list-page";
     }
-
-    /*
-     * @GetMapping("/section/{sectionName}/more/{page}")
-     * public String loadMore(
-     * 
-     * @PathVariable String sectionName,
-     * 
-     * @PathVariable int page,
-     * 
-     * @RequestParam(required = false) String category,
-     * Model model) {
-     * 
-     * 
-     * String section = sectionName.toLowerCase();
-     * List<MuseumObject> objects = objectService
-     * .findByType(section, page)
-     * .getContent();
-     * 
-     * 
-     * List<SectionElement> sectionElements = objects.stream()
-     * .map(obj -> new SectionElement(
-     * obj.getObjectName(),
-     * "/images/" + obj.getImage().getId(),
-     * obj.getCategory(),
-     * "bg-secondary",
-     * "/object/" + obj.getId()))
-     * .toList();
-     * 
-     * 
-     * model.addAttribute("sectionElements", convertToSectionElement(objects,
-     * sectionName));
-     * 
-     * return "partials/section-elements";
-     * 
-     * 
-     * // 1. Imprimimos en la consola para ver que funciona (búscalo en "Debug
-     * // Console")
-     * System.err.println("--- ENTRANDO EN LOAD MORE ---");
-     * System.err.println("Sección: " + sectionName);
-     * System.err.println("Página: " + page);
-     * System.err.println("Categoría recibida: " + category);
-     * 
-     * String section = sectionName.toLowerCase();
-     * 
-     * // 2. Pedimos los objetos de esa página al service
-     * List<MuseumObject> objects = objectService.findByType(section,
-     * page).getContent();
-     * 
-     * // 3. Filtramos nosotros mismos para no tocar el Repository
-     * List<MuseumObject> filteredObjects;
-     * if (category != null && !category.isEmpty()) {
-     * filteredObjects = objects.stream()
-     * .filter(obj -> obj.getCategory().equalsIgnoreCase(category))
-     * .toList();
-     * } else {
-     * filteredObjects = objects;
-     * }
-     * 
-     * // 4. Mandamos a la plantilla los objetos filtrados
-     * model.addAttribute("sectionElements",
-     * convertToSectionElement(filteredObjects, sectionName));
-     * 
-     * return "partials/section-elements";
-     * }
-     */
 
     @GetMapping("/section/{sectionName}/more/{page}")
     public String loadMore(
@@ -309,19 +297,16 @@ public class SectionWebController {
             @RequestParam(required = false) String category,
             Model model) {
 
+        // Loads additional objects for pagination (AJAX / partial rendering)
         String section = sectionName.toLowerCase();
         List<MuseumObject> objects;
 
-        // 1. Usamos el Service para traer SOLO lo que necesitamos de la BD
         if (category != null && !category.isEmpty()) {
-            // Pedimos la página X de esa categoría específica
-            objects = objectService.findByCategory(category, PageRequest.of(0,4)).getContent();
+            objects = objectService.findByCategory(category, PageRequest.of(page, 4)).getContent();
         } else {
-            // Pedimos la página X de toda la sección
-            objects = objectService.findByType(section, PageRequest.of(0,4)).getContent();
+            objects = objectService.findByType(section, PageRequest.of(page, 4)).getContent();
         }
 
-        // 2. Convertimos y mandamos a la plantilla
         model.addAttribute("sectionElements", convertToSectionElement(objects, sectionName));
 
         return "partials/section-elements";

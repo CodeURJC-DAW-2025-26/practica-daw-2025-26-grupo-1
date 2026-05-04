@@ -2,10 +2,14 @@ package es.codeurjc.daw.museum.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import es.codeurjc.daw.museum.dto.CategoryStatsDTO;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
 import es.codeurjc.daw.museum.model.MuseumObject;
+import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.repository.UserRepository;
 
@@ -33,7 +38,6 @@ public class UserService {
     @Autowired
     private MuseumObjectService objectService;
 
-
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
@@ -50,18 +54,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
     public User registerNewUser(User user) {
         if (userRepository.findByName(user.getName()).isPresent()) {
-            throw new ResponseStatusException (HttpStatus.CONFLICT, "El usuario ya existe.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "El usuario ya existe.");
         }
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
         return userRepository.save(user);
     }
 
-    public User editUser(String username, User userModify, boolean removeImage, MultipartFile imageField) throws IOException, SQLException{
+    public User editUser(String username, User userModify, boolean removeImage, MultipartFile imageField)
+            throws IOException, SQLException {
 
-        User user = userRepository.findByName(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        User user = userRepository.findByName(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
         user.setName(userModify.getName());
 
         if (imageField != null && !imageField.isEmpty()) {
@@ -79,34 +89,20 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User deleteUser(Long id) {
+    public void deleteUser(Long id) {
 
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
         userRepository.delete(user);
 
-        return user;
     }
 
-    public User getUserProfile (String username) {
-        return userRepository.findByName(username).orElseThrow(() -> new ResponseStatusException (HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+    public User getUserProfile(String username) {
+        return userRepository.findByName(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
     }
 
-    public MuseumObject addFavourite(User user, MuseumObject object) {
-        if (!user.getFavourites().contains(object)) {
-            user.getFavourites().add(object);
-            userRepository.save(user);
-        }
-        return object;
-    }
-
-    public MuseumObject removeFavourite(User user, MuseumObject object) {
-        if (user.getFavourites().contains(object)) {
-            user.getFavourites().remove(object);
-            userRepository.save(user);
-        }
-        return object;
-    }
+    
 
     public MuseumObject markSeen(User user, MuseumObject object) {
         if (!user.getSeen().contains(object)) {
@@ -118,11 +114,11 @@ public class UserService {
 
     public UserStatisticsDTO getUserStats(String username) {
         User user = userRepository.findByName(username).orElseThrow();
-        List <String> sections = List.of("peces", "insectos", "fosiles", "arte");
+        List<String> sections = List.of("peces", "insectos", "fosiles", "arte");
 
         List<CategoryStatsDTO> categoryStats = sections.stream().map(section -> {
 
-            int favs = (int) user.getFavourites().stream().filter(obj -> obj.getType().equalsIgnoreCase(section)).count();
+            
             int seen = (int) user.getSeen().stream().filter(obj -> obj.getType().equalsIgnoreCase(section)).count();
 
             int totalInSec = (int) objectService.countByType(section);
@@ -130,19 +126,29 @@ public class UserService {
             double percentage;
 
             if (totalInSec > 0) {
-                percentage = (seen * 100.0)/totalInSec;
+                percentage = (seen * 100.0) / totalInSec;
             } else {
                 percentage = 0.0;
             }
 
-            percentage = Math.round(percentage*100.0) / 100.0;
+            percentage = Math.round(percentage * 100.0) / 100.0;
 
-            return new CategoryStatsDTO(section, seen, favs, totalInSec, percentage);
+            return new CategoryStatsDTO(section, seen, totalInSec, percentage);
         }).toList();
 
+        Map<String, Long> globalTotals = new HashMap<>();
+        globalTotals.put("peces", objectService.countByType("peces"));
+        globalTotals.put("insectos", objectService.countByType("insectos"));
+        globalTotals.put("fosiles", objectService.countByType("fosiles"));
+        globalTotals.put("arte", objectService.countByType("arte"));
 
-        return new UserStatisticsDTO(user.getName(), (long) user.getSeen().size(), (long) user.getFavourites().size(), categoryStats);
+        return new UserStatisticsDTO(
+                user.getName(),
+                (long) user.getSeen().size(),
+                categoryStats,
+                globalTotals 
+        );
+
     }
-
 
 }

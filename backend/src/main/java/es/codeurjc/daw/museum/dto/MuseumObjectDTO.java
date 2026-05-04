@@ -10,6 +10,5 @@ public record MuseumObjectDTO(
     String description,
     String category,
     List <NoteDTO> notes,
-    boolean isFavourite,
     boolean isSeen
 ) {}

@@ -3,17 +3,19 @@ package es.codeurjc.daw.museum.dto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import es.codeurjc.daw.museum.model.MuseumObject;
+import es.codeurjc.daw.museum.model.Note;
 
 @Mapper(componentModel = "spring")
 public interface MuseumObjectMapper {
 
-    @Mapping(target = "category", ignore = true)
-    @Mapping(target = "notes", source = "objectNotes") 
-    @Mapping(target = "isFavourite", ignore = true)   
+    MuseumObjectBasicDTO toBasicDTO(MuseumObject museumObject);
+
+    @Mapping(target = "category", source = "category")
+    @Mapping(target = "notes", source = "objectNotes")  
     @Mapping(target = "isSeen", ignore = true)
 	MuseumObjectDTO toDTO(MuseumObject museumObject);
 
-    @Mapping(target = "category", ignore = true)
+    @Mapping(target = "category", source = "category")
     @Mapping(target = "objectNotes", source = "notes") 
     @Mapping(target = "image", ignore = true)
     MuseumObject toEntity (MuseumObjectDTO museumObjectDTO);

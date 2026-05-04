@@ -29,15 +29,6 @@ import es.codeurjc.daw.museum.service.NoteService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
-// This controller has been deprecated because its URL mapping collided
-// with the more elaborate viewObject method in UserController.  The
-// logic for displaying an object is now handled there, which also adds
-// user-specific attributes for logged-in users.
-//
-// Keeping the class around for reference, but without the
-// @Controller annotation Spring will ignore it and the duplicate
-// mapping error disappears.
-
 @Controller
 public class MuseumObjectWebController {
 
@@ -53,69 +44,28 @@ public class MuseumObjectWebController {
     @Autowired
     private NoteService noteService;
 
-    /*
-     * @GetMapping("/object/{id}")
-     * public String viewObject(@PathVariable long id, Model model) {
-     * 
-     * Optional<MuseumObject> museumObject = objectService.findById(id);
-     * if (museumObject.isPresent()) {
-     * 
-     * MuseumObject obj = museumObject.get();
-     * String tipo = obj.getType();
-     * 
-     * switch (tipo) {
-     * case "peces":
-     * model.addAttribute("backgroundSectionImage",
-     * "/assets/images/fondo-marino-siluetas.png");
-     * break;
-     * case "insectos":
-     * model.addAttribute("backgroundSectionImage",
-     * "/assets/images/fondo-insectos-siluetas.png");
-     * break;
-     * case "fosiles":
-     * model.addAttribute("backgroundSectionImage",
-     * "/assets/images/fondo-fosiles-siluetas.png");
-     * break;
-     * case "arte":
-     * model.addAttribute("backgroundSectionImage",
-     * "/assets/images/fondo-secundario-arte.png");
-     * break;
-     * default:
-     * model.addAttribute("backgroundSectionImage",
-     * "/assets/images/interior-museo.png");
-     * break;
-     * }
-     * 
-     * model.addAttribute("nameElement", obj.getObjectName());
-     * model.addAttribute("groupNameElement", obj.getGroupName());
-     * model.addAttribute("categoryName", obj.getCategory());
-     * model.addAttribute("type", obj.getType());
-     * model.addAttribute("elementImage", obj.getImage().getId());
-     * model.addAttribute("descriptionElement", obj.getDescription());
-     * model.addAttribute("technicalData", obj.getTechnicalData());
-     * 
-     * model.addAttribute("backUrl", "/section/" + tipo);
-     * 
-     * return "informative-page";
-     * } else {
-     * return "partials/section-elements";
-     * }
-     * 
-     * }
-     */
-
     @ModelAttribute
     public void addAttributes(Model model, HttpServletRequest request) {
 
+        // Retrieves authenticated user and adds common attributes for all views
         Principal principal = request.getUserPrincipal();
 
         if (principal != null) {
-
             model.addAttribute("logged", true);
             model.addAttribute("userName", principal.getName());
             model.addAttribute("admin", request.isUserInRole("ADMIN"));
 
+            // Loads full user entity from database
+            Optional<User> userOpt = userService.findByUsername(principal.getName());
+
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                // Adds user object to model (used for navbar/profile rendering)
+                model.addAttribute("user", user);
+            }
+
         } else {
+            // Marks user as not authenticated
             model.addAttribute("logged", false);
         }
     }
@@ -125,8 +75,12 @@ public class MuseumObjectWebController {
             Principal principal) {
 
         String section = sectionName.toLowerCase();
+
+        // Retrieves museum object by ID
         Optional<MuseumObject> museumObject = objectService.findById(id);
 
+        // Adds object data to model for rendering (name, category, description, image,
+        // etc.)
         if (museumObject.isPresent()) {
             MuseumObject obj = museumObject.get();
 
@@ -159,16 +113,19 @@ public class MuseumObjectWebController {
 
             model.addAttribute("backUrl", "/section/" + sectionName);
 
+            // If user is authenticated, load user-specific data (notes, seen status)
             if (principal != null) {
 
                 User user = userService.findByUsername(principal.getName()).orElse(null);
                 if (user != null) {
+                    model.addAttribute("isSeen", user.getSeen().contains(obj));
                     List<Note> notes = noteService.findAllByUserAndMuseumObject(user, obj);
                     model.addAttribute("userNotes", notes);
                 }
             } else {
 
                 model.addAttribute("userNotes", new ArrayList<>());
+                model.addAttribute("isSeen", false);
             }
 
             return "informative-page";
@@ -176,7 +133,7 @@ public class MuseumObjectWebController {
         } else {
 
             List<MuseumObject> objects = objectService
-                    .findByType(section, PageRequest.of(0,4))
+                    .findByType(section, PageRequest.of(0, 4))
                     .getContent();
 
             model.addAttribute("sectionName", sectionName);
@@ -189,6 +146,8 @@ public class MuseumObjectWebController {
 
     private List<SectionWebController.SectionElement> convertToSectionElement(List<MuseumObject> objects,
             String sectionName) {
+
+        // Converts MuseumObject entities into DTO-like objects for view rendering
         return objects.stream()
                 .map(obj -> new SectionWebController.SectionElement(obj.getId(),
                         obj.getObjectName(),
@@ -201,6 +160,8 @@ public class MuseumObjectWebController {
 
     @GetMapping("/search")
     public String search(@RequestParam String searchName) {
+
+        // Searches objects by name and redirects to first result if found
         List<MuseumObject> results = objectService.findByName(searchName);
 
         if (!results.isEmpty()) {
@@ -255,71 +216,62 @@ public class MuseumObjectWebController {
     @PostMapping("/newObject")
     public String newMuseumObjectProcess(MuseumObject museumObject, MultipartFile imageField) throws IOException {
 
+        // Validates required fields before saving object
+        if (museumObject.getObjectName() == null || museumObject.getObjectName().isBlank()
+                || museumObject.getGroupName() == null || museumObject.getGroupName().isBlank()) {
+            return "redirect:/system-error?action=invalidData";
+        }
+
+        // Creates and assigns image if provided
         if (imageField != null && !imageField.isEmpty()) {
             Image image = imageService.createImage(imageField.getInputStream());
             museumObject.setImage(image);
+        } else {
+            return "redirect:/system-error?action=addObject";
         }
 
+        // Saves object in database
         objectService.saveObject(museumObject);
 
         return "redirect:/confirmation?action=addObject&section=" + museumObject.getType();
     }
 
-    /*
-     * @GetMapping("/editbook/{id}")
-     * public String editBook(Model model, @PathVariable long id) {
-     * 
-     * Optional<Book> book = bookService.findById(id);
-     * if (book.isPresent()) {
-     * model.addAttribute("book", book.get());
-     * return "editBookPage";
-     * } else {
-     * return "books";
-     * }
-     * }
-     * 
-     * @PostMapping("/editbook")
-     * public String editBookProcess(Model model, Book book, boolean removeImage,
-     * MultipartFile imageField)
-     * throws IOException, SQLException {
-     * 
-     * updateImage(book, removeImage, imageField);
-     * 
-     * bookService.save(book);
-     * 
-     * model.addAttribute("bookId", book.getId());
-     * 
-     * return "redirect:/books/" + book.getId();
-     * }
-     * 
-     * private void updateImage(Book book, boolean removeImage, MultipartFile
-     * imageField)
-     * throws IOException, SQLException {
-     * 
-     * if (!imageField.isEmpty()) {
-     * Book dbBook = bookService.findById(book.getId()).orElseThrow();
-     * 
-     * if (dbBook.getImage() == null) {
-     * Image image = imageService.createImage(imageField.getInputStream());
-     * book.setImage(image);
-     * } else {
-     * Image image = imageService.replaceImageFile(dbBook.getImage().getId(),
-     * imageField.getInputStream());
-     * book.setImage(image);
-     * }
-     * } else {
-     * if (removeImage) {
-     * if (book.getImage() != null) {
-     * imageService.deleteImage(book.getImage().getId());
-     * book.setImage(null);
-     * }
-     * } else {
-     * // Maintain the same image loading it before updating the book
-     * Book dbBook = bookService.findById(book.getId()).orElseThrow();
-     * book.setImage(dbBook.getImage());
-     * }
-     * }
-     * }
-     */
+    @PostMapping("/objects/edit/{id}")
+    public String editObjectProcess(@PathVariable long id, MuseumObject updatedObject,
+            @RequestParam(required = false) boolean removeImage, MultipartFile imageField) throws IOException {
+
+        // Updates or removes image if requested
+        if (removeImage) {
+            objectService.removeImageFromObject(id);
+        } else if (imageField != null && !imageField.isEmpty()) {
+            objectService.updateObjectImage(id, imageField);
+        }
+
+        // Replaces object data with updated values
+        objectService.replaceObject(id, updatedObject);
+
+        MuseumObject obj = objectService.getObject(id);
+        return "redirect:/section/" + obj.getType() + "/" + id;
+    }
+
+    @PostMapping("/objects/{id}/seen")
+    public String markSeen(@PathVariable long id, Principal principal) {
+
+        // Marks object as seen by the current user (if not already marked)
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        String username = principal.getName();
+        User user = userService.findByUsername(username).orElseThrow();
+        MuseumObject item = objectService.findById(id).orElseThrow();
+
+        if (!user.getSeen().contains(item)) {
+            user.getSeen().add(item);
+            userService.saveUser(user);
+        }
+
+        return "redirect:/section/" + item.getType() + "/" + id;
+    }
 
 }

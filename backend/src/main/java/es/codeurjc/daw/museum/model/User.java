@@ -36,9 +36,6 @@ public class User {
 	private List<Note> notes;
 
 	@ManyToMany
-	private List<MuseumObject> favourites;
-
-	@ManyToMany
 	private List<MuseumObject> seen;
 
 	public User() {
@@ -49,19 +46,8 @@ public class User {
 		this.encodedPassword = encodedPassword;
 		this.roles = roles;
 		this.notes = new ArrayList<>();
-		this.favourites = new ArrayList<>();
 		this.seen = new ArrayList<>();
 	}
-
-	/*public User(String name, String encodedPassword, String[] roles, Image userImage, List<Note> notes, List<MuseumObject> favourites, List<MuseumObject> seen) {
-		this.name = name;
-		this.encodedPassword = encodedPassword;
-		this.roles = List.of(roles);
-		this.image = userImage;
-		this.notes = notes;
-		this.favourites = favourites;
-		this.seen = seen;
-	}*/
 
 	public Long getId() {
 		return id;
@@ -109,14 +95,6 @@ public class User {
 
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
-	}
-
-	public List<MuseumObject> getFavourites() {
-		return favourites;
-	}
-
-	public void setFavourites(List<MuseumObject> favourites) {
-		this.favourites = favourites;
 	}
 
 	public List<MuseumObject> getSeen() {

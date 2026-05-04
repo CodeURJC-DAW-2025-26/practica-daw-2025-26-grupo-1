@@ -7,13 +7,13 @@
                 </svg> </a>
 
             <div class="d-flex align-items-start gap-3">
-                
+
                 <a href="/welcome-user" class="nav-link px-2 text-white">Página principal</a>
                 <a href="/section/peces" class="nav-link px-2 text-white">Peces</a>
                 <a href="/section/insectos" class="nav-link px-2 text-white">Insectos</a>
                 <a href="/section/fosiles" class="nav-link px-2 text-white">Fósiles</a>
                 <a href="/section/arte" class="nav-link px-2 text-white">Obras de arte</a>
-                
+
             </div>
 
             <div class="me-auto"></div>
@@ -26,39 +26,39 @@
             {{/logged}}
 
             {{#logged}}
-            <div class="dropdown text-end"> <a href="#"
-                    class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    {{^user.image}}
-                        <img src="/assets/images/perfil-sin-foto.png" alt="" width="45" height="45" class="rounded-circle">
-                    {{/user.image}}
+            <div class="dropdown text-end">
+                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
 
-                    {{#user.image}}           
-                        <img src="/images/{{user.image.id}}" alt="Logo app" class="me-3 rounded-circle mb-3" style="height:80px;">
-                    {{/user.image}}
-                                        
-                </a>
+                    {{#user}} {{^image}} <img src="/assets/images/perfil-sin-foto.png" alt="" width="45" height="45"
+                        class="rounded-circle">
+                    {{/image}}
+
+                    {{#image}} <img src="/images/{{id}}" alt="Logo app" class="me-3 rounded-circle mb-3"
+                        style="height:45px; width:45px; object-fit: cover;">
+                    {{/image}}
+
+                    {{/user}} </a>
                 <ul class="dropdown-menu text-small">
                     <li><a class="dropdown-item" href="/profile">Perfil</a></li>
 
-                    {{^admin}}
-                    <li><a class="dropdown-item" href="/statistics">Estadísticas y favoritos</a></li>
+                    {{#admin}}
+                    <li><a class="dropdown-item" href="/admin/users">Lista de usuarios</a></li>
                     {{/admin}}
 
-                    <li><!--<a class="dropdown-item" href="/logout">-->
+                    {{^admin}}
+                    <li><a class="dropdown-item" href="/statistics">Estadísticas</a></li>
+                    {{/admin}}
+
+                    <li>
                         <form action="/logout" method="post" class="d-inline">
                             <button class="btn btn-primary btn-nowrap" type="submit">Cerrar sesión</button>
                             <input type="hidden" name="_csrf" value="{{token}}" />
                         </form>
                     </li>
-
                 </ul>
             </div>
             {{/logged}}
-
-
-
-
 
         </div>
     </div>

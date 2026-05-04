@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,8 +29,8 @@ public class MuseumObjectService {
 	}
 
 	public Optional<MuseumObject> findById(long id) {
-		return objectRepository.findById(id);
 
+		return objectRepository.findById(id);
 	}
 
 	public List<MuseumObject> findAll() {
@@ -42,11 +41,11 @@ public class MuseumObjectService {
 		return objectRepository.findByObjectName(name);
 	}
 
-	/*
-	 * public List<MuseumObject> findByType(String type) {
-	 * return objectRepository.findByType(type);
-	 * }
-	 */
+	
+	public List<MuseumObject> findByTypeAll(String type) {
+		return objectRepository.findByType(type);
+	}
+	 
 
 	public List<MuseumObject> findByCategory(String category) {
 		return objectRepository.findByCategory(category);
@@ -75,19 +74,6 @@ public class MuseumObjectService {
 	public Page<MuseumObject> findByNamePageable(String name, Pageable pageable) {
 		return objectRepository.findByObjectNameContainingIgnoreCase(name, pageable);
 	}
-
-	/*
-	 * public List<MuseumObject> findByTypeAndCategory(String type, String category)
-	 * {
-	 * return objectRepository.findByTypeAndCategory(type, category);
-	 * }
-	 */
-
-	/*
-	 * public List<String> findAllTypes() {
-	 * return objectRepository.findDistinctTypes();
-	 * }
-	 */
 
 	public long countByType(String type) {
 		return objectRepository.countByTypeIgnoreCase(type);
@@ -136,6 +122,7 @@ public class MuseumObjectService {
 		MuseumObject oldObject = objectRepository.findById(id)
 				.orElseThrow();
 		updatedObject.setId(id);
+		updatedObject.setType(oldObject.getType());
 
 		if (updatedObject.getImage() == null && oldObject.getImage() != null) {
 			updatedObject.setImage(oldObject.getImage());

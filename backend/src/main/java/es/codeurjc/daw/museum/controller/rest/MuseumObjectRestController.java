@@ -2,6 +2,8 @@ package es.codeurjc.daw.museum.controller.rest;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +29,7 @@ import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.service.ImageService;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
@@ -73,13 +75,26 @@ public class MuseumObjectRestController {
             objects = objectService.findAllPageable(pageable);
         }
 
-        Page<ElementDTO> dtoPage = objects.map(obj -> elementMapper.toDTO(obj));
+        Page<ElementDTO> dtoPage = objects.map(elementMapper::toDTO);
+
         return ResponseEntity.ok(dtoPage);
     }
 
     @GetMapping("/{id}")
     public MuseumObjectDTO getObject(@PathVariable long id) {
         return objectMapper.toDTO(objectService.getObject(id));
+    }
+
+    // List of all objects
+    @GetMapping("/all")
+    public ResponseEntity<List<ElementDTO>> getObjectsWithoutPage() {
+        List<MuseumObject> objects = objectService.findAll();
+
+        List <ElementDTO> elementsDTOs = objects.stream()
+                .map(obj -> elementMapper.toDTO(obj))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(elementsDTOs);
     }
 
     @PostMapping("/")
@@ -124,15 +139,31 @@ public class MuseumObjectRestController {
         return ResponseEntity.created(location).body(imageMapper.toDTO(image));
     }
 
+    @PutMapping("/{id}/image")
+    public ResponseEntity<ImageDTO> updateObjectImage(@PathVariable long id, @RequestParam MultipartFile imageFile) 
+            throws IOException {
+        
+        if (imageFile.isEmpty()) throw new IllegalArgumentException();
+        
+        MuseumObject obj = objectService.getObject(id);
+        Image oldImage = obj.getImage();
+
+        Image newImage = imageService.createImage(imageFile.getInputStream());
+        objectService.addImageToObject(id, newImage);
+
+        if (oldImage != null) {
+            imageService.deleteImage(oldImage.getId());
+        }
+
+        return ResponseEntity.ok(imageMapper.toDTO(newImage));
+    }
+
     @DeleteMapping("/{id}/image")
     public ImageDTO deleteObjectImage(@PathVariable long id) {
         MuseumObject obj = objectService.getObject(id);
         Image image = obj.getImage();
 
         objectService.removeImageFromObject(id);
-        if (image != null) {
-            imageService.deleteImage(image.getId());
-        }
 
         return imageMapper.toDTO(image);
     }

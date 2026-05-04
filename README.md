@@ -35,29 +35,30 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
   - Permisos: 
   
       -> Puede acceder a una sección, entrar a la página informativa de un objeto y realizar búsquedas usando filtros.  
-      -> Puede marcar o desmarcar un objeto como visto, y también puede marcar un objeto como favorito, guardando dicho objeto en una lista de favoritos que posee, o desmarcarlo.  
+      -> Puede marcar o desmarcar un objeto como visto.  
       -> Puede dejar una o varias notas en la página informativa de un objeto.  
       -> Puede editar su perfil de usuario.
-  - Es dueño de: Su perfil de usuario, los objetos que marca como vistos, los objetos que marca como favoritos y las notas que deja en un objeto.
+      -> Puede acceder a la página de estadísticas.
+  - Es dueño de: Su perfil de usuario, los objetos que marca como vistos y las notas que deja en un objeto.
 
 * **Administrador**: 
   - Permisos: 
-  
       -> Puede añadir o eliminar un objeto tras acceder a una sección.  
-      -> Puede editar un objeto desde la página informativa de este (cambiar foto, nombre o descripción del objeto, además de poder añadir o eliminar una nota).
-  - Es dueño de: Los objetos que muestra cada sección, los datos e imágenes de cada objeto, y las notas que dejan los usuarios. No puede crear ni eliminar usuarios, ni tampoco editar sus datos personales.
+      -> Puede editar un objeto desde la página informativa de este (cambiar foto, nombre o descripción e información del objeto).
+      -> Puede editar su perfil de usuario.
+      -> Puede acceder al perfil de un usuario para editarlo o puede eliminar un usuario (desde la página de listado de usuarios).
+  - Es dueño de: Los objetos que muestra cada sección, los datos e imágenes de cada objeto, y los usuarios que tiene la aplicación.
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **Usuario**: Una imagen en el perfil, que el usuario puede cambiar por otra o quitarla si lo desea.
-- **Objeto**: Cada objeto tiene una imagen junto a su descripción en la página informativa de dicho objeto. La misma imagen también aparece en el objeto localizado en la lista de objetos que se muestra tras acceder a una sección.
+- **Usuario**: Una imagen en el perfil, que el usuario puede cambiar por otra.
+- **Objeto**: Cada objeto tiene una imagen junto a su descripción en la página informativa de dicho objeto. La misma imagen también aparece en el objeto localizado en la lista de objetos que se muestra tras acceder a una sección. Si se edita el onjeto (adminisitrador), se puede cambiar o borrar dicha imagen.
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
 - **Gráfico 1**: Gráfico que muestra cómo se distribuye el total de objetos entre las diferentes secciones (Gráfico de tarta / circular).
-- **Gráfico 2**: Gráfico que representa el número de objetos favoritos que tiene el usuario por cada sección (Gráfico de barras).
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
@@ -71,39 +72,11 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 ## 🛠 **Práctica 1: Web con HTML generado en servidor y AJAX**
 
 ### **Vídeo de Demostración**
+
+(POR HACER)
 📹 **[Enlace al vídeo en YouTube](https://youtu.be/PVULrZABfDQ)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
-**GUÍA DEL VÍDEO**
-<br>
-<br>
-1
-00:00:00,000 --> 00:00:21,000
-Introducción
-
-2
-00:00:22,000 --> 00:00:37,000
-Página inicial
-
-3
-00:00:38,000 --> 00:00:50,000
-Página principal o menú
-
-4
-00:00:51,000 --> 00:01:16,000
-Página de inicio de sesión
-
-5
-00:01:17,000 --> 00:01:57,000
-Página de registro
-
-6
-00:01:58,000 --> 00:03:28,000
-Selección y visualización de las pantalla de cada sección
-
-7
-00:03:29,000 --> 00:03:57,000
-Página de error
 
 ### **Navegación y Capturas de Pantalla**
 
@@ -111,14 +84,14 @@ Página de error
 
 Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
 
-![Diagrama de Navegación](screenshots/diagrama-pantallas.png)
+![Diagrama de Navegación](screenshots/diagrama-navegacion.png)
 
 > El usuario accede a la página inicial de la aplicación. A continuación, puede decidir si quiere entrar como usuario anónimo, iniciar sesión o registrarse tanto como usuario registrado como administrador.
 
 > - El usuario anónimo, tras pasar la página inicial, llega a la página principal o home en la versión de usuario anónimo, donde, tras seleccionar una sección, le aparece la página de la sección elegida. En dicha página, si selecciona un elemento de los disponibles, pasa a estar en la página informativa del elemento seleccionado.
 
 > - El usuario que ha iniciado sesión o se ha registrado (tanto como usuario normal como usuario administrador), puede hacer las mismas acciones que el usuario anónimo, más algunas adicionales dependiendo del rol.
-Junto a esto, puede consultar su perfil de usuario desde la página principal o home, desde la página de una sección o desde la página informativa.
+Junto a esto, puede consultar su perfil de usuario desde la página principal o home (o desde cualquier página, ya que se puede acceder al perfil en cualquiera de ellas desde el navbar. Por simplicidad, en el diagrama se ha puesto que sea desde la página principal).
 
 
 #### **Capturas de Pantalla Actualizadas**
@@ -129,39 +102,36 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 > Página de inicio de la aplicación. En la página, se te da la opción de iniciar sesión, registrarte, o acceder a la web como usuario anónimo. Si accedes como usuario anónimo, arriba se seguirá mostrando las opciones de inicio de sesión y de registro en todas las páginas por las que navegues.
 
 #### **2. Página de registro**
-![Página Principal](screenshots/pagina-registro.png)
+![Página Principal](screenshots/registro.png)
 
 > Página que se muestra tras haber pulsado la opción "Registrarse" en la barra superior. Se debe poner un nombre de usuario y una contraseña; opcionalmente, se puede poner también una imagen o foto de perfil. Tras esto, al pulsar en "Aceptar" quedas registrado en la aplicación.
 
 #### **3. Página de inicio de sesión**
-![Página Principal](screenshots/pagina-inicio-sesion.png)
+![Página Principal](screenshots/inicio-sesion.png)
 
 > Página que se muestra tras haber pulsado la opción "Iniciar sesión" en la barra superior. Se debe poner un nombre de usuario y una contraseña para poder iniciar tu sesión en la aplicación. 
 
 #### **4. Página principal / Home**
 
 #### **- Página de usuario anónimo**
-![Página Principal](screenshots/pagina-principal.png)
+![Página Principal](screenshots/pagina-principal-anonimo.png)
 
 > Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
 
-#### **- Página de usuario registrado**
-![Página Principal](screenshots/pagina-bienvenida-registrado.png)
-
-#### **- Página del administrador**
-![Página Principal](screenshots/pagina-bienvenida-admin.png)
+#### **- Página de usuario registrado y de administrador**
+![Página Principal](screenshots/pagina-principal-usuario.png)
 
 > Página que se muestra tras haber pasado la página inicial. En ella, se pueden elegir diferentes secciones temáticas del museo, tanto seleccionando una de las ventanas con los logos representativos, como en las opciones de la barra superior. También se pueden consultar otras secciones que no están visibles en la página (opción "Ver más").
 
 #### **5. Página de una sección**
 
 #### **- Página de usuario anónimo**
-![Página Principal](screenshots/pagina-de-seccion.png)
+![Página Principal](screenshots/pagina-seccion-anonimo.png)
 
 > Página que se muestra tras haber seleccionado una sección de las disponibles en la página principal. El usuario puede usar la barra de búsqueda, seleccionar uno de los elementos que se muestran en la página o consultar otros elementos que no están visibles en la página (opción "Ver más").
 
 #### **- Página de usuario registrado**
-![Página Principal](screenshots/pagina-seccion-registrado.png)
+![Página Principal](screenshots/pagina-seccion-usuario.png)
 
 > Además de lo que puede hacer el usuario anónimo, se pueden buscar elementos por tipos pulsando en los botones disponibles (agua dulce, mar o abisales).
 
@@ -172,25 +142,53 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 #### **6. Página informativa**
 #### **- Página de usuario anónimo**
-![Página Principal](screenshots/info-anonimo.png)
+![Página Principal](screenshots/pagina-informativa-anonimo.png)
 
 > Página que se muestra tras haber seleccionado un elemento de los disponibles en la página de la sección. El usuario puede consultar información de interés acerca del elemento que ha seleccionado previamente. 
+
 #### **- Página de usuario registrado**
-![Página Principal](screenshots/info-registrado.png)
+![Página Principal](screenshots/pagina-informativa-usuario.png)
 
-> Además de lo que puede hacer el usuario anónimo, se puede marcar como visto el elemento, marcarlo como favorito o añadir un comentario en la página informativa. 
+> Además de lo que puede hacer el usuario anónimo, se puede marcar como visto el elemento o añadir una nota en la página informativa. 
 
-#### **- Página del administrador**
-![Página Principal](screenshots/info-edit-admin.png)
+#### **- Página del administrador (Página de edición de un objeto)**
+![Página Principal](screenshots/editar-objeto-1.png)
+![Página Principal](screenshots/editar-objeto-2.png)
+![Página Principal](screenshots/editar-objeto-3.png)
 
 > Accede directamente a la página informativa donde puede modificar lo que desee de ella. 
 
+#### **7. Página de nueva nota (solo usuario registrado)**
+![Página Principal](screenshots/nueva-nota.png)
+
+> Página que se muestra tras haber seleccionado la opción de añadir nota en la página informativa. Se puede crear una nota y guardarla en la página informativa de un objeto.
+
+#### **8. Página de confirmación**
+![Página Principal](screenshots/confirmacion.png)
+
+> Página en la que se informa que una operación ha sido realizada con éxito. 
+
+#### **9. Página de error**
+![Página Principal](screenshots/error.png)
+
+> Página en la que se informa que se ha producido algún fallo al intentar realizar una operación. 
+
 #### **-> Para las siguientes páginas, se accede a ellas pulsando una opción de las que hay en el menú desplegable del perfil:**
 
-#### **7. Página de perfil de usuario**
+#### **10. Página de perfil de usuario**
 ![Página Principal](screenshots/pagina-perfil.png)
 
 > Página que muestra tu perfil de usuario actual, el cual puedes editar si lo deseas.
+
+#### **11. Página estadística (solo usuario registrado, no admin)**
+![Página Principal](screenshots/grafico-estadisticas.png)
+
+> Página que muestra el porcentaje de objetos vistos por el usuario en cada sección y una gráfica circular de los objetos de cada sección disponibles en el museo.
+
+#### **12. Lista de usuarios (solo admin)**
+![Página Principal](screenshots/lista-usuarios.png)
+
+> Página que muestra una lista con los usuarios que tiene la aplicación, en la que se puede acceder al perfil de uno de ellos o eliminarlo.
 
 ### **Instrucciones de Ejecución**
 
@@ -202,48 +200,46 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 #### **Pasos para ejecutar la aplicación**
 
+
 1. **Clonar el repositorio**
    ```bash
    git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git
    cd practica-daw-2025-26-grupo-1
    ```
 
-2. **Haber instalado MySQL Workbench**
 
-3. **Haber instalado el Extension Pack of Java y el Spring Boot Extension Pack en el Visual Studio Code**
+2. **Configuración de la base de datos**
 
-4. **Crear una base de datos en MySQL Workbench y modificar las application.properties en el Visual Studio Code para adaptarlas a dicha base de datos y que la aplicación pueda funcionar**
+> La aplicación utiliza MySQL y requiere que la base de datos esté creada previamente antes del arranque.
+> 1. Crear la base de datos: Acceda a la aplicación MySQL Workbench y cree una base de datos llamada `museum`.
+> 2. Introducir las credenciales necesarias tras la creación de la base de datos. Puede consultarlas poniendo en su terminal `cd practica-daw-2025-26-grupo-1/backend/src/main/resources` y después `cat application.properties`. El proyecto está configurado para conectar con el usuario `root` y la contraseña `Mysql2026!`.
 
-4. **En Visual Studio Code, cuando se tenga la aplicación lista para ejecutar, pulsar en el botón "Run" (a ser posible, desde el archivo Application.java o accediendo al Spring Dashboard)**
+3. **Pasos para la ejecución**
 
-5. **Esperar a que Spring termine de realizar el procesamiento de datos**
+> Una vez configurada la base de datos, tras haber clonado en la terminal el repositorio con `git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git`, escriba `cd practica-daw-2025-26-grupo-1/backend` y después `mvn spring-boot:run`.
 
-6. **Una vez que Spring termine, abrir un navegador y escribir en la barra de búsqueda la ruta https://localhost:8443**
+> Tras esto, la aplicación debería cargar todo lo que necesita. Una vez termine la carga, si en las últimas líneas que aparecen encuentra una en la que pone `Tomcat started on port 8443 (https) with context path '/'`, la aplicación se puede ejecutar. Para ejecutarla, vaya a un navegador y escriba `https://localhost:8443` y tras pulsa la tecla Enter o Intro, se le mostrará la aplicación.
 
-7. **Tras esto, pulsar la tecla Intro y esperar a que la página inicial de la aplicación aparezca en pantalla**
 
 #### **Credenciales de prueba**
-- **Usuario Admin**: usuario: `admin`, contraseña: `admin`
-- **Usuario Registrado**: usuario: `user`, contraseña: `user`
+- **Usuario Admin**: usuario: `admin`, contraseña: `adminpass`
+- **Usuario Registrado**: usuario: `user`, contraseña: `pass`
 
 ### **Diagrama de Entidades de Base de Datos**
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](screenshots/diagrama-entidades.png)
+![Diagrama Entidad-Relación](screenshots/diagrama-base-de-datos.png)
 
-> El diagrama muestra las entidades principales que han sido necesarias para el desarrollo de esta aplicación, que serían: User, MuseumObject, Note e Image. Como se puede ver, tanto User como MuseumObject dependen de Application. 
-> - Además, User y MuseumObject necesitan conocerse, de manera que un User puede acceder a muchos MuseumObjects, y a un MuseumObject pueden acceder muchos Users (N:M).
-> - Un User puede escribir muchas Notes en un MuseumObject, y un MuseumObject puede tener muchas Notes. Tanto User como MuseumObject conocen a Note. Sin embargo, Note depende de User y de MuseumObject, por lo que también necesita conocer al User que la ha escrito (que solo puede ser uno) y el MuseumObject donde ha sido escrita (que solo puede ser uno también) (1:N) y (1:N).
-> - Tanto User como MuseumObject conocen a Image, ya que ambos solo pueden tener una Image y una Image solo pertence a un User y a un MuseumObject (1:1) y (1:1).
+> El diagrama muestra las entidades principales que han sido necesarias para el desarrollo de esta aplicación, además de las tablas con la que cuenta alguna de ellas para la gestión de sus datos.
 
 ### **Diagrama de Clases y Templates**
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](screenshots/diagrama-clases-templates.png)
+![Diagrama de Clases](screenshots/diagrama-web.png)
 
-> Este diagrama es una representación que muestra todas las clases y templates que se han usado, así como las relaciones entre ellas. Esta representación sería sobre el progreso que se ha tenido hasta ahora del proyecto, pero no es el diagrama definitivo del mismo. Esto se debe a que puede estar sujeto a cambios por mejoras y ampliaciones del proyecto o por implementaciones que no se han podido realizar.
+> Este diagrama es una representación que muestra todas las clases y templates que se han usado, así como las relaciones entre ellas. Se puede ver que las entidades se relacionan entre ellas al mismo tiempo que cada una usa unos repositorios específicos. Estos repositorios son usados por los servicios, y dichos servicios serán posteriormente utilizados por los controladores con el fin de mostrar la vista de cada una de las templates de la aplicación.
 
 ---
 
@@ -267,7 +263,11 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado](screenshots/diagrama-web.png)
+![Diagrama de Clases Actualizado](screenshots/diagrama-rest.png)
+
+> Este diagrama muestra cómo las entidades se relacionan entre ellas al mismo tiempo que cada una usa unos repositorios específicos. Estos repositorios son utilizados por los servicios, y dichos servicios son posteriormente consumidos por los controladores.
+A diferencia del caso anterior, en el que se mostraban los servicios utilizados por los controladores web para renderizar vistas, en este caso se representan los servicios utilizados por los controladores REST, los cuales exponen la funcionalidad de la aplicación a través de una API.
 
 ### **Instrucciones de Ejecución con Docker**
 
@@ -332,61 +332,7 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 | Usuario Registrado | user1 | user123 |
 | Usuario Registrado | user2 | user123 |
 
-### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 2 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 3 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 
 ---
 
@@ -433,60 +379,4 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 Diagrama mostrando los componentes React, hooks personalizados, servicios y sus relaciones:
 
 ![Diagrama de Componentes React](images/spa-classes-diagram.png)
-
-### **Participación de Miembros en la Práctica 3**
-
-#### **Alumno 1 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 2 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 3 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 4 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
 

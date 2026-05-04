@@ -22,12 +22,15 @@ public class ImageWebController {
     @GetMapping("/images/{id}")
     public ResponseEntity<Object> getImageFile(@PathVariable long id) throws SQLException {
 
+        // Retrieves image file from database/service by ID
         Resource imageFile = imageService.getImageFile(id);
 
+        // Determines the media type (PNG, JPEG, etc.)
         MediaType mediaType = MediaTypeFactory
                 .getMediaType(imageFile)
                 .orElse(MediaType.IMAGE_PNG); 
 
+        // Returns the image as HTTP response with correct content type
         return ResponseEntity
                 .ok()
                 .contentType(mediaType)

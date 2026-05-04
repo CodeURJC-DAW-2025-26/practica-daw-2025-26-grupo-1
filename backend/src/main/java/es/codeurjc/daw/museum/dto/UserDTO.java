@@ -7,6 +7,5 @@ public record UserDTO (
     String name,
     String password,
     List <String> roles,
-    List <ElementDTO> favourites,
     List <ElementDTO> seen
 ){}
