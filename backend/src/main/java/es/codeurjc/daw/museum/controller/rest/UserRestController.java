@@ -72,27 +72,37 @@ public class UserRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<UserBasicDTO> register(@RequestBody UserDTO user) { 
+    public ResponseEntity<UserBasicDTO> register(@RequestBody UserDTO user) {
 
         User newUser = userService.registerNewUser(userMapper.toEntity(user));
         URI location = fromCurrentRequest().path("/me").build().toUri();
-        return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser)); 
+        return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
     }
 
     @PutMapping("/profile")
     public ResponseEntity<UserBasicDTO> updateProfile(@RequestBody UserDTO userModifyDTO, Principal principal)
             throws IOException, SQLException {
 
-        User updatedUser = userService.editUser(principal.getName(), userMapper.toEntity(userModifyDTO), false, null);
+        User updatedUser = userService.editUser(principal.getName(), principal.getName(),
+                userMapper.toEntity(userModifyDTO), false, null);
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity <UserBasicDTO> updateUser (@PathVariable long id, @RequestBody UserDTO userDTO) throws IOException, SQLException {
+    public ResponseEntity<UserBasicDTO> updateUser(@PathVariable long id, @RequestBody UserDTO userDTO,
+            Principal principal)
+            throws IOException, SQLException {
 
-        User userToEdit = userService.findById(id).orElseThrow();
-        User updatedUser = userService.editUser(userToEdit.getName(), userMapper.toEntity(userDTO), false, null);
+        if (principal == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
+
+        User userToEdit = userService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        User updatedUser = userService.editUser(userToEdit.getName(), principal.getName(), userMapper.toEntity(userDTO),
+                false, null);
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
@@ -104,14 +114,16 @@ public class UserRestController {
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }
 
-    /*@DeleteMapping("/me")
-    public ResponseEntity<UserBasicDTO> deleteMyAccount(Principal principal) {
-
-        User user = userService.findByUsername(principal.getName()).orElseThrow();
-        userService.deleteUser(user.getId());
-
-        return ResponseEntity.ok(userMapper.toBasicDTO(user));
-    }*/
+    /*
+     * @DeleteMapping("/me")
+     * public ResponseEntity<UserBasicDTO> deleteMyAccount(Principal principal) {
+     * 
+     * User user = userService.findByUsername(principal.getName()).orElseThrow();
+     * userService.deleteUser(user.getId());
+     * 
+     * return ResponseEntity.ok(userMapper.toBasicDTO(user));
+     * }
+     */
 
     @PostMapping("/me/seen/{id}")
     public ResponseEntity<MuseumObjectBasicDTO> markSeen(@PathVariable Long id, HttpServletRequest request) {
@@ -127,7 +139,6 @@ public class UserRestController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Objeto no encontrado"));
 
         MuseumObject seenObject = userService.markSeen(user, object);
-
 
         URI location = fromCurrentRequest().build().toUri();
 

@@ -67,26 +67,39 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User editUser(String username, User userModify, boolean removeImage, MultipartFile imageField)
+    public User editUser(String username, String authUsername, User userModify, boolean removeImage,
+            MultipartFile imageField)
             throws IOException, SQLException {
 
-        User user = userRepository.findByName(username)
+        User userToEdit = userRepository.findByName(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
-        user.setName(userModify.getName());
+
+        User currentUser = userRepository.findByName(authUsername)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sesión inválida"));
+
+        System.out.println("ID actual:" + currentUser.getId());
+
+        if (!currentUser.getId().equals(userToEdit.getId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "No tienes permiso para editar el perfil de otro usuario");
+        }
+
+        userToEdit.setName(userModify.getName());
 
         if (imageField != null && !imageField.isEmpty()) {
-            if (user.getUserImage() == null) {
-                user.setUserImage(imageService.createImage(imageField.getInputStream()));
+            if (userToEdit.getUserImage() == null) {
+                userToEdit.setUserImage(imageService.createImage(imageField.getInputStream()));
             } else {
-                imageService.replaceImageFile(user.getUserImage().getId(), imageField.getInputStream());
+                imageService.replaceImageFile(userToEdit.getUserImage().getId(), imageField.getInputStream());
             }
-        } else if (removeImage && user.getUserImage() != null) {
-            Long imageId = user.getUserImage().getId();
-            user.setUserImage(null);
-            userRepository.save(user);
+        } else if (removeImage && userToEdit.getUserImage() != null) {
+            Long imageId = userToEdit.getUserImage().getId();
+            userToEdit.setUserImage(null);
+            userRepository.save(userToEdit);
             imageService.deleteImage(imageId);
         }
-        return userRepository.save(user);
+
+        return userRepository.save(userToEdit);
     }
 
     public void deleteUser(Long id) {
@@ -102,8 +115,6 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
     }
 
-    
-
     public MuseumObject markSeen(User user, MuseumObject object) {
         if (!user.getSeen().contains(object)) {
             user.getSeen().add(object);
@@ -118,7 +129,6 @@ public class UserService {
 
         List<CategoryStatsDTO> categoryStats = sections.stream().map(section -> {
 
-            
             int seen = (int) user.getSeen().stream().filter(obj -> obj.getType().equalsIgnoreCase(section)).count();
 
             int totalInSec = (int) objectService.countByType(section);
@@ -146,8 +156,7 @@ public class UserService {
                 user.getName(),
                 (long) user.getSeen().size(),
                 categoryStats,
-                globalTotals 
-        );
+                globalTotals);
 
     }
 

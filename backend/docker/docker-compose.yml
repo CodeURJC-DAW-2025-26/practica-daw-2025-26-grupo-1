@@ -15,11 +15,11 @@ services:
   db:
     image: mysql:9.6
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-pass}
+      - MYSQL_DATABASE=${DB_NAME:-museum}
     volumes:
       - db_data:/var/lib/mysql
-      - healthcheck:      
+    healthcheck:      
           test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-p$$MYSQL_ROOT_PASSWORD"]      
           interval: 5s      
           timeout: 5s      

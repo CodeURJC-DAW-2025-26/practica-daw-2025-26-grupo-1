@@ -211,7 +211,7 @@ public class SectionWebController {
         if (objectsInSection.isEmpty()) {
             model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
             model.addAttribute("errorText",
-                    "La sección '" + sectionName + "' no existe o no tiene objetos disponibles.");
+                    "La sección no existe o no tiene objetos disponibles.");
             model.addAttribute("backLink", "/welcome-user");
             return "error-page";
         }
@@ -261,7 +261,7 @@ public class SectionWebController {
 
             default:
                 model.addAttribute("museumHeroImage", "/assets/images/interior-museo.png");
-                model.addAttribute("errorText", "La sección '" + sectionName + "' no existe.");
+                model.addAttribute("errorText", "La sección no existe o no tiene objetos disponibles.");
                 model.addAttribute("backLink", "/welcome-user");
                 return "error-page";
         }
