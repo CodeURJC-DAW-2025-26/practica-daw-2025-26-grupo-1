@@ -73,8 +73,7 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
 ### **Vídeo de Demostración**
 
-(POR HACER)
-📹 **[Enlace al vídeo en YouTube](https://youtu.be/PVULrZABfDQ)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/zI_jivVCOrU)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 
@@ -200,6 +199,7 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 #### **Pasos para ejecutar la aplicación**
 
+**OPCIÓN 1**
 
 1. **Clonar el repositorio**
    ```bash
@@ -212,13 +212,38 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 
 > La aplicación utiliza MySQL y requiere que la base de datos esté creada previamente antes del arranque.
 > 1. Crear la base de datos: Acceda a la aplicación MySQL Workbench y cree una base de datos llamada `museum`.
-> 2. Introducir las credenciales necesarias tras la creación de la base de datos. Puede consultarlas poniendo en su terminal `cd practica-daw-2025-26-grupo-1/backend/src/main/resources` y después `cat application.properties`. El proyecto está configurado para conectar con el usuario `root` y la contraseña `Mysql2026!`.
+> 2. Introducir las credenciales necesarias tras la creación de la base de datos. Puede consultarlas poniendo en su terminal `cd practica-daw-2025-26-grupo-1/backend/src/main/resources` y después `cat application.properties`. El proyecto está configurado para conectar con el usuario `root` y la contraseña `Mysql2026!`. Si se desea usar otro usuario y contraseña, se pueden modificar los valores `spring.datasource.username` y `spring.datasource.password`en el archivo `application.properties`.
 
 3. **Pasos para la ejecución**
 
-> Una vez configurada la base de datos, tras haber clonado en la terminal el repositorio con `git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git`, escriba `cd practica-daw-2025-26-grupo-1/backend` y después `mvn spring-boot:run`.
+> Una vez configurada la base de datos, tras haber clonado en la terminal el repositorio con `git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git`, escriba los siguientes comandos:
+
+```bash
+cd practica-daw-2025-26-grupo-1/backend
+mvn spring-boot:run
+```
 
 > Tras esto, la aplicación debería cargar todo lo que necesita. Una vez termine la carga, si en las últimas líneas que aparecen encuentra una en la que pone `Tomcat started on port 8443 (https) with context path '/'`, la aplicación se puede ejecutar. Para ejecutarla, vaya a un navegador y escriba `https://localhost:8443` y tras pulsa la tecla Enter o Intro, se le mostrará la aplicación.
+
+
+**OPCIÓN 2**
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git
+   cd practica-daw-2025-26-grupo-1
+   ```
+
+2. **Ejecutar el siguiente comando para arrancar la base de datos de la aplicación**
+   ```bash
+   docker run --rm -e MYSQL_ROOT_PASSWORD=Mysql2026! -e MYSQL_DATABASE=museum -p 3306:3306 -d mysql:9.5.0
+   ```
+
+3. **Ejecutar la aplicación**
+   ```bash
+   cd backend
+   mvn spring-boot:run
+   ```
 
 
 #### **Credenciales de prueba**
@@ -279,11 +304,21 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 
 1. **Clonar el repositorio** (si no lo has hecho ya):
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git
+   cd practica-daw-2025-26-grupo-1
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Entrar en la carpeta docker del proyecto:**
+   
+   ```bash
+   cd backend/docker
+   ```
+
+3. **Ejecutar el siguiente comando:**
+
+   ```bash
+   docker compose up
+   ```
 
 ### **Construcción de la Imagen Docker**
 
@@ -292,12 +327,25 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 
 #### **Pasos para construir y publicar la imagen:**
 
-1. **Navegar al directorio de Docker**:
+1. **Navegar al directorio de Docker:**:
    ```bash
-   cd docker
+   cd backend/docker
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+2. **Crear la imagen ejecutando lo siguiente:**
+
+   ```bash
+   ./create_image.sh museum
+   ```
+3. **Publicar la imagen ejecutando lo siguiente:**
+
+   ```bash
+   ./publish_image.sh <tu_nombre_de_usuario_dockerhub> museum
+
+   #Publicar la imagen como OCI Artifact
+   ./publish_docker-compose.sh <tu_nombre_de_usuario_dockerhub> museum
+   ```
+
 
 ### **Despliegue en Máquina Virtual**
 
@@ -322,15 +370,14 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 
 ### **URL de la Aplicación Desplegada**
 
-🌐 **URL de acceso**: `https://[nombre-app].etsii.urjc.es:8443`
+🌐 **URL de acceso**: `https://appweb01.dawgis.etsii.urjc.es:8443`
 
 #### **Credenciales de Usuarios de Ejemplo**
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin | adminpass |
+| Usuario Registrado | user | pass |
 
 
 

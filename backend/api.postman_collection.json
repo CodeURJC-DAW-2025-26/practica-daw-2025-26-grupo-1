@@ -11,80 +11,6 @@
       "name": "Pruebas del Museo",
       "item": [
         {
-          "name": "NO ADMIN",
-          "item": [
-            {
-              "name": "Login User",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"pass\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/auth/login",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "auth",
-                    "login"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Refresh Token",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/auth/refresh",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "auth",
-                    "refresh"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Logout User",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/auth/logout",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "auth",
-                    "logout"
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        },
-        {
           "name": "ADMIN",
           "item": [
             {
@@ -256,7 +182,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/users/3",
+                  "raw": "{{baseURL}}/api/v1/users/2",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -264,7 +190,7 @@
                     "api",
                     "v1",
                     "users",
-                    "3"
+                    "2"
                   ]
                 }
               },
@@ -285,6 +211,38 @@
                     "v1",
                     "users",
                     "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Replace Image File",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "imageFile",
+                      "type": "file",
+                      "uuid": "896020f4-bb57-444f-bfee-326c13ae1869",
+                      "src": "/C:/Users/34607/Downloads/5 feb 2026 a la(s) 13_30(1).jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/images/1/media",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "images",
+                    "1",
+                    "media"
                   ]
                 }
               },
@@ -322,6 +280,351 @@
           ]
         },
         {
+          "name": "REGISTERED USER",
+          "item": [
+            {
+              "name": "Login User",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"pass\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/auth/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Login Other User",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"pepe\",\r\n    \"password\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/auth/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Note",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\": \"Esta es la segunda nota de pepe.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/object/1",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "object",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Note",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/2",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Notes By Object",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/object/1",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "object",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Notes",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Mark Seen",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/me/seen/1",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "me",
+                    "seen",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "My Statistics",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/me/statistics",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "me",
+                    "statistics"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "AUTHENTICATED",
+          "item": [
+            {
+              "name": "Logout User",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/auth/logout",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "logout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Refresh Token",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/auth/refresh",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Profile",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"NombreActualizado\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/profile",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "profile"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update User",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Nombre\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/2",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Who Am I",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/me",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
           "name": "ALL USERS",
           "item": [
             {
@@ -350,7 +653,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/1",
+                  "raw": "{{baseURL}}/api/v1/objects/2",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -358,7 +661,7 @@
                     "api",
                     "v1",
                     "objects",
-                    "1"
+                    "2"
                   ]
                 }
               },
@@ -406,38 +709,6 @@
                     "v1",
                     "menu-page",
                     "welcome-user"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Replace Image File",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "key": "imageFile",
-                      "type": "file",
-                      "uuid": "896020f4-bb57-444f-bfee-326c13ae1869",
-                      "src": "/C:/Users/34607/Downloads/5 feb 2026 a la(s) 13_30(1).jpg"
-                    }
-                  ]
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/images/1/media",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "images",
-                    "1",
-                    "media"
                   ]
                 }
               },
@@ -505,145 +776,13 @@
               "response": []
             },
             {
-              "name": "Create Note",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"text\": \"Esta es una nota de prueba sobre este objeto del museo.\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/1",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "notes",
-                    "object",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Delete Note",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/1",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "notes",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get Notes By Object",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/1",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "notes",
-                    "object",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Notes",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/all",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "notes",
-                    "all"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Who Am I",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": ""
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/me",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "me"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Register",
               "request": {
                 "method": "POST",
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"nuevoUsuario\",\r\n    \"password\": \"miPasswordSegura\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "raw": "{\r\n    \"name\": \"ana\",\r\n    \"password\": \"ana\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -660,116 +799,6 @@
                     "v1",
                     "users",
                     ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Update Profile",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"NombreActualizado\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/profile",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "profile"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Update User",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"NombreActualizado\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/1",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Mark Seen",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": true\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/me/seen/1",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "me",
-                    "seen",
-                    "1"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "My Statistics",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/me/statistics",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "me",
-                    "statistics"
                   ]
                 }
               },

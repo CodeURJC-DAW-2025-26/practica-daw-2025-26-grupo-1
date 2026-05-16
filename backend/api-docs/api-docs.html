@@ -897,6 +897,17 @@ ul.nav-tabs {
     }
   }
 };
+    defs["ErrorDTO"] = {
+  "properties" : {
+    "errorCode" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "errorMsg" : {
+      "type" : "string"
+    }
+  }
+};
     defs["ImageDTO"] = {
   "properties" : {
     "id" : {
@@ -1209,6 +1220,28 @@ ul.nav-tabs {
             -->
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
+                  <li class="nav-header" data-group="ErrorRestController"><a href="#api-ErrorRestController">API Methods - ErrorRestController</a></li>
+                    <li data-group="ErrorRestController" data-name="handleError" class="">
+                      <a href="#api-ErrorRestController-handleError">handleError</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError1" class="">
+                      <a href="#api-ErrorRestController-handleError1">handleError1</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError2" class="">
+                      <a href="#api-ErrorRestController-handleError2">handleError2</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError3" class="">
+                      <a href="#api-ErrorRestController-handleError3">handleError3</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError4" class="">
+                      <a href="#api-ErrorRestController-handleError4">handleError4</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError5" class="">
+                      <a href="#api-ErrorRestController-handleError5">handleError5</a>
+                    </li>
+                    <li data-group="ErrorRestController" data-name="handleError6" class="">
+                      <a href="#api-ErrorRestController-handleError6">handleError6</a>
+                    </li>
                   <li class="nav-header" data-group="ImageRestController"><a href="#api-ImageRestController">API Methods - ImageRestController</a></li>
                     <li data-group="ImageRestController" data-name="getAllImages" class="">
                       <a href="#api-ImageRestController-getAllImages">getAllImages</a>
@@ -1323,6 +1356,2732 @@ ul.nav-tabs {
           </div>
         </div>
         <div id="sections">
+                <section id="api-ErrorRestController">
+                  <h1>ErrorRestController</h1>
+                    <div id="api-ErrorRestController-handleError">
+                      <article id="api-ErrorRestController-handleError-0" data-group="User" data-name="handleError" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleErrorWithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleErrorExample
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError-404-schema">
+                                <div id="responses-ErrorRestController-handleError-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError-200-schema">
+                                <div id="responses-ErrorRestController-handleError-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError1">
+                      <article id="api-ErrorRestController-handleError1-0" data-group="User" data-name="handleError1" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError1</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError1-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError1-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError1-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError1-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError1-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError1();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError1");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError1();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError1: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError1();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError1");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError1WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError1(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError1-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError1Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError1();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError1: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError1();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError1: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError1();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError1: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error1()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError1: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError1-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError1(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError1-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError1-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError1-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError1-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError1-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError1-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError1-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError1-404-schema">
+                                <div id="responses-ErrorRestController-handleError1-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError1-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError1-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError1-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError1-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError1-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError1-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError1-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError1-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError1-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError1-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError1-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError1-200-schema">
+                                <div id="responses-ErrorRestController-handleError1-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError1-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError1-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError1-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError2">
+                      <article id="api-ErrorRestController-handleError2-0" data-group="User" data-name="handleError2" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError2</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError2-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError2-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError2-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError2-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError2-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError2();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError2");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError2();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError2: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError2();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError2");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError2WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError2(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError2-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError2Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError2();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError2: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError2();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError2: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError2();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError2: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error2()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError2: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError2-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError2(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError2-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError2-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError2-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError2-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError2-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError2-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError2-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError2-404-schema">
+                                <div id="responses-ErrorRestController-handleError2-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError2-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError2-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError2-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError2-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError2-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError2-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError2-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError2-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError2-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError2-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError2-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError2-200-schema">
+                                <div id="responses-ErrorRestController-handleError2-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError2-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError2-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError2-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError3">
+                      <article id="api-ErrorRestController-handleError3-0" data-group="User" data-name="handleError3" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError3</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError3-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError3-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError3-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError3-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError3-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError3();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError3");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError3();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError3: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError3();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError3");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError3WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError3(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError3-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError3Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError3();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError3: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError3();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError3: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError3();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError3: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error3()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError3: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError3-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError3(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError3-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError3-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError3-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError3-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError3-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError3-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError3-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError3-404-schema">
+                                <div id="responses-ErrorRestController-handleError3-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError3-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError3-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError3-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError3-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError3-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError3-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError3-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError3-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError3-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError3-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError3-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError3-200-schema">
+                                <div id="responses-ErrorRestController-handleError3-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError3-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError3-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError3-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError4">
+                      <article id="api-ErrorRestController-handleError4-0" data-group="User" data-name="handleError4" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError4</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="patch"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError4-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError4-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError4-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError4-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError4-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PATCH \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError4();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError4");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError4();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError4: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError4();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError4");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError4WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError4(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError4-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError4Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError4();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError4: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError4();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError4: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError4();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError4: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error4()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError4: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError4-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError4(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError4-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError4-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError4-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError4-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError4-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError4-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError4-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError4-404-schema">
+                                <div id="responses-ErrorRestController-handleError4-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError4-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError4-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError4-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError4-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError4-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError4-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError4-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError4-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError4-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError4-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError4-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError4-200-schema">
+                                <div id="responses-ErrorRestController-handleError4-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError4-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError4-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError4-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError5">
+                      <article id="api-ErrorRestController-handleError5-0" data-group="User" data-name="handleError5" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError5</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="head"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError5-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError5-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError5-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError5-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError5-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X HEAD \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError5();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError5");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError5();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError5: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError5();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError5");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError5WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError5(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError5-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError5Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError5();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError5: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError5();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError5: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError5();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError5: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error5()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError5: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError5-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError5(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError5-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError5-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError5-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError5-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError5-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError5-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError5-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError5-404-schema">
+                                <div id="responses-ErrorRestController-handleError5-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError5-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError5-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError5-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError5-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError5-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError5-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError5-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError5-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError5-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError5-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError5-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError5-200-schema">
+                                <div id="responses-ErrorRestController-handleError5-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError5-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError5-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError5-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-ErrorRestController-handleError6">
+                      <article id="api-ErrorRestController-handleError6-0" data-group="User" data-name="handleError6" data-version="0">
+                        <div class="pull-left">
+                          <h1>handleError6</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="options"><code><span class="pln">/error</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-ErrorRestController-handleError6-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-java">Java</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-dart">Dart</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError6-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-ErrorRestController-handleError6-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-python">Python</a></li>
+                          <li class=""><a href="#examples-ErrorRestController-handleError6-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-ErrorRestController-handleError6-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X OPTIONS \
+ -H "Accept: application/json" \
+ "http://127.0.0.1:8443/error"
+</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.ErrorRestControllerApi;
+
+import java.io.File;
+import java.util.*;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+
+        // Create an instance of the API class
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError6();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError6");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-dart">
+                            <pre class="prettyprint"><code class="language-dart">import 'package:openapi/api.dart';
+
+final api_instance = DefaultApi();
+
+
+try {
+    final result = await api_instance.handleError6();
+    print(result);
+} catch (e) {
+    print('Exception when calling DefaultApi->handleError6: $e\n');
+}
+
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.ErrorRestControllerApi;
+
+public class ErrorRestControllerApiExample {
+    public static void main(String[] args) {
+        ErrorRestControllerApi apiInstance = new ErrorRestControllerApi();
+
+        try {
+            ErrorDTO result = apiInstance.handleError6();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling ErrorRestControllerApi#handleError6");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">
+
+// Create an instance of the API class
+ErrorRestControllerApi *apiInstance = [[ErrorRestControllerApi alloc] init];
+
+[apiInstance handleError6WithCompletionHandler: 
+              ^(ErrorDTO output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var OpenApiDefinition = require('open_api_definition');
+
+// Create an instance of the API class
+var api = new OpenApiDefinition.ErrorRestControllerApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.handleError6(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-ErrorRestController-handleError6-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class handleError6Example
+    {
+        public void main()
+        {
+
+            // Create an instance of the API class
+            var apiInstance = new ErrorRestControllerApi();
+
+            try {
+                ErrorDTO result = apiInstance.handleError6();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling ErrorRestControllerApi.handleError6: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\ErrorRestControllerApi();
+
+try {
+    $result = $api_instance->handleError6();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ErrorRestControllerApi->handleError6: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::ErrorRestControllerApi;
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::ErrorRestControllerApi->new();
+
+eval {
+    my $result = $api_instance->handleError6();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling ErrorRestControllerApi->handleError6: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Create an instance of the API class
+api_instance = openapi_client.ErrorRestControllerApi()
+
+try:
+    api_response = api_instance.handle_error6()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ErrorRestControllerApi->handleError6: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-ErrorRestController-handleError6-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate ErrorRestControllerApi;
+
+pub fn main() {
+
+    let mut context = ErrorRestControllerApi::Context::default();
+    let result = client.handleError6(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-ErrorRestController-handleError6-title-404"></h3>
+                            <p id="examples-ErrorRestController-handleError6-description-404" class="marked"></p>
+                            <script>
+                              var responseErrorRestController404_description = `Not Found`;
+                              var responseErrorRestController404_description_break = responseErrorRestController404_description.indexOf('\n');
+                              if (responseErrorRestController404_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError6-title-404").text("Status: 404 - " + responseErrorRestController404_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError6-title-404").text("Status: 404 - " + responseErrorRestController404_description.substring(0, responseErrorRestController404_description_break));
+                                $("#examples-ErrorRestController-handleError6-description-404").html(responseErrorRestController404_description.substring(responseErrorRestController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError6-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError6-404-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError6-404-schema">
+                                <div id="responses-ErrorRestController-handleError6-schema-404" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "Not Found"
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError6-404-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError6-schema-404');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError6-404-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                            <h3 id="examples-ErrorRestController-handleError6-title-200"></h3>
+                            <p id="examples-ErrorRestController-handleError6-description-200" class="marked"></p>
+                            <script>
+                              var responseErrorRestController200_description = `OK`;
+                              var responseErrorRestController200_description_break = responseErrorRestController200_description.indexOf('\n');
+                              if (responseErrorRestController200_description_break == -1) {
+                                $("#examples-ErrorRestController-handleError6-title-200").text("Status: 200 - " + responseErrorRestController200_description);
+                              } else {
+                                $("#examples-ErrorRestController-handleError6-title-200").text("Status: 200 - " + responseErrorRestController200_description.substring(0, responseErrorRestController200_description_break));
+                                $("#examples-ErrorRestController-handleError6-description-200").html(responseErrorRestController200_description.substring(responseErrorRestController200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-ErrorRestController-handleError6-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-ErrorRestController-handleError6-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-ErrorRestController-handleError6-200-wrapper" style='margin-bottom: 10px;'>
+                              <div class="tab-pane active" id="responses-ErrorRestController-handleError6-200-schema">
+                                <div id="responses-ErrorRestController-handleError6-schema-200" class="exampleStyle">
+                                  <script>
+                                    $(document).ready(function() {
+                                      var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorDTO"
+      }
+    }
+  }
+};
+                                      var schema = findNode('schema',schemaWrapper).schema;
+                                      if (!schema) {
+                                        schema = schemaWrapper.schema;
+                                      }
+                                      if (schema == null) {
+                                        return;
+                                      }
+                                      if (schema.$ref != null) {
+                                        schema = defsParser.$refs.get(schema.$ref);
+                                        if (schema.properties != null) {
+                                          Object.keys(schema.properties).forEach( (item) => {
+                                            if (schema.properties[item].$ref != null) {
+                                              schema.properties[item] = defsParser.$refs.get(schema.properties[item].$ref);
+                                            }
+                                          });
+                                        }
+                                      } else if (schema.items != null && schema.items.$ref != null) {
+                                        schema.items = defsParser.$refs.get(schema.items.$ref);
+                                      } else {
+                                        schemaWrapper.definitions = Object.assign({}, defs);
+                                        $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                          console.log(err);
+                                        });
+                                      }
+
+                                      var view = new JSONSchemaView(schema, 3);
+                                      $('#responses-ErrorRestController-handleError6-200-schema-data').val(JSON.stringify(schema));
+                                      var result = $('#responses-ErrorRestController-handleError6-schema-200');
+                                      result.empty();
+                                      result.append(view.render());
+                                    });
+                                  </script>
+                                </div>
+                                <input id='responses-ErrorRestController-handleError6-200-schema-data' type='hidden' value=''></input>
+                              </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
                 <section id="api-ImageRestController">
                   <h1>ImageRestController</h1>
                     <div id="api-ImageRestController-getAllImages">
@@ -1361,7 +4120,7 @@ ul.nav-tabs {
                           <div class="tab-pane active" id="examples-ImageRestController-getAllImages-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/images/all?pageable="
+ "http://127.0.0.1:8443/api/v1/images/all?pageable="
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ImageRestController-getAllImages-0-java">
@@ -1788,7 +4547,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-ImageRestController-getImage-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/images/{id}"
+ "http://127.0.0.1:8443/api/v1/images/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ImageRestController-getImage-0-java">
@@ -2218,7 +4977,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-ImageRestController-getImageFile-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/images/{id}/media"
+ "http://127.0.0.1:8443/api/v1/images/{id}/media"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ImageRestController-getImageFile-0-java">
@@ -2649,7 +5408,7 @@ pub fn main() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/images/{id}/media" \
+ "http://127.0.0.1:8443/api/v1/images/{id}/media" \
  -d ''
 </code></pre>
                           </div>
@@ -3143,7 +5902,7 @@ $(document).ready(function() {
                           <div class="tab-pane active" id="examples-LoginController-logOut-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/auth/logout"
+ "http://127.0.0.1:8443/api/v1/auth/logout"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-LoginController-logOut-0-java">
@@ -3533,7 +6292,7 @@ pub fn main() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/auth/login" \
+ "http://127.0.0.1:8443/api/v1/auth/login" \
  -d '{
   &quot;password&quot; : &quot;password&quot;,
   &quot;username&quot; : &quot;username&quot;
@@ -3985,7 +6744,7 @@ $(document).ready(function() {
                           <div class="tab-pane active" id="examples-LoginController-refreshToken-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/auth/refresh"
+ "http://127.0.0.1:8443/api/v1/auth/refresh"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-LoginController-refreshToken-0-java">
@@ -4391,7 +7150,7 @@ pub fn main() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/objects/" \
+ "http://127.0.0.1:8443/api/v1/objects/" \
  -d '{
   &quot;groupName&quot; : &quot;groupName&quot;,
   &quot;notes&quot; : [ {
@@ -4902,7 +7661,7 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/objects/{id}/image" \
+ "http://127.0.0.1:8443/api/v1/objects/{id}/image" \
  -d ''
 </code></pre>
                           </div>
@@ -5393,7 +8152,7 @@ $(document).ready(function() {
                           <div class="tab-pane active" id="examples-MuseumObjectRestController-deleteObject-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/objects/{id}"
+ "http://127.0.0.1:8443/api/v1/objects/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-MuseumObjectRestController-deleteObject-0-java">
@@ -5823,7 +8582,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-MuseumObjectRestController-deleteObjectImage-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/objects/{id}/image"
+ "http://127.0.0.1:8443/api/v1/objects/{id}/image"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-MuseumObjectRestController-deleteObjectImage-0-java">
@@ -6253,7 +9012,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-MuseumObjectRestController-getObject-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/objects/{id}"
+ "http://127.0.0.1:8443/api/v1/objects/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-MuseumObjectRestController-getObject-0-java">
@@ -6683,7 +9442,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-MuseumObjectRestController-getObjects-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/objects/?type=type_example&category=category_example&name=name_example&pageable="
+ "http://127.0.0.1:8443/api/v1/objects/?type=type_example&category=category_example&name=name_example&pageable="
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-MuseumObjectRestController-getObjects-0-java">
@@ -7196,7 +9955,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-MuseumObjectRestController-getObjectsWithoutPage-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/objects/all"
+ "http://127.0.0.1:8443/api/v1/objects/all"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-MuseumObjectRestController-getObjectsWithoutPage-0-java">
@@ -7589,7 +10348,7 @@ pub fn main() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/objects/{id}" \
+ "http://127.0.0.1:8443/api/v1/objects/{id}" \
  -d '{
   &quot;groupName&quot; : &quot;groupName&quot;,
   &quot;notes&quot; : [ {
@@ -8141,7 +10900,7 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/objects/{id}/image" \
+ "http://127.0.0.1:8443/api/v1/objects/{id}/image" \
  -d ''
 </code></pre>
                           </div>
@@ -8636,7 +11395,7 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/notes/object/{objectId}" \
+ "http://127.0.0.1:8443/api/v1/notes/object/{objectId}" \
  -d '{
   &quot;id&quot; : 0,
   &quot;text&quot; : &quot;text&quot;,
@@ -9151,7 +11910,7 @@ $(document).ready(function() {
                         <div class="tab-content">
                           <div class="tab-pane active" id="examples-NoteRestController-deleteNote-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
- "https://localhost:8443/api/v1/notes/{id}"
+ "http://127.0.0.1:8443/api/v1/notes/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-NoteRestController-deleteNote-0-java">
@@ -9560,7 +12319,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-NoteRestController-getAllNotes-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/notes/all?pageable="
+ "http://127.0.0.1:8443/api/v1/notes/all?pageable="
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-NoteRestController-getAllNotes-0-java">
@@ -9987,7 +12746,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-NoteRestController-getNotesByObject-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/notes/object/{objectId}"
+ "http://127.0.0.1:8443/api/v1/notes/object/{objectId}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-NoteRestController-getNotesByObject-0-java">
@@ -10423,7 +13182,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-UserRestController-deleteUser-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X DELETE \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/users/{id}"
+ "http://127.0.0.1:8443/api/v1/users/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserRestController-deleteUser-0-java">
@@ -10853,7 +13612,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-UserRestController-getAllUsers-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/users/all?pageable="
+ "http://127.0.0.1:8443/api/v1/users/all?pageable="
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserRestController-getAllUsers-0-java">
@@ -11280,7 +14039,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-UserRestController-getMyStats-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/users/me/statistics"
+ "http://127.0.0.1:8443/api/v1/users/me/statistics"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserRestController-getMyStats-0-java">
@@ -11669,7 +14428,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-UserRestController-markSeen-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/users/me/seen/{id}"
+ "http://127.0.0.1:8443/api/v1/users/me/seen/{id}"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserRestController-markSeen-0-java">
@@ -12099,7 +14858,7 @@ pub fn main() {
                           <div class="tab-pane active" id="examples-UserRestController-me-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/users/me"
+ "http://127.0.0.1:8443/api/v1/users/me"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-UserRestController-me-0-java">
@@ -12489,7 +15248,7 @@ pub fn main() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/users/" \
+ "http://127.0.0.1:8443/api/v1/users/" \
  -d '{
   &quot;password&quot; : &quot;password&quot;,
   &quot;roles&quot; : [ &quot;roles&quot;, &quot;roles&quot; ],
@@ -12961,7 +15720,7 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/users/profile" \
+ "http://127.0.0.1:8443/api/v1/users/profile" \
  -d '{
   &quot;password&quot; : &quot;password&quot;,
   &quot;roles&quot; : [ &quot;roles&quot;, &quot;roles&quot; ],
@@ -13433,7 +16192,7 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X PUT \
  -H "Accept: */*" \
  -H "Content-Type: application/json" \
- "https://localhost:8443/api/v1/users/{id}" \
+ "http://127.0.0.1:8443/api/v1/users/{id}" \
  -d '{
   &quot;password&quot; : &quot;password&quot;,
   &quot;roles&quot; : [ &quot;roles&quot;, &quot;roles&quot; ],
@@ -13948,7 +16707,7 @@ $(document).ready(function() {
                           <div class="tab-pane active" id="examples-WelcomeRestController-getSections-0-curl">
                             <pre class="prettyprint"><code class="language-bsh">curl -X GET \
  -H "Accept: */*" \
- "https://localhost:8443/api/v1/menu-page/welcome-user"
+ "http://127.0.0.1:8443/api/v1/menu-page/welcome-user"
 </code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WelcomeRestController-getSections-0-java">
