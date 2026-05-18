@@ -53,7 +53,7 @@ Describir los permisos de cada tipo de usuario e indicar de qué entidades es du
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
 - **Usuario**: Una imagen en el perfil, que el usuario puede cambiar por otra.
-- **Objeto**: Cada objeto tiene una imagen junto a su descripción en la página informativa de dicho objeto. La misma imagen también aparece en el objeto localizado en la lista de objetos que se muestra tras acceder a una sección. Si se edita el onjeto (adminisitrador), se puede cambiar o borrar dicha imagen.
+- **Objeto**: Cada objeto tiene una imagen junto a su descripción en la página informativa de dicho objeto. La misma imagen también aparece en el objeto localizado en la lista de objetos que se muestra tras acceder a una sección. Si se edita el objeto (administrador), se puede cambiar o borrar dicha imagen.
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
@@ -65,7 +65,7 @@ Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
 - **Algoritmo/Consulta**: Cálculo del porcentaje de progreso del usuario por sección.
 - **Descripción**: El sistema calcula el porcentaje de objetos que un usuario registrado ha marcado como "vistos" dentro de cada sección del museo.
-- **Alternativa**: Determinar la sección favorita del usuario calculando el número de objetos marcados como favoritos en cada sección. Si coinciden varias secciones como las favoritas del usuario, se muestran todas las que coincidan.
+- **Alternativa**: Determinar la sección más vista del usuario calculando el número de objetos marcados como vistos en cada sección. Si coinciden varias secciones como las más vistas del usuario, se muestran todas las que coincidan.
 
 ---
 
