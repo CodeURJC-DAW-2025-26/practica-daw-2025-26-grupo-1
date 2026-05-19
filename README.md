@@ -271,7 +271,10 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ## 🛠 **Práctica 2: Incorporación de una API REST a la aplicación web, despliegue con Docker y despliegue remoto**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube (primera parte)](https://youtu.be/L8le4tw4Kns)**
+> Vídeo mostrando las principales funcionalidades de la aplicación web.
+
+**[Enlace al vídeo en YouTube (segunda parte, continuación del anterior)](https://youtu.be/qmqpddm392o)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Documentación de la API REST**
