@@ -366,7 +366,23 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
    ssh -i ssh-keys/app.key vmuser@10.100.139.XXX
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Ejecutar uno de los modos de docker compose**:
+
+   Si se quiere el modo create, ejecutar:
+   ```bash
+   DB_CONFIG=create docker compose -f oci://docker.io/<tu_nombre_usuario_dockerhub>/museum-compose:latest up
+   ```
+
+   Si se quiere el modo none, hay dos opciones.
+
+   O ejecutar:
+   ```bash
+   DB_CONFIG=none docker compose -f oci://docker.io/<tu_nombre_usuario_dockerhub>/museum-compose:latest up
+   ```
+   O ejecutar:
+   ```bash
+   docker compose -f oci://docker.io/<tu_nombre_usuario_dockerhub>/museum-compose:latest up
+   ```
 
 ### **URL de la Aplicación Desplegada**
 
