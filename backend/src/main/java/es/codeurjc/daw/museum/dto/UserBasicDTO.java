@@ -5,5 +5,6 @@ import java.util.List;
 public record UserBasicDTO (
     Long id,
     String name,
-    List <String> roles
+    List <String> roles,
+    ImageDTO userImage
 ) {}

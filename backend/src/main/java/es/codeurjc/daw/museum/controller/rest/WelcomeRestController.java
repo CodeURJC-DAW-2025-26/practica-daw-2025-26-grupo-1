@@ -11,7 +11,7 @@ import es.codeurjc.daw.museum.dto.SectionDTO;
 import es.codeurjc.daw.museum.service.WelcomePageService;
 
 @RestController
-@RequestMapping("/api/v1/menu-page")
+@RequestMapping("/api/v1/sections")
 public class WelcomeRestController {
     
     @Autowired

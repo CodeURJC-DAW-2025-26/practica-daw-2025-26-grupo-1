@@ -30,7 +30,7 @@ public class User {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "image_id")
-	private Image image;
+	private Image userImage;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Note> notes;
@@ -82,11 +82,11 @@ public class User {
 	}
 
 	public Image getUserImage() {
-		return image;
+		return userImage;
 	}
 
 	public void setUserImage(Image userImage) {
-		this.image = userImage;
+		this.userImage = userImage;
 	}
 
 	public List<Note> getNotes() {

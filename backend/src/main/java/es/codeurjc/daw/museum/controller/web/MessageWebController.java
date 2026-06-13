@@ -129,7 +129,7 @@ public class MessageWebController {
         // Handles different failed operations
         switch (action) {
             case "logout":
-                message = "Se ha producido un error al iniciar sesión.";
+                message = "Se ha producido un error al cerrar sesión.";
                 url = "/";
                 break;
             case "updateProfile":

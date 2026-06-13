@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import es.codeurjc.daw.museum.model.MuseumObject;
 
@@ -25,7 +24,7 @@ public interface MuseumObjectRepository extends JpaRepository<MuseumObject, Long
     Page<MuseumObject> findByTypeOrderByIdAsc(String type, Pageable pageable);
     Page<MuseumObject> findByCategoryOrderByIdAsc(String category, Pageable pageable);
 
-    List<MuseumObject> findByTypeAndObjectNameContainingIgnoreCase(String type, String objectName);
+    Page<MuseumObject> findByTypeAndObjectNameContainingIgnoreCase(String type, String objectName, Pageable pageable);
 
     Page<MuseumObject> findByTypeAndCategoryOrderByIdAsc(String type, String category, Pageable pageable);
 

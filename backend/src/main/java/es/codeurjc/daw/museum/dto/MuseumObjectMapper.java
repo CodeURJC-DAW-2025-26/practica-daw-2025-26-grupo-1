@@ -3,9 +3,8 @@ package es.codeurjc.daw.museum.dto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import es.codeurjc.daw.museum.model.MuseumObject;
-import es.codeurjc.daw.museum.model.Note;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses={ImageMapper.class})
 public interface MuseumObjectMapper {
 
     MuseumObjectBasicDTO toBasicDTO(MuseumObject museumObject);

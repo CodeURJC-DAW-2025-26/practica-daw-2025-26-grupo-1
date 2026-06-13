@@ -2,8 +2,6 @@ package es.codeurjc.daw.museum.controller.rest;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -58,7 +56,7 @@ public class ImageRestController {
     }
 
     // List of all images
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<Page<ImageDTO>> getAllImages(Pageable pageable) {
         Page<Image> images = imageService.getImages(pageable);
 

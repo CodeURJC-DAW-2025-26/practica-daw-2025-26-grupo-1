@@ -3,7 +3,6 @@ package es.codeurjc.daw.museum.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
 

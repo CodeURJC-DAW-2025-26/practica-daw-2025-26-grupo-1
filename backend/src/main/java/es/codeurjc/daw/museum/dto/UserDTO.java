@@ -5,7 +5,8 @@ import java.util.List;
 public record UserDTO (
     Long id,
     String name,
-    String password,
+    String encodedPassword,
     List <String> roles,
-    List <ElementDTO> seen
+    List <ElementDTO> seen,
+    ImageDTO userImage
 ){}

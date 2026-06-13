@@ -7,8 +7,6 @@ import java.net.URI;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -22,24 +20,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
-import es.codeurjc.daw.museum.dto.MuseumObjectDTO;
 import es.codeurjc.daw.museum.dto.MuseumObjectMapper;
-import es.codeurjc.daw.museum.dto.NoteDTO;
 import es.codeurjc.daw.museum.dto.UserBasicDTO;
 import es.codeurjc.daw.museum.dto.UserDTO;
 import es.codeurjc.daw.museum.dto.UserMapper;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
 import es.codeurjc.daw.museum.model.MuseumObject;
-import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -72,27 +68,45 @@ public class UserRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<UserBasicDTO> register(@RequestBody UserDTO user) {
+    public ResponseEntity<UserBasicDTO> register(
+            @RequestParam("name") String name,
+            @RequestParam("password") String password,
+            @RequestParam(value = "imageField", required = false) MultipartFile imageField) throws IOException {
 
-        User newUser = userService.registerNewUser(userMapper.toEntity(user));
+        User userEntity = new User();
+        userEntity.setName(name);
+
+        userEntity.setEncodedPassword(password);
+
+        User newUser = userService.registerNewUser(userEntity, imageField);
+
         URI location = fromCurrentRequest().path("/me").build().toUri();
         return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
     }
 
-    @PutMapping("/profile")
-    public ResponseEntity<UserBasicDTO> updateProfile(@RequestBody UserDTO userModifyDTO, Principal principal)
-            throws IOException, SQLException {
+    @PutMapping("/me")
+    public ResponseEntity<UserBasicDTO> updateProfile(
+            @RequestParam("name") String name,
+            @RequestParam(value = "removeImage", defaultValue = "false") boolean removeImage,
+            @RequestParam(value = "imageField", required = false) MultipartFile imageField,
+            Principal principal) throws IOException, SQLException {
+
+        User userModify = new User();
+        userModify.setName(name);
 
         User updatedUser = userService.editUser(principal.getName(), principal.getName(),
-                userMapper.toEntity(userModifyDTO), false, null);
+                userModify, removeImage, imageField);
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserBasicDTO> updateUser(@PathVariable long id, @RequestBody UserDTO userDTO,
-            Principal principal)
-            throws IOException, SQLException {
+    public ResponseEntity<UserBasicDTO> updateUser(
+            @PathVariable("id") long id,
+            @RequestParam String name,
+            @RequestParam(value = "removeImage", defaultValue = "false") boolean removeImage,
+            @RequestParam(value = "imageField", required = false) MultipartFile imageField,
+            Principal principal) throws IOException, SQLException {
 
         if (principal == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
@@ -101,8 +115,11 @@ public class UserRestController {
         User userToEdit = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
-        User updatedUser = userService.editUser(userToEdit.getName(), principal.getName(), userMapper.toEntity(userDTO),
-                false, null);
+        User userModify = new User();
+        userModify.setName(name);
+
+        User updatedUser = userService.editUser(userToEdit.getName(), principal.getName(),
+                userModify, removeImage, imageField);
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
@@ -113,17 +130,6 @@ public class UserRestController {
         userService.deleteUser(id);
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }
-
-    /*
-     * @DeleteMapping("/me")
-     * public ResponseEntity<UserBasicDTO> deleteMyAccount(Principal principal) {
-     * 
-     * User user = userService.findByUsername(principal.getName()).orElseThrow();
-     * userService.deleteUser(user.getId());
-     * 
-     * return ResponseEntity.ok(userMapper.toBasicDTO(user));
-     * }
-     */
 
     @PostMapping("/me/seen/{id}")
     public ResponseEntity<MuseumObjectBasicDTO> markSeen(@PathVariable Long id, HttpServletRequest request) {
@@ -142,7 +148,20 @@ public class UserRestController {
 
         URI location = fromCurrentRequest().build().toUri();
 
-        return ResponseEntity.created(location).body(objectMapper.toBasicDTO(seenObject));
+        MuseumObjectBasicDTO originalDTO = objectMapper.toBasicDTO(seenObject);
+
+        MuseumObjectBasicDTO responseDTO = new MuseumObjectBasicDTO(
+                originalDTO.id(),
+                originalDTO.objectName(),
+                originalDTO.groupName(),
+                originalDTO.technicalData(),
+                originalDTO.description(),
+                originalDTO.type(),
+                originalDTO.category(),
+                true,
+                originalDTO.image());
+
+        return ResponseEntity.created(location).body(responseDTO);
     }
 
     @GetMapping("/me/statistics")
@@ -157,7 +176,7 @@ public class UserRestController {
     }
 
     // List of all users
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<Page<UserBasicDTO>> getAllUsers(Pageable pageable) {
         Page<User> users = userService.findAll(pageable);
 

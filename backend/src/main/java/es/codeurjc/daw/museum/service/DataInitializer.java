@@ -7,17 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.context.event.EventListener;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import java.sql.SQLException;
-import javax.sql.rowset.serial.SerialBlob;
 
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.User;
-import es.codeurjc.daw.museum.repository.MuseumObjectRepository;
 import es.codeurjc.daw.museum.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 
@@ -26,9 +19,6 @@ public class DataInitializer {
 
         @Autowired
         private UserRepository userRepository;
-
-        @Autowired
-        private MuseumObjectRepository objectRepository;
 
         @Autowired
         private MuseumObjectService objectService;

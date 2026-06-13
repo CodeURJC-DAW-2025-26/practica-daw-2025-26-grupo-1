@@ -155,36 +155,41 @@ Junto a esto, puede consultar su perfil de usuario desde la página principal o 
 ![Página Principal](screenshots/editar-objeto-2.png)
 ![Página Principal](screenshots/editar-objeto-3.png)
 
-> Accede directamente a la página informativa donde puede modificar lo que desee de ella. 
+> Accede directamente a la página informativa donde puede modificar lo que desee de ella.
 
-#### **7. Página de nueva nota (solo usuario registrado)**
+#### **7. Página de nuevo objeto (solo admin)**
+![Página Principal](screenshots/nuevo-objeto.png)
+
+> Página que se muestra tras haber seleccionado la opción de añadir en la página de la sección en modo administrador. Se puede crear un objeto para guardarlo y añadirlo al resto de objetos que se muestran en la página de la sección.
+
+#### **8. Página de nueva nota (solo usuario registrado)**
 ![Página Principal](screenshots/nueva-nota.png)
 
 > Página que se muestra tras haber seleccionado la opción de añadir nota en la página informativa. Se puede crear una nota y guardarla en la página informativa de un objeto.
 
-#### **8. Página de confirmación**
+#### **9. Página de confirmación**
 ![Página Principal](screenshots/confirmacion.png)
 
 > Página en la que se informa que una operación ha sido realizada con éxito. 
 
-#### **9. Página de error**
+#### **10. Página de error**
 ![Página Principal](screenshots/error.png)
 
 > Página en la que se informa que se ha producido algún fallo al intentar realizar una operación. 
 
 #### **-> Para las siguientes páginas, se accede a ellas pulsando una opción de las que hay en el menú desplegable del perfil:**
 
-#### **10. Página de perfil de usuario**
+#### **11. Página de perfil de usuario**
 ![Página Principal](screenshots/pagina-perfil.png)
 
 > Página que muestra tu perfil de usuario actual, el cual puedes editar si lo deseas.
 
-#### **11. Página estadística (solo usuario registrado, no admin)**
+#### **12. Página estadística (solo usuario registrado, no admin)**
 ![Página Principal](screenshots/grafico-estadisticas.png)
 
 > Página que muestra el porcentaje de objetos vistos por el usuario en cada sección y una gráfica circular de los objetos de cada sección disponibles en el museo.
 
-#### **12. Lista de usuarios (solo admin)**
+#### **13. Lista de usuarios (solo admin)**
 ![Página Principal](screenshots/lista-usuarios.png)
 
 > Página que muestra una lista con los usuarios que tiene la aplicación, en la que se puede acceder al perfil de uno de ellos o eliminarlo.
@@ -429,8 +434,8 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 
 2. **Clonar el repositorio** (si no lo has hecho ya)
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-1.git
+   cd practica-daw-2025-26-grupo-1
    ```
 
 3. **Navegar a la carpeta del proyecto React**
@@ -438,7 +443,21 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
    cd frontend
    ```
 
-4. **AQUÍ LOS SIGUIENTES PASOS**
+4. **Instalar todas las dependencias necesarias antes de ejecutar el proyecto**
+   ```bash
+   npm install
+   ```
+
+5. **Ejecutar el proyecto desde el frontend (React)**
+   ```bash
+   npm run dev
+   ```  
+
+6. **Ejecutar el proyecto desde el backend**
+   ```bash
+   cd ../backend
+   mvn spring-boot:run
+   ```  
 
 ### **Diagrama de Clases y Templates de la SPA**
 

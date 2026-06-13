@@ -4,7 +4,6 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,18 +11,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.codeurjc.daw.museum.dto.ElementDTO;
+import es.codeurjc.daw.museum.dto.MuseumObjectDTO;
 import es.codeurjc.daw.museum.dto.NoteBasicDTO;
-import es.codeurjc.daw.museum.dto.NoteDTO;
 import es.codeurjc.daw.museum.dto.NoteMapper;
 import es.codeurjc.daw.museum.service.NoteService;
 import es.codeurjc.daw.museum.service.UserService;
-import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.model.User;
 
@@ -69,6 +65,7 @@ public class NoteRestController {
         return ResponseEntity.noContent().build(); 
     }
 
+
     @GetMapping("/object/{objectId}")
     public ResponseEntity<List<NoteBasicDTO>> getNotesByObject(@PathVariable long objectId) {
         
@@ -84,11 +81,11 @@ public class NoteRestController {
     }
 
     // List of all notes
-    @GetMapping("/all")
-    public ResponseEntity<Page<NoteDTO>> getAllNotes(Pageable pageable) {
+    @GetMapping("/")
+    public ResponseEntity<Page<NoteBasicDTO>> getAllNotes(Pageable pageable) {
         Page<Note> notes = noteService.findAll(pageable);
 
-        Page <NoteDTO> notesDTOs = notes.map(noteMapper::toDTO);
+        Page <NoteBasicDTO> notesDTOs = notes.map(noteMapper::toBasicDTO);
 
         return ResponseEntity.ok(notesDTOs);
     }

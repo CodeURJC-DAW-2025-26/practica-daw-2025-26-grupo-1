@@ -9,7 +9,7 @@ public interface ElementMapper {
 
     @Mapping(source = "objectName", target = "nameElement")
     @Mapping(source = "image", target = "objectSectionImage") 
-    @Mapping(target = "category", ignore = true) 
+    @Mapping(source="category", target = "category") 
     @Mapping(target = "goToElement", ignore = true)
 	ElementDTO toDTO(MuseumObject museumObject);
 

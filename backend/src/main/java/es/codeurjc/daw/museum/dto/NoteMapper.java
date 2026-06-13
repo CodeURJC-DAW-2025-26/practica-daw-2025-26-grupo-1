@@ -20,4 +20,5 @@ public interface NoteMapper {
     @Mapping(target = "user.seen", ignore = true)
     Note toEntity(NoteDTO noteDTO);
 
+
 }

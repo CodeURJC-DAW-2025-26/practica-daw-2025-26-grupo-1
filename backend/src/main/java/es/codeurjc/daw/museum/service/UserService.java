@@ -19,7 +19,6 @@ import org.springframework.web.server.ResponseStatusException;
 import es.codeurjc.daw.museum.dto.CategoryStatsDTO;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
 import es.codeurjc.daw.museum.model.MuseumObject;
-import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.repository.UserRepository;
 
@@ -58,12 +57,17 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public User registerNewUser(User user) {
+    public User registerNewUser(User user, MultipartFile imageField) throws IOException{
         if (userRepository.findByName(user.getName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "El usuario ya existe.");
         }
         user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
         user.setRoles(List.of("USER"));
+
+        if (imageField != null && !imageField.isEmpty()) {
+            user.setUserImage(imageService.createImage(imageField.getInputStream()));
+        }
+        
         return userRepository.save(user);
     }
 

@@ -8,7 +8,9 @@ public record MuseumObjectDTO(
     String groupName,
     String technicalData,
     String description,
+    String type,
     String category,
     List <NoteDTO> notes,
-    boolean isSeen
+    boolean isSeen,
+    ImageDTO image
 ) {}

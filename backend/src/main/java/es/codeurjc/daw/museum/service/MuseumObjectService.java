@@ -12,7 +12,6 @@ import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.repository.MuseumObjectRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 @Service
@@ -63,8 +62,8 @@ public class MuseumObjectService {
 		return objectRepository.findByTypeAndCategoryOrderByIdAsc(type, category, pageable);
 	}
 
-	public List<MuseumObject> findByTypeAndName(String type, String name) {
-		return objectRepository.findByTypeAndObjectNameContainingIgnoreCase(type, name);
+	public Page<MuseumObject> findByTypeAndName(String type, String name, Pageable pageable) {
+		return objectRepository.findByTypeAndObjectNameContainingIgnoreCase(type, name, pageable);
 	}
 
 	public Page<MuseumObject> findAllPageable(Pageable pageable) {
@@ -119,10 +118,13 @@ public class MuseumObjectService {
 
 	public MuseumObject replaceObject(long id, MuseumObject updatedObject) {
 
-		MuseumObject oldObject = objectRepository.findById(id)
-				.orElseThrow();
+		MuseumObject oldObject = objectRepository.findById(id).orElseThrow();
 		updatedObject.setId(id);
 		updatedObject.setType(oldObject.getType());
+
+		if (updatedObject.getCategory() == null || updatedObject.getCategory().isEmpty()) {
+            updatedObject.setCategory(oldObject.getCategory());
+        }
 
 		if (updatedObject.getImage() == null && oldObject.getImage() != null) {
 			updatedObject.setImage(oldObject.getImage());

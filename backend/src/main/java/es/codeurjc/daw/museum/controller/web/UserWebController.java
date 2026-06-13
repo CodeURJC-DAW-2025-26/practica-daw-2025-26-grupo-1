@@ -3,7 +3,6 @@ package es.codeurjc.daw.museum.controller.web;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.model.Image;
-import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.ImageService;
-import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserWebController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private MuseumObjectService objectService;
 
     @Autowired
     private ImageService imageService;

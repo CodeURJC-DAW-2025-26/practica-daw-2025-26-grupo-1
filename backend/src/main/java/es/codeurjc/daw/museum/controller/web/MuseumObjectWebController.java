@@ -3,7 +3,6 @@ package es.codeurjc.daw.museum.controller.web;
 import java.util.Optional;
 import java.io.IOException;
 import java.security.Principal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.PageRequest;
-
-import es.codeurjc.daw.museum.controller.web.SectionWebController.SectionElement;
 
 import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;

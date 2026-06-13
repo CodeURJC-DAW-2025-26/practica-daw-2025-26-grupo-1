@@ -23,6 +23,7 @@ import es.codeurjc.daw.museum.dto.ElementDTO;
 import es.codeurjc.daw.museum.dto.ElementMapper;
 import es.codeurjc.daw.museum.dto.ImageDTO;
 import es.codeurjc.daw.museum.dto.ImageMapper;
+import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
 import es.codeurjc.daw.museum.dto.MuseumObjectDTO;
 import es.codeurjc.daw.museum.dto.MuseumObjectMapper;
 import es.codeurjc.daw.museum.model.Image;
@@ -53,17 +54,19 @@ public class MuseumObjectRestController {
     @Autowired
     private ImageMapper imageMapper;
 
-
+    // List of all objects with page
     @GetMapping("/")
-    public ResponseEntity<Page<ElementDTO>> getObjects(
+    public ResponseEntity<Page<MuseumObjectBasicDTO>> getObjects(
             @RequestParam(required = false) String type,
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String name, 
+            @RequestParam(required = false) String name,
             Pageable pageable) {
 
         Page<MuseumObject> objects;
-        
-        if (name != null) {
+
+        if (name != null && type != null) {
+            objects = objectService.findByTypeAndName(type, name, pageable);
+        } else if (name != null) {
             objects = objectService.findByNamePageable(name, pageable);
         } else if (type != null && category != null) {
             objects = objectService.findByTypeAndCategory(type, category, pageable);
@@ -75,7 +78,7 @@ public class MuseumObjectRestController {
             objects = objectService.findAllPageable(pageable);
         }
 
-        Page<ElementDTO> dtoPage = objects.map(elementMapper::toDTO);
+        Page<MuseumObjectBasicDTO> dtoPage = objects.map(objectMapper::toBasicDTO);
 
         return ResponseEntity.ok(dtoPage);
     }
@@ -85,16 +88,27 @@ public class MuseumObjectRestController {
         return objectMapper.toDTO(objectService.getObject(id));
     }
 
-    // List of all objects
-    @GetMapping("/all")
+    // List of all objects without page
+    @GetMapping("/list")
     public ResponseEntity<List<ElementDTO>> getObjectsWithoutPage() {
         List<MuseumObject> objects = objectService.findAll();
 
-        List <ElementDTO> elementsDTOs = objects.stream()
+        List<ElementDTO> elementsDTOs = objects.stream()
                 .map(obj -> elementMapper.toDTO(obj))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(elementsDTOs);
+    }
+
+    @GetMapping("/section/{type}")
+    public ResponseEntity<Page<MuseumObjectBasicDTO>> getObjectsBySection(
+            @PathVariable String type,
+            Pageable pageable) {
+
+        Page<MuseumObject> objects = objectService.findByType(type, pageable);
+        Page<MuseumObjectBasicDTO> dtoPage = objects.map(objectMapper::toBasicDTO);
+
+        return ResponseEntity.ok(dtoPage);
     }
 
     @PostMapping("/")
@@ -140,11 +154,12 @@ public class MuseumObjectRestController {
     }
 
     @PutMapping("/{id}/image")
-    public ResponseEntity<ImageDTO> updateObjectImage(@PathVariable long id, @RequestParam MultipartFile imageFile) 
+    public ResponseEntity<ImageDTO> updateObjectImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
             throws IOException {
-        
-        if (imageFile.isEmpty()) throw new IllegalArgumentException();
-        
+
+        if (imageFile.isEmpty())
+            throw new IllegalArgumentException();
+
         MuseumObject obj = objectService.getObject(id);
         Image oldImage = obj.getImage();
 
