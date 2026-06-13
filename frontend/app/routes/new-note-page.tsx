@@ -1,77 +1,49 @@
 import { useParams, useNavigate, Link } from "react-router";
 import { Container, Card, Form, Button, Spinner } from "react-bootstrap";
-import { useActionState } from "react";
+import { useState } from "react"; 
 import { ArrowLeft, Check2 } from "react-bootstrap-icons";
 import { createNote } from "~/services/note-service";
-import { checkPermission, requiredOnlyStandardUser } from "~/services/route-guards-service";
+import { requiredOnlyStandardUser } from "~/services/route-guards-service";
 import type { Route } from "./+types/new-note-page";
 
-
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-
-    const navigate = useNavigate();
-    const currentUser = await requiredOnlyStandardUser();
-
-    if (params.noteId) {
-        
-            const note = await getNote(Number(params.noteId));
-
-            if (!note) {
-                const message = "La nota que buscas no existe.";
-                const encodeMessage = encodeURIComponent(message);
-                navigate(`/notification?type=error&message=${encodeMessage}`);
-            }
-
-            checkPermission(currentUser, note?.userId);
-
-            return note;
-        
-    }
-
+    await requiredOnlyStandardUser();
     return null;
 }
 
-
 export default function NewNotePage() {
-
     const navigate = useNavigate();
+    const { type, objectId } = useParams<{ type: string; objectId: string }>();
 
-    const { type, objectId, noteId } = useParams<{
-        type: string;
-        objectId: string;
-        noteId: string;
-    }>();
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsPending(true);
+        setError(null);
 
-    async function saveNoteAction(prevState: any, formData: FormData) {
-
-        const text = formData.get("noteText") as string;
+        const formData = new FormData(e.currentTarget);
+        const text = formData.get("noteContent") as string;
 
         try {
-            await createNote(Number(objectId), Number(noteId), text);
+            await createNote(Number(objectId), text);
 
             const message = "Nota creada con éxito.";
             const encodeMessage = encodeURIComponent(message);
+
             navigate(`/notification?type=confirmation&message=${encodeMessage}`);
-
-            return { success: true, error: null }
-        } catch {
-            const message = "Se ha producido un error al crear la nota.";
-            const encodeMessage = encodeURIComponent(message);
-            navigate(`/notification?type=error&message=${encodeMessage}`);
-
-            return { success: false, error: "The note could not be created. Please try again.", };
+        } catch (err) {
+            setError("No se ha podido crear la nota. Inténtalo de nuevo.");
+            setIsPending(false);
         }
-    }
-
-
-    const [state, formAction, isPending] = useActionState(saveNoteAction, null);
+    };
 
     const backgrounds: Record<string, string> = {
         fish: "/fondo-marino-siluetas.png",
-        insects: "/fondo-insectos-siluetas",
-        fossils: "/fondo-fosiles-siluetas",
-        art: "/fondo-secundario-arte",
+        insects: "/fondo-insectos-siluetas.png",
+        fossils: "/fondo-fosiles-siluetas.png",
+        art: "/fondo-secundario-arte.png",
     };
 
     const actualBack = backgrounds[type || "fish"] || backgrounds.fish;
@@ -85,51 +57,53 @@ export default function NewNotePage() {
                 backgroundRepeat: "no-repeat"
             }}>
 
-            <Container className="d-flex justify-content-center align-items-center flex-grow-1 py-4">
-                <Card className="shadow-lg border-0 bg-white text-dark p-4 rounded-4" style={{ maxWidth: "500px", width: "100%" }}>
-                    <Card.Body>
-
-                        <Form action={formAction}>
-                            <Form.Group className="mb-4">
-                                <Form.Label className="fw-semibold text-secondary">
+            <Container className="d-flex flex-column justify-content-center align-items-center flex-grow-1 py-4">
+                
+                <Card className="shadow-lg border-0 bg-white text-dark p-4 rounded-4 mb-4" style={{ maxWidth: "950px", width: "100%" }}>
+                    <Card.Body className="p-2">
+                        <Form id="noteForm" onSubmit={handleSubmit}>
+                            <Form.Group>
+                                <Form.Label className="fw-semibold text-secondary fs-5 mb-3">
                                     Escribe una nota:
                                 </Form.Label>
                                 <Form.Control
                                     as="textarea"
-                                    name="contenidoNota"
+                                    name="noteContent"
                                     rows={5}
-                                    className="border-2 rounded-3"
+                                    className="border-2 rounded-3 fs-5"
                                     disabled={isPending}
                                     required
                                 />
                             </Form.Group>
 
-                            {state?.error && <p className="text-danger small text-center">{state.error}</p>}
-
-                            <div className="d-grid">
-
-                                <Link to="/sections" className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center">
-                                    <ArrowLeft className="me-2" />
-                                    Volver
-                                </Link>
-
-                                <Button variant="success" type="submit" className="w-100 d-flex justify-content-center align-items-center gap-2" disabled={isPending}>
-                                    {isPending ?
-                                        <>
-                                            <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-                                            "Creando nota..."
-                                        </>
-                                        :
-                                        <>
-                                            <Check2 className="me-2" />
-                                            Crear y guardar
-                                        </>
-                                    }
-                                </Button>
-                            </div>
+                            {error && <p className="text-danger small text-center mt-3 mb-0">{error}</p>}
                         </Form>
                     </Card.Body>
                 </Card>
+
+
+                <div className="d-flex justify-content-center gap-3" style={{ maxWidth: "950px", width: "100%" }}>
+                    <Link to={`/objects/${type}/${objectId}`} className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center gap-2 rounded-3" style={{ minWidth: "140px", justifyContent: "center" }}>
+                        <ArrowLeft />
+                        Volver
+                    </Link>
+
+
+                    <Button variant="success" type="submit" form="noteForm" className="px-4 py-2 fs-5 d-flex justify-content-center align-items-center gap-2 rounded-3" style={{ minWidth: "180px" }} disabled={isPending}>
+                        {isPending ? (
+                            <>
+                                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                                Guardando...
+                            </>
+                        ) : (
+                            <>
+                                <Check2 size={22} />
+                                Crear y guardar
+                            </>
+                        )}
+                    </Button>
+                </div>
+
             </Container>
         </div>
     );
