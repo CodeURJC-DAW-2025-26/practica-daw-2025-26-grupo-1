@@ -1,7 +1,7 @@
-import type { UserDTO } from "./UserDTO";
+import type { UserBasicDTO } from "./UserBasicDTO";
 
 export interface NoteBasicDTO {
     id: number;
     text: string;
-    user: UserDTO;
+    user: UserBasicDTO;
 }

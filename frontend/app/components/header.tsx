@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import { Nav, Navbar, Dropdown } from "react-bootstrap";
-import { Link } from "react-router";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router";
+import { useEffect} from "react";
 import { useUserStore } from "~/stores/user-store";
 
 const getUserAvatarUrl = (user: any) => {
@@ -13,6 +13,7 @@ const getUserAvatarUrl = (user: any) => {
 
 export default function Header() {
     const { user, logoutUser, loadLoggedUser } = useUserStore();
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadLoggedUser();
@@ -20,6 +21,9 @@ export default function Header() {
 
     const handleLogout = async () => {
         await logoutUser();
+        const messageSuccess = "Su sesión se ha cerrado correctamente.";
+        navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+
     };
 
     const isAdmin = user?.roles?.includes("ADMIN");

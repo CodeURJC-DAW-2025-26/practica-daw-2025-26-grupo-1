@@ -1,12 +1,13 @@
 import { useParams, useNavigate, Link } from "react-router";
 import type { Route } from "./+types/object-page";
 import { Container, Card, Button, Row, Col, Badge, Form, Spinner } from "react-bootstrap";
-import { ArrowLeft, Check2, BookmarkPlus, CloudUpload } from "react-bootstrap-icons";
+import { ArrowLeft, Check2, BookmarkPlus, CloudUpload, Trash } from "react-bootstrap-icons";
 import { useState } from "react";
 import { useUserStore } from "~/stores/user-store";
 import { getMuseumObject, replaceMuseumObject } from "~/services/museum-object-service";
 import { replaceImageFile } from "~/services/image-service";
 import { markObjectAsSeen } from "~/services/user-service";
+import { deleteNote } from "~/services/note-service";
 import type { MuseumObjectDTO } from "~/dtos/MuseumObjectDTO";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
@@ -29,12 +30,15 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);
     const [markingAsSeen, setMarkingAsSeen] = useState(false);
 
+    const [notesList, setNotesList] = useState(museumObject.notes || []);
+
     const [editForm, setEditForm] = useState({
         objectName: museumObject.objectName,
         groupName: museumObject.groupName,
         category: museumObject.category,
         technicalData: museumObject.technicalData,
-        description: museumObject.description
+        description: museumObject.description,
+        type: museumObject.type
     });
     const [saving, setSaving] = useState(false);
 
@@ -72,9 +76,11 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                 editForm.groupName,
                 editForm.technicalData,
                 editForm.description,
+                editForm.type,
                 editForm.category
             );
-            navigate(`/objects/${type}`);
+            const message = "Objeto actualizado con éxito.";
+            navigate(`/notification?type=confirmation&message=${encodeURIComponent(message)}`);
         } catch (error) {
             console.error("Error al actualizar el objeto:", error);
         } finally {
@@ -92,6 +98,22 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
             console.error("Error al marcar el objeto como visto:", error);
         } finally {
             setMarkingAsSeen(false);
+        }
+    };
+
+
+    const handleDeleteNote = async (noteId: number) => {
+        if (!confirm("¿Estás seguro de que quieres eliminar esta nota?")) return;
+
+        try {
+            await deleteNote(noteId);
+            setNotesList((prevNotes) => prevNotes.filter((n) => n.id !== noteId));
+            const messageSuccess = "Nota eliminada correctamente.";
+            navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+
+        } catch (error) {
+            console.error("Error al eliminar la nota:", error);
+            alert("No se ha podido eliminar la nota.");
         }
     };
 
@@ -248,11 +270,22 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                     <Card className="shadow-lg border-0 bg-white text-dark p-4 mt-4 text-center rounded-4">
                         <Card.Body>
                             <h2 className="display-6 fw-bold m-0">Tus notas:</h2>
-                            {museumObject.notes && museumObject.notes.length > 0 ? (
+                            {notesList && notesList.length > 0 ? (
                                 <div className="text-start mt-4">
-                                    {museumObject.notes.map((note) => (
+                                    {notesList.map((note) => (
                                         <Card key={note.id} className="mb-2 bg-light border-1">
-                                            <Card.Body className="py-2 fs-5">{note.text}</Card.Body>
+                                            <Card.Body className="py-2 fs-5 d-flex justify-content-between align-items-center">
+                                                <span>{note.text}</span>
+                                                <Button 
+                                                    variant="outline-danger" 
+                                                    size="sm" 
+                                                    className="border-0 rounded-3 p-2 d-flex align-items-center justify-content-center"
+                                                    onClick={() => handleDeleteNote(note.id)}
+                                                    title="Eliminar nota"
+                                                >
+                                                    <Trash size={18} />
+                                                </Button>
+                                            </Card.Body>
                                         </Card>
                                     ))}
                                 </div>

@@ -30,7 +30,7 @@ export default function RegisterPage() {
         }
     }
 
-    const userStore = useUserStore(); // 🌟 Instancia el store
+    const userStore = useUserStore(); 
 
 async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,7 +46,8 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         
         await userStore.loginUser(username, password);
 
-        navigate("/sections");
+        const messageSuccess = "Perfil actualizado correctamente.";
+        navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
         
     } catch (err) {
         setError("El usuario ya existe o los datos son incorrectos.");

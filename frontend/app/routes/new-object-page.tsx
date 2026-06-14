@@ -3,7 +3,7 @@ import { Container, Card, Form, Button, Spinner, Row, Col } from "react-bootstra
 import { useActionState } from "react";
 import { ArrowLeft, Check2 } from "react-bootstrap-icons";
 import { createMuseumObject, createObjectImage } from "~/services/museum-object-service";
-import type {Route} from "./+types/new-object-page.tsx"
+import type { Route } from "./+types/new-object-page.tsx"
 import { requiredAdmin } from "~/services/route-guards-service";
 
 
@@ -38,6 +38,7 @@ export default function NewObjectPage() {
         const groupName = formData.get("groupName") as string;
         const technicalData = formData.get("technicalData") as string;
         const description = formData.get("description") as string;
+        const subCategory = formData.get("subCategory") as string;
 
         const imageFile = formData.get("imageFile") as File | null;
 
@@ -47,10 +48,11 @@ export default function NewObjectPage() {
                 groupName,
                 technicalData,
                 description,
-                currentCategory
+                currentCategory,
+                subCategory
             );
 
-            if (imageFile && imageFile.size > 0) {
+            if (imageFile && imageFile.size > 0 && imageFile.name !== "") {
                 await createObjectImage(newObject.id, imageFile);
             }
 
@@ -58,13 +60,14 @@ export default function NewObjectPage() {
             navigate(`/notification?type=confirmation&message=${encodeURIComponent(message)}`);
             return { success: true, error: null };
 
-        } catch (error) {
-            console.error(error);
-            return {
-                success: false,
-                error: "Se ha producido un error al crear el objeto. Por favor, inténtelo de nuevo."
-            };
-        }
+        } catch (error: any) {
+        console.error(error);
+        return {
+            success: false,
+            
+            error: error instanceof Error ? error.message : "Error desconocido al crear."
+        };
+    }
     }
 
     const [state, formAction, isPending] = useActionState(saveObjectAction, null);

@@ -1,6 +1,4 @@
-
-
-
+import type { ImageDTO } from "./ImageDTO";
 
 export interface MuseumObjectBasicDTO {
     id: number;
@@ -11,4 +9,5 @@ export interface MuseumObjectBasicDTO {
     type: string;
     category: string;
     isSeen: boolean;
+    image: ImageDTO;
 }

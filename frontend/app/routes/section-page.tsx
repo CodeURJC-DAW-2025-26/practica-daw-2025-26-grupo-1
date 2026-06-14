@@ -103,7 +103,7 @@ export default function SectionPage({ loaderData }: Route.ComponentProps) {
         try {
             await deleteMuseumObject(id);
             setObjects((prevObjects) => prevObjects.filter((obj) => obj.id !== id));
-            const message = "Usuario eliminado correctamente.";
+            const message = "Objeto eliminado correctamente.";
             const encodeMessage = encodeURIComponent(message);
             navigate(`/notification?type=confirmation&message=${encodeMessage}`);
         } catch (error) {
@@ -257,7 +257,8 @@ export default function SectionPage({ loaderData }: Route.ComponentProps) {
 
                     {user?.roles?.includes("ADMIN") && (
                         <div className="mt-5 text-center border-top pt-4">
-                            <Button as={Link as any} to={`/new-object/${type}`} variant="success" className="fw-bold shadow-sm text-white">
+                            <Button as={Link as any} to={`/new-object/${type}`} variant="success" 
+                            className="d-inline-flex align-items-center fw-bold shadow-sm text-white px-3 py-2 rounded-3">
                                 <Plus className="me-2" />
                                 Añadir
                             </Button>

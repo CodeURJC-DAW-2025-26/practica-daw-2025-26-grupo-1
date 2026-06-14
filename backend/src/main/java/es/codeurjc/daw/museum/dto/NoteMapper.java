@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import es.codeurjc.daw.museum.model.Note;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class, MuseumObjectMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface NoteMapper {
 
 	NoteDTO toDTO(Note note);

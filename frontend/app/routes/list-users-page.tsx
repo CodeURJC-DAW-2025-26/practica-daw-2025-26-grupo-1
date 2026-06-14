@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Container, Table, Button, Badge, Spinner } from "react-bootstrap";
-import { ArrowLeft, EyeFill } from "react-bootstrap-icons";
+import { ArrowLeft, EyeFill, PeopleFill } from "react-bootstrap-icons";
 import type { Route } from "./+types/list-users-page";
 import { Link, useNavigate } from "react-router";
 import { getUsers, deleteUser } from "~/services/admin-service";
@@ -19,8 +19,6 @@ export default function ListUsersPage({ loaderData }: Route.ComponentProps) {
     const [hasMore, setHasMore] = useState(loaderData?.hasNext || false);
     const [currentPage, setCurrentPage] = useState(0);
     const [loading, setLoading] = useState(false);
-
-    console.log("¿Estado de hasMore en React?:", hasMore, "| Datos del Loader:", loaderData);
 
 
     const loadMoreUsers = async () => {
@@ -74,7 +72,8 @@ export default function ListUsersPage({ loaderData }: Route.ComponentProps) {
             <div className="card shadow-sm border-0 rounded-3 mb-4">
                 <div className="card-header bg-light py-3 border-bottom border-light-subtle">
                     <h5 className="m-0 text-secondary fs-6 fw-semibold">
-                        👥 Usuarios registrados en el sistema
+                        <PeopleFill className="me-2"/>
+                        Usuarios registrados en el sistema
                     </h5>
                 </div>
 

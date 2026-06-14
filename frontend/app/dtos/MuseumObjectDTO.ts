@@ -1,4 +1,5 @@
 import type { NoteDTO } from "./NoteDTO";
+import type { ImageDTO } from "./ImageDTO";
 
 export interface MuseumObjectDTO {
     id: number;
@@ -10,5 +11,6 @@ export interface MuseumObjectDTO {
     category: string;
     notes: NoteDTO[];
     isSeen: boolean;
+    image: ImageDTO;
 }
 

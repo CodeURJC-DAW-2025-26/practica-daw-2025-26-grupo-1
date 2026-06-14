@@ -153,7 +153,7 @@ public class MuseumObjectRestController {
         return ResponseEntity.created(location).body(imageMapper.toDTO(image));
     }
 
-    @PutMapping("/{id}/image")
+    @PutMapping("/{id}/media")
     public ResponseEntity<ImageDTO> updateObjectImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
             throws IOException {
 

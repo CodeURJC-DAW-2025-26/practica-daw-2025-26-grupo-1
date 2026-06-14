@@ -71,11 +71,28 @@ export async function getMuseumObjectsWithoutPage(): Promise<MuseumObjectDTO[]> 
 }
 
 
-export async function createMuseumObject(objectName: string, groupName: string, technicalData: string, description: string, category: string): Promise<MuseumObjectDTO> {
+export async function createMuseumObject(
+    objectName: string, 
+    groupName: string, 
+    technicalData: string, 
+    description: string, 
+    type: string,          
+    category: string       
+): Promise<MuseumObjectDTO> {
     const response = await fetch(`${API_OBJECTS_URL}/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ objectName, groupName, technicalData, description, category })
+        body: JSON.stringify({ 
+            objectName, 
+            groupName, 
+            technicalData, 
+            description, 
+            type, 
+            category,
+            isSeen: false,
+            notes: [],    // Añadido para cumplir con el Record de Java
+            image: null   // Añadido (la imagen se sube justo después)
+        })
     });
 
     if (!response.ok) {
@@ -85,12 +102,30 @@ export async function createMuseumObject(objectName: string, groupName: string, 
     return await response.json();
 }
 
-
-export async function replaceMuseumObject(id: number, objectName: string, groupName: string, technicalData: string, description: string, category: string): Promise<MuseumObjectDTO> {
+export async function replaceMuseumObject(
+    id: number, 
+    objectName: string, 
+    groupName: string, 
+    technicalData: string, 
+    description: string, 
+    type: string, 
+    category: string
+): Promise<MuseumObjectDTO> {
     const response = await fetch(`${API_OBJECTS_URL}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ objectName, groupName, technicalData, description, category })
+        body: JSON.stringify({ 
+            id,
+            objectName, 
+            groupName, 
+            technicalData, 
+            description, 
+            type,
+            category,
+            isSeen: false,
+            notes: [],
+            image: null
+        })
     });
 
     if (!response.ok) {
@@ -118,7 +153,7 @@ export async function createObjectImage(id: number, imageFile: File): Promise<vo
 
     formData.append("imageFile", imageFile);
 
-    const response = await fetch(`${API_OBJECTS_URL}/${id}/images/`, {
+    const response = await fetch(`${API_OBJECTS_URL}/${id}/image`, {
         method: "POST",
         body: formData
     });

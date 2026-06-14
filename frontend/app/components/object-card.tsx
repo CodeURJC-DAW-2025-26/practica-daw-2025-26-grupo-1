@@ -23,6 +23,8 @@ export default function ObjectCard({ object, isMenu = false, title, image, menuC
         imageUrl = image;
     } else if (object){
         imageUrl = `/api/v1/images/${object.id}/media`;
+    } else {
+        imageUrl = "/no_image.png";
     }
 
     const titleCard = isMenu ? title : object?.objectName;
