@@ -27,11 +27,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
 import es.codeurjc.daw.museum.dto.MuseumObjectMapper;
+import es.codeurjc.daw.museum.dto.NoteBasicDTO;
 import es.codeurjc.daw.museum.dto.UserBasicDTO;
 import es.codeurjc.daw.museum.dto.UserDTO;
 import es.codeurjc.daw.museum.dto.UserMapper;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
 import es.codeurjc.daw.museum.model.MuseumObject;
+import es.codeurjc.daw.museum.model.Note;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
@@ -173,6 +175,15 @@ public class UserRestController {
 
         UserStatisticsDTO stats = userService.getUserStats(principal.getName());
         return ResponseEntity.ok(stats);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserBasicDTO> getUser (@PathVariable long id) {
+        User user = userService.findById(id)
+            .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Usuario no encontrada"));
+                
+        return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }
 
     // List of all users

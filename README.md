@@ -448,20 +448,33 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
    npm install
    ```
 
-5. **Ejecutar el proyecto desde el frontend (React)**
-   ```bash
-   npm run dev
-   ```  
-
-6. **Ejecutar el proyecto desde el backend**
+6. **Ejecutar primero el proyecto desde el backend**
    ```bash
    cd ../backend
    mvn spring-boot:run
+   ``` 
+
+5. **Tras ejecutar el backend, volver a la carpeta del proyecto React y ejecutar dicho proyecto desde el frontend (React)**
+   ```bash
+   cd ../frontend
+   npm run dev
    ```  
+
+ 
 
 ### **Diagrama de Clases y Templates de la SPA**
 
 Diagrama mostrando los componentes React, hooks personalizados, servicios y sus relaciones:
 
-![Diagrama de Componentes React](images/spa-classes-diagram.png)
+![Diagrama de Componentes React](screenshots/primera-version-diagrama.png)
 
+## **Leyenda del diagrama**
+- **Rutas** (cajas grises): endpoints de la aplicación.
+- **Páginas de la aplicación / Componentes principales** (cajas moradas): componentes React que sirven como páginas de la aplicación.
+- **Componentes auxiliares** (cajas amarillas): componentes React auxiliares.
+- **Stores** (cajas rojas): estado global de la aplicación.
+- **Services** (cajas azules): servicios que consume la aplicación (comunicación con la API).
+- **Flechas sólidas moradas**: navegación entre componentes.
+- **Flechas sólidas naranjas**: un componente principal o página usa un componente auxiliar.
+- **Flechas sólidas rojas**: un componente usa store.
+- **Flechas sólidas azules**: un componente o store usa service.

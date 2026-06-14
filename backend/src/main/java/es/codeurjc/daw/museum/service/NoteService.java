@@ -30,8 +30,6 @@ public class NoteService {
 		return noteRepository.existsById(id);
 	}
 
-	
-
 	public Optional<Note> findById(long id) {
 		return noteRepository.findById(id);
 	}
