@@ -10,6 +10,14 @@ import { markObjectAsSeen } from "~/services/user-service";
 import { deleteNote } from "~/services/note-service";
 import type { MuseumObjectDTO } from "~/dtos/MuseumObjectDTO";
 
+
+const subCategoriesConfig: Record<string, string[]> = {
+    fish: ["Agua dulce", "Mar", "Abisales"],
+    insects: ["Terrestres", "Aéreos", "Acuáticos"],
+    fossils: ["Fósiles", "Minerales"],
+    art: ["Pintura", "Escultura", "Cerámica"]
+};
+
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const data = await getMuseumObject(Number(params.id!));
     return Array.isArray(data) ? data[0] : data;
@@ -17,7 +25,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const navigate = useNavigate();
-    const { type, id } = useParams<{ type: string; id: string }>();
+    const { type } = useParams<{ type: string; id: string }>();
 
     const museumObject = loaderData as MuseumObjectDTO;
     const { user } = useUserStore();
@@ -26,10 +34,8 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const isLogged = user ? true : false;
 
     const [imageVersion, setImageVersion] = useState(0);
-
     const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);
     const [markingAsSeen, setMarkingAsSeen] = useState(false);
-
     const [notesList, setNotesList] = useState(museumObject.notes || []);
 
     const [editForm, setEditForm] = useState({
@@ -49,7 +55,10 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
         art: "/fondo-secundario-arte.png",
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
         setEditForm({
             ...editForm,
             [e.target.name]: e.target.value
@@ -59,10 +68,15 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             try {
-                await replaceImageFile(museumObject.id, e.target.files[0]);
-                setImageVersion((prev) => prev + 1);
+                if (museumObject.image && museumObject.image.id) {
+                    await replaceImageFile(museumObject.image.id, e.target.files[0]);
+                    setImageVersion((prev) => prev + 1);
+                } else {
+                    alert("Este objeto no tiene una imagen base que reemplazar.");
+                }
             } catch (error) {
                 console.error("Error al actualizar la imagen:", error);
+                alert("No se ha podido guardar la imagen.");
             }
         }
     };
@@ -101,16 +115,13 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
         }
     };
 
-
     const handleDeleteNote = async (noteId: number) => {
         if (!confirm("¿Estás seguro de que quieres eliminar esta nota?")) return;
-
         try {
             await deleteNote(noteId);
             setNotesList((prevNotes) => prevNotes.filter((n) => n.id !== noteId));
             const messageSuccess = "Nota eliminada correctamente.";
             navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
-
         } catch (error) {
             console.error("Error al eliminar la nota:", error);
             alert("No se ha podido eliminar la nota.");
@@ -137,13 +148,33 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                                     <Form.Label className="fw-bold m-0 text-muted">Nombre:</Form.Label>
                                     <Form.Control type="text" name="objectName" value={editForm.objectName} onChange={handleChange} className="fs-3 fw-bold" />
                                 </Form.Group>
+
                                 <Form.Group className="mb-2">
                                     <Form.Label className="fw-bold m-0 text-muted">Dato de interés (Grupo):</Form.Label>
                                     <Form.Control type="text" name="groupName" value={editForm.groupName} onChange={handleChange} />
                                 </Form.Group>
+
+
+                                <Form.Group className="mb-2">
+                                    <Form.Label className="fw-semibold text-secondary">Tipo:</Form.Label>
+                                    <Form.Control type="text" value={editForm.type} disabled className="bg-light text-muted border-2 rounded-3" />
+                                </Form.Group>
+
                                 <Form.Group>
-                                    <Form.Label className="fw-bold m-0 text-muted">Tipo (Categoría):</Form.Label>
-                                    <Form.Control type="text" name="category" value={editForm.category} onChange={handleChange} />
+                                    <Form.Label className="fw-semibold text-secondary">Categoría:</Form.Label>
+                                    <Form.Select
+                                        name="category"
+                                        value={editForm.category}
+                                        onChange={handleChange}
+                                        disabled={saving}
+                                        className="border-2 rounded-3"
+                                    >
+                                        {(subCategoriesConfig[type || "fish"] || subCategoriesConfig.fish).map((sub) => (
+                                            <option key={sub} value={sub}>
+                                                {sub}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
                                 </Form.Group>
                             </>
                         ) : (
@@ -162,7 +193,7 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                     <Col md={6} xs={12}>
                         <Card className="shadow-lg border-0 rounded-4 overflow-hidden h-100 position-relative d-flex flex-column align-items-center justify-content-center bg-dark">
                             <Card.Img
-                                src={`/api/v1/images/${museumObject.id}/media?v=${imageVersion}`}
+                                src={museumObject.image?.id ? `/api/v1/images/${museumObject.image.id}/media?v=${imageVersion}` : "/no_image.png"}
                                 className="w-100 h-100"
                                 style={{ objectFit: "cover", minHeight: "320px", maxHeight: "400px" }}
                                 onError={(e: any) => { e.target.src = "/no_image.png"; }}
@@ -234,13 +265,13 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                             {isLogged && (
                                 <>
                                     <Button
-                                        variant={isSeenState ? "secondary" : "success"} 
+                                        variant={isSeenState ? "secondary" : "success"}
                                         className="px-4 py-2 fw-semibold d-flex align-items-center gap-2 rounded-3 fs-5 text-white"
-                                        onClick={isSeenState ? undefined : handleMarkAsSeen} 
-                                        disabled={isSeenState || markingAsSeen} 
+                                        onClick={isSeenState ? undefined : handleMarkAsSeen}
+                                        disabled={isSeenState || markingAsSeen}
                                         style={{
-                                            cursor: isSeenState ? "not-allowed" : "pointer", 
-                                            opacity: isSeenState ? 0.75 : 1 
+                                            cursor: isSeenState ? "not-allowed" : "pointer",
+                                            opacity: isSeenState ? 0.75 : 1
                                         }}
                                     >
                                         {markingAsSeen ? (
@@ -276,9 +307,9 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                                         <Card key={note.id} className="mb-2 bg-light border-1">
                                             <Card.Body className="py-2 fs-5 d-flex justify-content-between align-items-center">
                                                 <span>{note.text}</span>
-                                                <Button 
-                                                    variant="outline-danger" 
-                                                    size="sm" 
+                                                <Button
+                                                    variant="outline-danger"
+                                                    size="sm"
                                                     className="border-0 rounded-3 p-2 d-flex align-items-center justify-content-center"
                                                     onClick={() => handleDeleteNote(note.id)}
                                                     title="Eliminar nota"

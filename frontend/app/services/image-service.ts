@@ -29,7 +29,7 @@ export async function replaceImageFile(id: number, imageFile: File): Promise<voi
 
     formData.append("imageFile", imageFile);
 
-    const response = await fetch(`${API_IMAGES_URL}/${id}`, {
+    const response = await fetch(`${API_IMAGES_URL}/${id}/media`, {
         method: "PUT",
         body: formData
     });

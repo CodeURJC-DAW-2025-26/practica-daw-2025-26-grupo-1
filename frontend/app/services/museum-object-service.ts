@@ -90,8 +90,8 @@ export async function createMuseumObject(
             type, 
             category,
             isSeen: false,
-            notes: [],    // Añadido para cumplir con el Record de Java
-            image: null   // Añadido (la imagen se sube justo después)
+            notes: [],    
+            image: null   
         })
     });
 
