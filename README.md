@@ -466,7 +466,7 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 
 Diagrama mostrando los componentes React, hooks personalizados, servicios y sus relaciones:
 
-![Diagrama de Componentes React](screenshots/primera-version-diagrama.png)
+![Diagrama de Componentes React](screenshots/segunda-version-diagrama.png)
 
 ## **Leyenda del diagrama**
 - **Rutas** (cajas grises): endpoints de la aplicación.
