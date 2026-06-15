@@ -181,7 +181,7 @@ public class UserRestController {
     public ResponseEntity<UserBasicDTO> getUser (@PathVariable long id) {
         User user = userService.findById(id)
             .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Usuario no encontrada"));
+                HttpStatus.NOT_FOUND, "Usuario no encontrado"));
                 
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }

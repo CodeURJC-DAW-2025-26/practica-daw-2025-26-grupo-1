@@ -37,11 +37,22 @@ export async function getUsers(page: number): Promise<UserPageResult> {
 }
 
 
-export async function updateUser(id: number, name: string, roles: string[]): Promise<UserBasicDTO> {
+export async function updateUser(
+    id: number, 
+    name: string, 
+    removeImage: boolean, 
+    imageField: File | null
+): Promise<UserBasicDTO> {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("removeImage", String(removeImage));
+    if (imageField) {
+        formData.append("imageField", imageField);
+    }
+
     const response = await fetch(`${API_ADMIN_URL}/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, roles }),
+        body: formData, 
     });
 
     if (!response.ok) {

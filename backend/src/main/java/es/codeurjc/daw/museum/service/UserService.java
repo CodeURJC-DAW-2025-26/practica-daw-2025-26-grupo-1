@@ -81,9 +81,9 @@ public class UserService {
         User currentUser = userRepository.findByName(authUsername)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Sesión inválida"));
 
-        System.out.println("ID actual:" + currentUser.getId());
+        boolean isAdmin = currentUser.getRoles().contains("ADMIN");
 
-        if (!currentUser.getId().equals(userToEdit.getId())) {
+        if (!currentUser.getId().equals(userToEdit.getId()) && !isAdmin) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,
                     "No tienes permiso para editar el perfil de otro usuario");
         }

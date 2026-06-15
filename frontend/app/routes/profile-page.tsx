@@ -1,37 +1,55 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { ArrowLeft, Check2 } from "react-bootstrap-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
-import { updateMyProfile } from "~/services/user-service"; 
+import { updateMyProfile } from "~/services/user-service";
+import { getUser, updateUser } from "~/services/admin-service";
 import { useUserStore } from "~/stores/user-store";
 
-const getUserAvatarUrl = (user: any) => {
-    if (user?.userImage?.id) {
-        return `/api/v1/users/${user.id}/image`; 
+const getUserAvatarUrl = (userId: number | string | undefined, hasImage: boolean) => {
+    if (userId && hasImage) {
+        return `/api/v1/users/${userId}/image`;
     }
     return "/perfil-sin-foto.png";
 };
 
 export default function ProfilePage() {
     const navigate = useNavigate();
+    const { id } = useParams();
     const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const { user, loadLoggedUser } = useUserStore();
+    const { user: loggedUser, loadLoggedUser } = useUserStore();
 
-    const [previewImage, setPreviewImage] = useState<string>(getUserAvatarUrl(user));
-    const [username, setUsername] = useState(user?.name || "");
-    
+    const [targetUserId, setTargetUserId] = useState<number | null>(null);
+    const [username, setUsername] = useState("");
+    const [previewImage, setPreviewImage] = useState("/perfil-sin-foto.png");
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    useEffect(() => {
+        if (id) {
+            getUser(id)
+                .then((fetchedUser) => {
+                    setTargetUserId(fetchedUser.id);
+                    setUsername(fetchedUser.name);
+                    setPreviewImage(`/api/v1/users/${fetchedUser.id}/image`);
+                })
+                .catch(() => setError("Error al cargar los datos del usuario seleccionado."));
+        } else if (loggedUser) {
+            setTargetUserId(loggedUser.id);
+            setUsername(loggedUser.name);
+            setPreviewImage(getUserAvatarUrl(loggedUser.id, loggedUser?.userImage?.id != null));
+        }
+    }, [id, loggedUser]);
 
     function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
         if (file) {
-            setSelectedFile(file); 
+            setSelectedFile(file);
             const reader = new FileReader();
             reader.onloadend = () => {
-                setPreviewImage(reader.result as string); 
+                setPreviewImage(reader.result as string);
             };
             reader.readAsDataURL(file);
         }
@@ -43,22 +61,22 @@ export default function ProfilePage() {
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (!user) return;
-        
-        setIsPending(true);
-        setError(null); 
+        if (!targetUserId) return;
 
-        const formData = new FormData(event.currentTarget);
-        const password = formData.get("password") as string;
+        setIsPending(true);
+        setError(null);
 
         try {
-            await updateMyProfile(user.id, username, false, selectedFile);
-            
-            await loadLoggedUser();
-            
-            const messageSuccess = "Perfil actualizado correctamente.";
-            navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
-            
+            if (id) {
+                await updateUser(targetUserId, username, false, selectedFile);
+                const messageSuccess = "Perfil de usuario actualizado por el Administrador.";
+                navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+            } else {
+                await updateMyProfile(targetUserId, username, false, selectedFile);
+                await loadLoggedUser();
+                const messageSuccess = "Perfil actualizado correctamente.";
+                navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+            }
         } catch (err) {
             setError("Error al actualizar el perfil del usuario.");
         } finally {
@@ -74,18 +92,20 @@ export default function ProfilePage() {
                         <div className="card mb-4 rounded-3 shadow-sm border-primary">
                             <div className="modal-content rounded-4 shadow">
                                 <div className="modal-header p-5 pb-4 border-bottom-0 justify-content-center">
-                                    <h1 className="fw-bold mb-0 fs-2">Su perfil</h1>
+                                    <h1 className="fw-bold mb-0 fs-2">
+                                        {id && Number(id) !== loggedUser?.id ? `Perfil del usuario #${id}` : "Su perfil"}
+                                    </h1>
                                 </div>
                                 <div className="modal-body p-5 pt-0">
-                                    
+
                                     <Form onSubmit={handleSubmit} className="mb-4">
-                                        
+
                                         <div className="d-flex justify-content-center mb-3">
-                                            <img 
-                                                src={previewImage} 
-                                                alt="Avatar de perfil" 
-                                                className="rounded-circle" 
-                                                style={{ height: '80px', width: '80px', objectFit: 'cover' }} 
+                                            <img
+                                                src={previewImage}
+                                                alt="Avatar de perfil"
+                                                className="rounded-circle"
+                                                style={{ height: '80px', width: '80px', objectFit: 'cover' }}
                                                 onError={(e) => {
                                                     (e.target as HTMLImageElement).src = "/perfil-sin-foto.png";
                                                 }}
@@ -94,40 +114,28 @@ export default function ProfilePage() {
 
                                         <Form.Group className="mb-3">
                                             <Form.Label htmlFor="imageField" className="fw-medium">Cambiar imagen:</Form.Label>
-                                            <Form.Control 
-                                                type="file" 
-                                                name="imageField" 
-                                                id="imageField" 
-                                                accept=".png" 
-                                                onChange={handleImageChange} 
-                                                disabled={isPending} 
+                                            <Form.Control
+                                                type="file"
+                                                name="imageField"
+                                                id="imageField"
+                                                accept=".png"
+                                                onChange={handleImageChange}
+                                                disabled={isPending}
                                             />
                                         </Form.Group>
 
-                                        <Form.Floating className="mb-3">
-                                            <Form.Control 
-                                                type="text" 
-                                                placeholder="Nombre de usuario" 
-                                                name="name" 
+                                        <Form.Floating className="mb-4">
+                                            <Form.Control
+                                                type="text"
+                                                placeholder="Nombre de usuario"
+                                                name="name"
                                                 id="name"
-                                                required 
-                                                value={username}            
-                                                onChange={handleUsernameChange} 
-                                                disabled={isPending} 
+                                                required
+                                                value={username}
+                                                onChange={handleUsernameChange}
+                                                disabled={isPending}
                                             />
                                             <label htmlFor="name">Nombre de usuario</label>
-                                        </Form.Floating>
-
-                                        <Form.Floating className="mb-4">
-                                            <Form.Control 
-                                                type="password" 
-                                                placeholder="Confirmar contraseña para guardar" 
-                                                name="password" 
-                                                id="password"
-                                                required 
-                                                disabled={isPending} 
-                                            />
-                                            <label htmlFor="password">Contraseña actual o nueva</label>
                                         </Form.Floating>
 
                                         {error && (
@@ -136,10 +144,10 @@ export default function ProfilePage() {
                                             </Alert>
                                         )}
 
-                                        <Button 
-                                            variant="success" 
-                                            type="submit" 
-                                            className="w-100 d-flex align-items-center justify-content-center py-2 fs-5" 
+                                        <Button
+                                            variant="success"
+                                            type="submit"
+                                            className="w-100 d-flex align-items-center justify-content-center py-2 fs-5"
                                             disabled={isPending}
                                         >
                                             <Check2 className="me-2" />
@@ -148,14 +156,14 @@ export default function ProfilePage() {
                                     </Form>
 
                                     <small className="text-body-secondary text-center d-block">
-                                        Al hacer clic en "Aceptar", aceptas las condiciones de uso.
+                                        Al hacer clic en "Aceptar", confirmas la edición del registro.
                                     </small>
                                 </div>
                             </div>
                         </div>
 
                         <div className="d-flex justify-content-center gap-3">
-                            <Link to="/sections" className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center">
+                            <Link to={id ? "/list-users" : "/sections"} className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center">
                                 <ArrowLeft className="me-2" />
                                 Volver
                             </Link>

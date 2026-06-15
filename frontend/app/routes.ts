@@ -13,7 +13,9 @@ export default [
         route("/objects/:type/:id", "routes/object-page.tsx"),
         route("/new-note/:type/:objectId/new", "routes/new-note-page.tsx"),
         route("/new-object/:type", "routes/new-object-page.tsx"),
-        route("/profile/:id", "routes/profile-page.tsx"),
+
+        route("/profile/:id?", "routes/profile-page.tsx"),
+
         route("/statistics/:id", "routes/statistics-page.tsx"),
     ]),
 ] satisfies RouteConfig;

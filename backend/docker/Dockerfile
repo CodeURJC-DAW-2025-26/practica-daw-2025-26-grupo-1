@@ -32,7 +32,7 @@ COPY --from=frontend-builder /app/build/client/ ./src/main/resources/static/new/
 RUN mvn -B package -DskipTests
 
 
-# PART 3: EXECUTION IMAGE
+# EXECUTION IMAGE
 
 FROM eclipse-temurin:21-jre
 WORKDIR /usr/src/app/
