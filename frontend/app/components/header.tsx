@@ -6,7 +6,7 @@ import { useUserStore } from "~/stores/user-store";
 
 const getUserAvatarUrl = (user: any) => {
     if (user?.userImage?.id) {
-        return `/api/v1/users/${user.id}/image`; 
+        return `/api/v1/images/${user.userImage.id}/media`; 
     }
     return "/perfil-sin-foto.png"; 
 };
@@ -23,7 +23,6 @@ export default function Header() {
         await logoutUser();
         const messageSuccess = "Su sesión se ha cerrado correctamente.";
         navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
-
     };
 
     const isAdmin = user?.roles?.includes("ADMIN");
@@ -33,7 +32,6 @@ export default function Header() {
         <>
             <Navbar expand="lg" bg="dark" data-bs-theme="dark">
                 <Container fluid>
-
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/sections">Página principal</Nav.Link>
                         <Nav.Link as={Link} to="/objects/fish">Peces</Nav.Link>
@@ -86,7 +84,6 @@ export default function Header() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         )}
-
                     </Nav>
                 </Container>
             </Navbar>

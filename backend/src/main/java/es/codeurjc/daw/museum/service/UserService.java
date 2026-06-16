@@ -57,7 +57,7 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public User registerNewUser(User user, MultipartFile imageField) throws IOException{
+    public User registerNewUser(User user, MultipartFile imageField) throws IOException {
         if (userRepository.findByName(user.getName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "El usuario ya existe.");
         }
@@ -67,7 +67,7 @@ public class UserService {
         if (imageField != null && !imageField.isEmpty()) {
             user.setUserImage(imageService.createImage(imageField.getInputStream()));
         }
-        
+
         return userRepository.save(user);
     }
 
@@ -91,11 +91,19 @@ public class UserService {
         userToEdit.setName(userModify.getName());
 
         if (imageField != null && !imageField.isEmpty()) {
-            if (userToEdit.getUserImage() == null) {
-                userToEdit.setUserImage(imageService.createImage(imageField.getInputStream()));
-            } else {
-                imageService.replaceImageFile(userToEdit.getUserImage().getId(), imageField.getInputStream());
+            Long oldImageId = null;
+            if (userToEdit.getUserImage() != null) {
+                oldImageId = userToEdit.getUserImage().getId();
             }
+
+            userToEdit.setUserImage(imageService.createImage(imageField.getInputStream()));
+
+            userRepository.save(userToEdit);
+
+            if (oldImageId != null) {
+                imageService.deleteImage(oldImageId);
+            }
+
         } else if (removeImage && userToEdit.getUserImage() != null) {
             Long imageId = userToEdit.getUserImage().getId();
             userToEdit.setUserImage(null);

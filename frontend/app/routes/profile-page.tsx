@@ -7,9 +7,9 @@ import { updateMyProfile } from "~/services/user-service";
 import { getUser, updateUser } from "~/services/admin-service";
 import { useUserStore } from "~/stores/user-store";
 
-const getUserAvatarUrl = (userId: number | string | undefined, hasImage: boolean) => {
-    if (userId && hasImage) {
-        return `/api/v1/users/${userId}/image`;
+const getUserAvatarUrl = (imageId: number | undefined) => {
+    if (imageId) {
+        return `/api/v1/images/${imageId}/media`;
     }
     return "/perfil-sin-foto.png";
 };
@@ -33,13 +33,13 @@ export default function ProfilePage() {
                 .then((fetchedUser) => {
                     setTargetUserId(fetchedUser.id);
                     setUsername(fetchedUser.name);
-                    setPreviewImage(`/api/v1/users/${fetchedUser.id}/image`);
+                    setPreviewImage(getUserAvatarUrl(fetchedUser.userImage?.id));
                 })
                 .catch(() => setError("Error al cargar los datos del usuario seleccionado."));
         } else if (loggedUser) {
             setTargetUserId(loggedUser.id);
             setUsername(loggedUser.name);
-            setPreviewImage(getUserAvatarUrl(loggedUser.id, loggedUser?.userImage?.id != null));
+            setPreviewImage(getUserAvatarUrl(loggedUser.userImage?.id));
         }
     }, [id, loggedUser]);
 
@@ -69,7 +69,7 @@ export default function ProfilePage() {
         try {
             if (id) {
                 await updateUser(targetUserId, username, false, selectedFile);
-                const messageSuccess = "Perfil de usuario actualizado por el Administrador.";
+                const messageSuccess = "Perfil actualizado correctamente.";
                 navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
             } else {
                 await updateMyProfile(targetUserId, username, false, selectedFile);
@@ -163,7 +163,7 @@ export default function ProfilePage() {
                         </div>
 
                         <div className="d-flex justify-content-center gap-3">
-                            <Link to={id ? "/list-users" : "/sections"} className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center">
+                            <Link to="/sections" className="btn btn-danger px-4 py-2 fs-5 d-flex align-items-center">
                                 <ArrowLeft className="me-2" />
                                 Volver
                             </Link>

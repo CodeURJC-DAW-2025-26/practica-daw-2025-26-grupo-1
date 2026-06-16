@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.codeurjc.daw.museum.dto.MuseumObjectDTO;
 import es.codeurjc.daw.museum.dto.NoteBasicDTO;
 import es.codeurjc.daw.museum.dto.NoteMapper;
 import es.codeurjc.daw.museum.service.NoteService;
