@@ -92,7 +92,7 @@ public class NoteRestController {
 
     // List of all notes
     @GetMapping("/")
-    public ResponseEntity<Page<NoteBasicDTO>> getAllNotes(Pageable pageable) {
+    public ResponseEntity<Page<NoteBasicDTO>> getNotes(Pageable pageable) {
         Page<Note> notes = noteService.findAll(pageable);
 
         Page <NoteBasicDTO> notesDTOs = notes.map(noteMapper::toBasicDTO);

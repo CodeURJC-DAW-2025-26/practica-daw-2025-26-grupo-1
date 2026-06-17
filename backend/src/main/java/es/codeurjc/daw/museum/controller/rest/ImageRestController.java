@@ -57,7 +57,7 @@ public class ImageRestController {
 
     // List of all images
     @GetMapping("/")
-    public ResponseEntity<Page<ImageDTO>> getAllImages(Pageable pageable) {
+    public ResponseEntity<Page<ImageDTO>> getImages(Pageable pageable) {
         Page<Image> images = imageService.getImages(pageable);
 
         Page <ImageDTO> imagesDTOs = images.map(imageMapper::toDTO);

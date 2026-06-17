@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
@@ -53,13 +52,13 @@ public class UserRestController {
     private MuseumObjectMapper objectMapper;
 
     @GetMapping("/me")
-    public UserDTO me(HttpServletRequest request) {
+    public UserBasicDTO me(HttpServletRequest request) {
 
         Principal principal = request.getUserPrincipal();
 
         if (principal != null) {
             User user = userService.findByUsername(principal.getName()).orElseThrow();
-            return userMapper.toDTO(user);
+            return userMapper.toBasicDTO(user);
         } else {
             throw new NoSuchElementException();
         }
@@ -67,17 +66,11 @@ public class UserRestController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<UserBasicDTO> register(
-            @RequestParam("name") String name,
-            @RequestParam("password") String password,
-            @RequestParam(value = "imageField", required = false) MultipartFile imageField) throws IOException {
+    public ResponseEntity<UserBasicDTO> register(@RequestBody UserDTO userDTO) throws IOException {
 
-        User userEntity = new User();
-        userEntity.setName(name);
+        User userEntity = userMapper.toEntity(userDTO);
 
-        userEntity.setEncodedPassword(password);
-
-        User newUser = userService.registerNewUser(userEntity, imageField);
+        User newUser = userService.registerNewUser(userEntity, null);
 
         URI location = fromCurrentRequest().path("/me").build().toUri();
         return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
@@ -85,26 +78,33 @@ public class UserRestController {
 
     @PutMapping("/me")
     public ResponseEntity<UserBasicDTO> updateProfile(
-            @RequestParam("name") String name,
-            @RequestParam(value = "removeImage", defaultValue = "false") boolean removeImage,
-            @RequestParam(value = "imageField", required = false) MultipartFile imageField,
+            @RequestBody UserBasicDTO userModifyDTO, 
             Principal principal) throws IOException, SQLException {
 
-        User userModify = new User();
-        userModify.setName(name);
+        if (principal == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
+        }
 
-        User updatedUser = userService.editUser(principal.getName(), principal.getName(),
-                userModify, removeImage, imageField);
+        User existingUser = userService.findByUsername(principal.getName())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        existingUser.setName(userModifyDTO.name());
+
+        User updatedUser = userService.editUser(
+                principal.getName(), 
+                principal.getName(),
+                existingUser, 
+                false, 
+                null
+        );
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserBasicDTO> updateUser(
-            @PathVariable("id") long id,
-            @RequestParam String name,
-            @RequestParam(value = "removeImage", defaultValue = "false") boolean removeImage,
-            @RequestParam(value = "imageField", required = false) MultipartFile imageField,
+            @PathVariable long id,
+            @RequestBody UserBasicDTO userDTO, 
             Principal principal) throws IOException, SQLException {
 
         if (principal == null) {
@@ -114,11 +114,17 @@ public class UserRestController {
         User userToEdit = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
-        User userModify = new User();
-        userModify.setName(name);
+        String nombreAntiguo = userToEdit.getName();
 
-        User updatedUser = userService.editUser(userToEdit.getName(), principal.getName(),
-                userModify, removeImage, imageField);
+        userToEdit.setName(userDTO.name());
+
+        User updatedUser = userService.editUser(
+                nombreAntiguo, 
+                principal.getName(),
+                userToEdit, 
+                false, 
+                null
+        );
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }

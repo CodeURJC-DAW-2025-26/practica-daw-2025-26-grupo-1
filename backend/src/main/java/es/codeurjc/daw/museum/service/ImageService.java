@@ -62,7 +62,6 @@ public class ImageService {
 
     public Image replaceImageFile(long id, InputStream inputStream) throws IOException {
 
-        // Replaces existing image binary content with a new one
         Image image = imageRepository.findById(id).orElseThrow();
 
         try {

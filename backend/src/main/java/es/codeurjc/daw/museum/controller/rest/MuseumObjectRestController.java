@@ -100,17 +100,6 @@ public class MuseumObjectRestController {
         return ResponseEntity.ok(elementsDTOs);
     }
 
-    @GetMapping("/section/{type}")
-    public ResponseEntity<Page<MuseumObjectBasicDTO>> getObjectsBySection(
-            @PathVariable String type,
-            Pageable pageable) {
-
-        Page<MuseumObject> objects = objectService.findByType(type, pageable);
-        Page<MuseumObjectBasicDTO> dtoPage = objects.map(objectMapper::toBasicDTO);
-
-        return ResponseEntity.ok(dtoPage);
-    }
-
     @PostMapping("/")
     public ResponseEntity<MuseumObjectDTO> createObject(@RequestBody MuseumObjectDTO objectDTO) {
         MuseumObject obj = objectMapper.toEntity(objectDTO);

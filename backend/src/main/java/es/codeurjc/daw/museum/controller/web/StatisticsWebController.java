@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import es.codeurjc.daw.museum.dto.CategoryStatsDTO;
+import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
@@ -55,7 +57,7 @@ public class StatisticsWebController {
     @GetMapping("/statistics")
     public String countObjects(Model model, HttpServletRequest request) {
 
-        // Retrieves total number of objects per section (fish, insects, fossils, art)
+        // 1. Reutilizamos el servicio para los contadores globales del gráfico de tarta
         long fishObjects = objectService.countByType("peces");
         long insectObjects = objectService.countByType("insectos");
         long fossilObjects = objectService.countByType("fosiles");
@@ -68,26 +70,13 @@ public class StatisticsWebController {
 
         Principal principal = request.getUserPrincipal();
         if (principal != null) {
-            User user = userService.findByUsername(principal.getName()).orElseThrow();
+            
+            UserStatisticsDTO statsDto = userService.getUserStats(principal.getName());
 
-            // Calculates user progress percentage for each section based on how many objects have been marked as seen
-            // Stores progress data in a map (section -> percentage) to be used in charts or UI rendering
             Map<String, Integer> progressMap = new HashMap<>();
-            String[] sections = { "peces", "insectos", "fosiles", "arte" };
-
-            for (String s : sections) {
-                long total = objectService.countByType(s);
-                int percentage = 0;
-
-                if (total > 0) {
-
-                    long seenInSection = user.getSeen().stream()
-                            .filter(obj -> obj.getType().equalsIgnoreCase(s))
-                            .count();
-
-                    percentage = (int) ((seenInSection * 100) / total);
-                }
-                progressMap.put(s, percentage);
+            
+            for (CategoryStatsDTO cat : statsDto.statsByCategory()) {
+                progressMap.put(cat.categoryName().toLowerCase(), (int) cat.percentage());
             }
 
             model.addAttribute("progressMap", progressMap);

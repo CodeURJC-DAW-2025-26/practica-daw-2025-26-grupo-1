@@ -116,8 +116,6 @@ public class UserWebController {
     private void updateImageUser(User user, boolean removeImage, MultipartFile imageField)
             throws IOException, SQLException {
 
-        // Handles image upload, replacement or deletion
-        // Keeps previous image if no changes are made
         if (!imageField.isEmpty()) {
             User dbUser = userService.findById(user.getId()).orElseThrow();
 
@@ -135,7 +133,6 @@ public class UserWebController {
                     user.setUserImage(null);
                 }
             } else {
-                // Maintain the same image loading it before updating the user
                 User dbUser = userService.findById(user.getId()).orElseThrow();
                 user.setUserImage(dbUser.getUserImage());
             }
@@ -145,7 +142,6 @@ public class UserWebController {
     @PostMapping("/remove-profile-image")
     public String removeProfileImage(Principal principal) {
 
-        // Removes user's profile image if exists
         User user = userService.findByUsername(principal.getName()).get();
 
         if (user.getUserImage() != null) {

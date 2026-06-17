@@ -14,13 +14,13 @@
           "name": "ADMIN",
           "item": [
             {
-              "name": "Create New Object",
+              "name": "Create Object",
               "request": {
                 "method": "POST",
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": false\r\n}",
+                  "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": false,\r\n    \"image\": null\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -49,7 +49,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"id\": 1,\r\n    \"objectName\": \"Nombre del Objeto Editado\",\r\n    \"groupName\": \"Nombre del Grupo Actualizado\",\r\n    \"technicalData\": \"Nuevos datos técnicos corregidos\",\r\n    \"description\": \"Esta es la descripción nueva que sustituye a la anterior.\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": false\r\n}",
+                  "raw": "{\r\n    \"id\": 1,\r\n    \"objectName\": \"Nombre del Objeto Editado\",\r\n    \"groupName\": \"Nombre del Grupo Actualizado\",\r\n    \"technicalData\": \"Nuevos datos técnicos corregidos\",\r\n    \"description\": \"Esta es la descripción nueva que sustituye a la anterior.\",\r\n    \"category\": \"Mar\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": false,\r\n    \"image\": null\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -57,7 +57,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/1",
+                  "raw": "{{baseURL}}/api/v1/objects/36",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -65,7 +65,7 @@
                     "api",
                     "v1",
                     "objects",
-                    "1"
+                    "36"
                   ]
                 }
               },
@@ -77,7 +77,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/1",
+                  "raw": "{{baseURL}}/api/v1/objects/36",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -85,7 +85,7 @@
                     "api",
                     "v1",
                     "objects",
-                    "1"
+                    "36"
                   ]
                 }
               },
@@ -103,12 +103,12 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "4b3de386-f590-43b1-9b12-850855b63b0d",
-                      "src": "/C:/Users/34607/Downloads/descarga.jpg"
+                      "src": "/C:/Users/34607/Downloads/conclusion.png"
                     }
                   ]
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/1/image",
+                  "raw": "{{baseURL}}/api/v1/objects/5/image",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -116,7 +116,7 @@
                     "api",
                     "v1",
                     "objects",
-                    "1",
+                    "5",
                     "image"
                   ]
                 }
@@ -135,12 +135,12 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "60dcb511-090f-4c26-b5be-291a702ad33e",
-                      "src": "/C:/Users/34607/Pictures/calendario-septiembre-2025-bonito-con-flores.jpg"
+                      "src": "/C:/Users/34607/Downloads/presentation.png"
                     }
                   ]
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/2/image",
+                  "raw": "{{baseURL}}/api/v1/objects/2/media",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -149,7 +149,7 @@
                     "v1",
                     "objects",
                     "2",
-                    "image"
+                    "media"
                   ]
                 }
               },
@@ -161,7 +161,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/1/image",
+                  "raw": "{{baseURL}}/api/v1/objects/12/image",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -169,8 +169,62 @@
                     "api",
                     "v1",
                     "objects",
-                    "1",
+                    "12",
                     "image"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get User",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "imageFile",
+                      "type": "file",
+                      "uuid": "60dcb511-090f-4c26-b5be-291a702ad33e",
+                      "src": "/C:/Users/34607/Downloads/presentation.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/1",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    ""
                   ]
                 }
               },
@@ -182,7 +236,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/users/2",
+                  "raw": "{{baseURL}}/api/v1/users/4",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -190,27 +244,7 @@
                     "api",
                     "v1",
                     "users",
-                    "2"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get All Users",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/all",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "all"
+                    "4"
                   ]
                 }
               },
@@ -228,12 +262,12 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "896020f4-bb57-444f-bfee-326c13ae1869",
-                      "src": "/C:/Users/34607/Downloads/5 feb 2026 a la(s) 13_30(1).jpg"
+                      "src": "/C:/Users/34607/Downloads/analysis.png"
                     }
                   ]
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/images/1/media",
+                  "raw": "{{baseURL}}/api/v1/images/9/media",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -241,7 +275,7 @@
                     "api",
                     "v1",
                     "images",
-                    "1",
+                    "9",
                     "media"
                   ]
                 }
@@ -347,7 +381,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"text\": \"Esta es la segunda nota de pepe.\"\r\n}",
+                  "raw": "{\r\n    \"text\": \"Esta es la nota nueva v2.\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -355,7 +389,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/1",
+                  "raw": "{{baseURL}}/api/v1/notes/object/3",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -364,7 +398,7 @@
                     "v1",
                     "notes",
                     "object",
-                    "1"
+                    "3"
                   ]
                 }
               },
@@ -376,7 +410,7 @@
                 "method": "DELETE",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/2",
+                  "raw": "{{baseURL}}/api/v1/notes/1",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -384,7 +418,7 @@
                     "api",
                     "v1",
                     "notes",
-                    "2"
+                    "1"
                   ]
                 }
               },
@@ -396,7 +430,7 @@
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/1",
+                  "raw": "{{baseURL}}/api/v1/notes/object/3",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -405,19 +439,19 @@
                     "v1",
                     "notes",
                     "object",
-                    "1"
+                    "3"
                   ]
                 }
               },
               "response": []
             },
             {
-              "name": "Get All Notes",
+              "name": "Get Note",
               "request": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/all",
+                  "raw": "{{baseURL}}/api/v1/notes/4",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -425,7 +459,27 @@
                     "api",
                     "v1",
                     "notes",
-                    "all"
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Notes",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    ""
                   ]
                 }
               },
@@ -438,7 +492,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": true\r\n}",
+                  "raw": "{\r\n    \"objectName\": \"Pez napoleón\",\r\n    \"groupName\": \"Cheilinus undulatus\",\r\n    \"technicalData\": \"Tamaño: hasta 2.3 metros. Peso: hasta 190 kg. Hábitat: arrecifes coralinos del Indo-Pacífico.\",\r\n    \"description\": \"El pez Napoleón es una especie de pez loro conocido por su gran tamaño y su distintiva protuberancia en la cabeza.\",\r\n    \"category\": \"Mar\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": true\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -544,7 +598,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"NombreActualizado\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "raw": "{\r\n    \"name\": \"NombreActualizado\"    \r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -552,7 +606,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/users/profile",
+                  "raw": "{{baseURL}}/api/v1/users/me",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -560,7 +614,7 @@
                     "api",
                     "v1",
                     "users",
-                    "profile"
+                    "me"
                   ]
                 }
               },
@@ -573,7 +627,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"Nombre\",\r\n    \"password\": \"nuevaPassword123\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "raw": "{\r\n    \"name\": \"Nombre\"\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -668,12 +722,12 @@
               "response": []
             },
             {
-              "name": "Get All Objects NoPage",
+              "name": "Get Objects NoPage",
               "request": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/all",
+                  "raw": "{{baseURL}}/api/v1/objects/list",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -681,14 +735,14 @@
                     "api",
                     "v1",
                     "objects",
-                    "all"
+                    "list"
                   ]
                 }
               },
               "response": []
             },
             {
-              "name": "Welcome Page",
+              "name": "Get Sections",
               "protocolProfileBehavior": {
                 "disableBodyPruning": true
               },
@@ -700,14 +754,14 @@
                   "raw": "{\r\n    \"objectName\": \"Prueba Postman\",\r\n    \"groupName\": \"Grupo Prueba\",\r\n    \"technicalData\": \"Datos técnicos\",\r\n    \"description\": \"Una descripción de prueba\",\r\n    \"category\": \"Peces\",\r\n    \"notes\": [],\r\n    \"isFavourite\": false,\r\n    \"isSeen\": false\r\n}"
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/menu-page/welcome-user",
+                  "raw": "{{baseURL}}/api/v1/sections/welcome-user",
                   "host": [
                     "{{baseURL}}"
                   ],
                   "path": [
                     "api",
                     "v1",
-                    "menu-page",
+                    "sections",
                     "welcome-user"
                   ]
                 }
@@ -756,12 +810,12 @@
               "response": []
             },
             {
-              "name": "Get All Images",
+              "name": "Get Images",
               "request": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/images/all",
+                  "raw": "{{baseURL}}/api/v1/images/",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -769,7 +823,7 @@
                     "api",
                     "v1",
                     "images",
-                    "all"
+                    ""
                   ]
                 }
               },
@@ -782,7 +836,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"ana\",\r\n    \"password\": \"ana\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": []\r\n}",
+                  "raw": "{\r\n    \"name\": \"ana3\",\r\n    \"encodedPassword\": \"ana3\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": [],\r\n    \"image\": null\r\n}",
                   "options": {
                     "raw": {
                       "language": "json"
