@@ -58,3 +58,15 @@ export function checkPermission(currentUser: UserDTO, ownerId?: number): void {
     throw new Response("No tienes permiso para acceder a esta página.", { status: 403 });
   }
 }
+
+
+
+export function checkPermissionAlternative(currentUser: UserDTO, ownerId?: number): void {
+  const isAdmin = currentUser.roles?.includes("ADMIN");
+
+  const isOwner = ownerId !== undefined && currentUser.id === ownerId;
+
+  if (isAdmin && !isOwner) {
+    throw new Response("No tienes permiso para acceder a esta página.", { status: 403 });
+  }
+}

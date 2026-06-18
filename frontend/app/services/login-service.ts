@@ -23,15 +23,21 @@ export async function reqIsLogged(): Promise<UserDTO> {
 }
 
 export async function logIn(user: string, pass: string): Promise<void> {
-  const res = await fetch(`${API_AUTH_URL}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: user, password: pass }),
-  });
+    const res = await fetch(`${API_AUTH_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+            name: user, 
+            username: user, 
+            password: pass 
+        })
+    });
 
-  if (!res.ok) {
-    throw new Error();
-  }
+    if (!res.ok) {
+        throw new Error();
+    }
+
+    return await res.json();
 }
 
 export async function logOut(): Promise<void> {

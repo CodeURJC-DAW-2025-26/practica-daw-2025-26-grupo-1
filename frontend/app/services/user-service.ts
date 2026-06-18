@@ -6,56 +6,51 @@ import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 const API_USERS_URL = "/api/v1/users";
 
 export async function register(name: string, password: string, imageField: File | null): Promise<UserBasicDTO> {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("password", password);
+    
+    const registerData = {
+        name: name,
+        username: name,      
+        password: password,   
+        encodedPassword: password, 
+        roles: ["USER"]
+    };
 
-  if (imageField) {
-    formData.append("imageField", imageField);
-  }
+    const response = await fetch(`${API_USERS_URL}/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(registerData) 
+    });
 
-  const response = await fetch(`${API_USERS_URL}/`, {
-    method: "POST",
-    body: formData,
-  });
+    if (!response.ok) {
+        throw new Response("No se ha podido registrar al usuario.");
+    }
 
-  if (!response.ok) {
-    throw new Error("No se ha podido registrar al usuario.");
-  }
-
-  return await response.json();
+    return await response.json();
 }
 
 
 export async function updateMyProfile(
-  id: number, 
-  name: string, 
-  removeImage: boolean, 
-  imageFile: File | null,
-  password?: string 
+    id: number,
+    name: string
 ): Promise<UserBasicDTO> {
-  const formData = new FormData();
-  formData.append("name", name);
-  formData.append("removeImage", removeImage.toString());
 
-  if (imageFile) {
-    formData.append("imageField", imageFile);
-  }
-  
-  if (password) {
-    formData.append("password", password); 
-  }
+    const updateData = {
+        name: name
+    };
 
-  const response = await fetch(`${API_USERS_URL}/me`, {
-    method: "PUT",
-    body: formData,
-  });
+    const response = await fetch(`${API_USERS_URL}/me`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updateData)
+    });
 
-  if (!response.ok) {
-    throw new Error("No se ha podido actualizar el perfil del usuario.");
-  }
+    if (!response.ok) {
+        throw new Error("Error al actualizar el perfil.");
+    }
 
-  return await response.json();
+    return await response.json();
 }
 
 

@@ -46,7 +46,7 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         
         await userStore.loginUser(username, password);
 
-        const messageSuccess = "Perfil actualizado correctamente.";
+        const messageSuccess = "Usuario registrado correctamente.";
         navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
         
     } catch (err) {

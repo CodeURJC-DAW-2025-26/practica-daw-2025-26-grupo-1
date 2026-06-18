@@ -3,9 +3,21 @@ import { Container, Form, Button, Alert } from "react-bootstrap";
 import { ArrowLeft, Check2 } from "react-bootstrap-icons";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
+import type { Route } from "./+types/profile-page";
 import { updateMyProfile } from "~/services/user-service";
 import { getUser, updateUser } from "~/services/admin-service";
 import { useUserStore } from "~/stores/user-store";
+import { requiredLoggedUser, checkPermission } from "~/services/route-guards-service";
+
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+    const currentUser = await requiredLoggedUser();
+
+    if (params.id) {
+        const targetId = Number(params.id);
+        checkPermission(currentUser, targetId);
+    }
+    return null;
+}
 
 const getUserAvatarUrl = (imageId: number | undefined) => {
     if (imageId) {
@@ -43,7 +55,7 @@ export default function ProfilePage() {
         }
     }, [id, loggedUser]);
 
-    function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+    async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
         if (file) {
             setSelectedFile(file);
@@ -55,7 +67,7 @@ export default function ProfilePage() {
         }
     }
 
-    function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    async function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
         setUsername(event.target.value);
     }
 
@@ -67,13 +79,17 @@ export default function ProfilePage() {
         setError(null);
 
         try {
-            if (id) {
-                await updateUser(targetUserId, username, false, selectedFile);
-                const messageSuccess = "Perfil actualizado correctamente.";
+            const isEditingMyself = targetUserId === loggedUser?.id;
+
+            if (id && !isEditingMyself) {
+                await updateUser(targetUserId, username, false);
+                
+                const messageSuccess = "Perfil actualizado por el administrador.";
                 navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
             } else {
-                await updateMyProfile(targetUserId, username, false, selectedFile);
-                await loadLoggedUser();
+                await updateMyProfile(targetUserId, username);
+                await loadLoggedUser(); 
+                
                 const messageSuccess = "Perfil actualizado correctamente.";
                 navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
             }

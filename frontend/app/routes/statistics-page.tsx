@@ -5,12 +5,17 @@ import { Link } from "react-router";
 import { getMyStats } from "~/services/user-service";
 import type { UserStatisticsDTO } from "~/dtos/UserStatisticsDTO";
 import type { CategoryStatsDTO } from "~/dtos/CategoryStatsDTO";
-import { requiredOnlyStandardUser } from "~/services/route-guards-service";
+import { checkPermissionAlternative, requiredLoggedUser } from "~/services/route-guards-service";
 import type {Route} from "./+types/statistics-page";
 
 
-export async function clientLoader(_: Route.ClientLoaderArgs) {
-    await requiredOnlyStandardUser();
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
+    const currentUser = await requiredLoggedUser();
+
+    if (params.id) {
+        const targetId = Number(params.id);
+        checkPermissionAlternative(currentUser, targetId);
+    }
     return await getMyStats();
 }
 

@@ -38,25 +38,25 @@ export async function getUsers(page: number): Promise<UserPageResult> {
 
 
 export async function updateUser(
-    id: number, 
-    name: string, 
-    removeImage: boolean, 
-    imageField: File | null
+    id: number,
+    name: string,
+    removeImage: boolean
 ): Promise<UserBasicDTO> {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("removeImage", String(removeImage));
-    if (imageField) {
-        formData.append("imageField", imageField);
-    }
+    
+    const updateData = {
+        name: name
+    };
 
     const response = await fetch(`${API_ADMIN_URL}/${id}`, {
         method: "PUT",
-        body: formData, 
+        headers: {
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify(updateData)
     });
 
     if (!response.ok) {
-        throw new Error("Se ha producido un error al editar al usuario.");
+        throw new Error("Se ha producido un error al editar el usuario.");
     }
 
     return await response.json();
