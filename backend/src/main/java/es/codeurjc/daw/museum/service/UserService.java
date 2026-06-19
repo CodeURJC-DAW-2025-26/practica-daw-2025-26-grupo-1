@@ -92,18 +92,14 @@ public class UserService {
         userToEdit.setName(userModify.getName());
 
         if (imageField != null && !imageField.isEmpty()) {
-            Long oldImageId = null;
             if (userToEdit.getUserImage() != null) {
-                oldImageId = userToEdit.getUserImage().getId();
+                userToEdit.getUserImage().getId();
             }
 
             userToEdit.setUserImage(imageService.createImage(imageField.getInputStream()));
 
             userRepository.save(userToEdit);
 
-            /*if (oldImageId != null) {
-                imageService.deleteImage(oldImageId);
-            }*/
 
         } else if (removeImage && userToEdit.getUserImage() != null) {
             Long imageId = userToEdit.getUserImage().getId();

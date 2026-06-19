@@ -1,7 +1,12 @@
 import type { UserBasicDTO } from "~/dtos/UserBasicDTO";
 
 const API_ADMIN_URL = "/api/v1/users";
-const API_IMAGES_URL = "/api/v1/images";
+const PAGE_SIZE = 100;
+
+export type UserPageResult = {
+    items: UserBasicDTO[];
+    hasNext: boolean;
+}
 
 export async function getUser(id: string): Promise<UserBasicDTO> {
     const res = await fetch(`${API_ADMIN_URL}/${id}`);
@@ -12,13 +17,23 @@ export async function getUser(id: string): Promise<UserBasicDTO> {
 }
 
 
-export async function getUsers(): Promise<UserBasicDTO[]> {
-    const res = await fetch(`${API_ADMIN_URL}/`);
+export async function getUsers(page: number): Promise<UserPageResult> {
+    const res = await fetch(`${API_ADMIN_URL}/?page=${page}&size=${PAGE_SIZE}`);
+
     if (!res.ok) {
         throw new Error("Error al obtener usuarios.");
     }
 
-    return await res.json();
+    const data = await res.json();
+
+    if (Array.isArray(data?.content)) {
+        return { 
+            items: data.content, 
+            hasNext: data.last === false 
+        };
+    }
+
+    return { items: [], hasNext: false };
 }
 
 

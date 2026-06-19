@@ -41,6 +41,7 @@ import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
+
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserRestController {
@@ -93,30 +94,6 @@ public class UserRestController {
         return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
     }
 
-    /*PutMapping("/me")
-    public ResponseEntity<UserBasicDTO> updateProfile(
-            @RequestBody UserBasicDTO userModifyDTO, 
-            Principal principal) throws IOException, SQLException {
-
-        if (principal == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
-        }
-
-        User existingUser = userService.findByUsername(principal.getName())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
-
-        existingUser.setName(userModifyDTO.name());
-
-        User updatedUser = userService.editUser(
-                principal.getName(), 
-                principal.getName(),
-                existingUser, 
-                false, 
-                null
-        );
-
-        return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
-    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<UserBasicDTO> updateUser(
@@ -144,7 +121,6 @@ public class UserRestController {
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
-
 
 
     @PutMapping("/{id}/media")
@@ -209,8 +185,6 @@ public class UserRestController {
         return ResponseEntity.created(location).body(responseDTO);
     }
 
-
-    //endpoint para comprobar objetos vistos por un usuario
 
     @GetMapping("/me/statistics")
     public ResponseEntity<UserStatisticsDTO> getMyStats(Principal principal) {

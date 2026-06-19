@@ -60,15 +60,7 @@ export async function getMuseumObjects(
 }
 
 
-export async function getMuseumObjectsWithoutPage(): Promise<MuseumObjectDTO[]> {
-    const response = await fetch(`${API_OBJECTS_URL}/list`);
 
-    if (!response.ok) {
-        throw new Error("No se han podido obtener los objetos.");
-    }
-
-    return await response.json();
-}
 
 
 export async function createMuseumObject(
