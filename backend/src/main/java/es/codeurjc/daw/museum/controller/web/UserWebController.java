@@ -76,8 +76,7 @@ public class UserWebController {
     public String viewOtherProfile(@PathVariable long id, Model model, Principal principal) {
 
         // Loads another user's profile by ID
-        User user = userService.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        User user = userService.findById(id);
 
         model.addAttribute("user", user);
         model.addAttribute("username", user.getName());
@@ -117,7 +116,7 @@ public class UserWebController {
             throws IOException, SQLException {
 
         if (!imageField.isEmpty()) {
-            User dbUser = userService.findById(user.getId()).orElseThrow();
+            User dbUser = userService.findById(user.getId());
 
             if (dbUser.getUserImage() == null) {
                 Image image = imageService.createImage(imageField.getInputStream());
@@ -133,7 +132,7 @@ public class UserWebController {
                     user.setUserImage(null);
                 }
             } else {
-                User dbUser = userService.findById(user.getId()).orElseThrow();
+                User dbUser = userService.findById(user.getId());
                 user.setUserImage(dbUser.getUserImage());
             }
         }

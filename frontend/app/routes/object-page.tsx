@@ -30,7 +30,7 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const { type } = useParams<{ type: string; id: string }>();
 
     const museumObject = loaderData as MuseumObjectDTO;
-    const { user } = useUserStore();
+    const { user, loadLoggedUser } = useUserStore();
 
     const isAdmin = user?.roles?.includes("ADMIN");
     const isLogged = user ? true : false;
@@ -141,22 +141,8 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
             await markObjectAsSeen(museumObject.id);
             setIsSeenState(true);
             
-            if (user) {
-                if (!user.seen) {
-                    user.seen = [];
-                }
-                
-                const alreadyInList = user.seen.some((e: any) => e.id === museumObject.id);
-                
-                if (!alreadyInList) {
-                    user.seen.push({
-                        id: museumObject.id,
-                        nameElement: museumObject.objectName,
-                        category: museumObject.category,
-                        goToElement: `/objects/${type}/${museumObject.id}`
-                    });
-                }
-            }
+            await loadLoggedUser(); 
+            
         } catch (error) {
             console.error("Error al marcar el objeto como visto:", error);
         } finally {

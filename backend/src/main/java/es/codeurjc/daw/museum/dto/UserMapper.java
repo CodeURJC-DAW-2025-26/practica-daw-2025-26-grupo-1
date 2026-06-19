@@ -4,10 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import es.codeurjc.daw.museum.model.User;
 
-@Mapper(componentModel = "spring", uses={ImageMapper.class})
+@Mapper(componentModel = "spring", uses={ImageMapper.class, MuseumObjectMapper.class})
 public interface UserMapper {
 
-    
     @Mapping(target = "seen", ignore = true)
     @Mapping(target = "userImage", source = "userImage")
     UserDTO toDTO(User user);

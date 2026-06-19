@@ -20,17 +20,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import es.codeurjc.daw.museum.dto.ImageDTO;
+import es.codeurjc.daw.museum.dto.ImageMapper;
 import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
 import es.codeurjc.daw.museum.dto.MuseumObjectMapper;
 import es.codeurjc.daw.museum.dto.UserBasicDTO;
 import es.codeurjc.daw.museum.dto.UserDTO;
 import es.codeurjc.daw.museum.dto.UserMapper;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
+import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.User;
+import es.codeurjc.daw.museum.service.ImageService;
 import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,10 +52,16 @@ public class UserRestController {
     private MuseumObjectService objectService;
 
     @Autowired
+    private ImageService imageService;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private MuseumObjectMapper objectMapper;
+
+    @Autowired
+    private ImageMapper imageMapper;
 
     @GetMapping("/me")
     public UserBasicDTO me(HttpServletRequest request) {
@@ -58,6 +70,11 @@ public class UserRestController {
 
         if (principal != null) {
             User user = userService.findByUsername(principal.getName()).orElseThrow();
+            
+            if (user.getSeen() != null) {
+                user.getSeen().size(); 
+            }
+            
             return userMapper.toBasicDTO(user);
         } else {
             throw new NoSuchElementException();
@@ -111,8 +128,7 @@ public class UserRestController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
         }
 
-        User userToEdit = userService.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        User userToEdit = userService.findById(id);
 
         String nombreAntiguo = userToEdit.getName();
 
@@ -129,9 +145,33 @@ public class UserRestController {
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
 
+
+
+    @PutMapping("/{id}/media")
+    public ResponseEntity<ImageDTO> updateUserImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+            throws IOException {
+
+        if (imageFile.isEmpty())
+            throw new IllegalArgumentException();
+
+       User user = userService.findById(id);
+        Image oldImage = user.getUserImage();
+
+        Image newImage = imageService.createImage(imageFile.getInputStream());
+        userService.addImageToUser(id, newImage);
+
+        if (oldImage != null) {
+            imageService.deleteImage(oldImage.getId());
+        }
+
+        return ResponseEntity.ok(imageMapper.toDTO(newImage));
+    }
+
+
+
     @DeleteMapping("/{id}")
     public ResponseEntity<UserBasicDTO> deleteUser(@PathVariable long id) {
-        User user = userService.findById(id).orElseThrow();
+        User user = userService.findById(id);
         userService.deleteUser(id);
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }
@@ -185,9 +225,7 @@ public class UserRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserBasicDTO> getUser(@PathVariable long id) {
-        User user = userService.findById(id)
-            .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        User user = userService.findById(id);
                 
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }

@@ -6,5 +6,6 @@ public record UserBasicDTO (
     Long id,
     String name,
     List <String> roles,
+    List<ElementDTO> seen,
     ImageDTO userImage
 ) {}

@@ -29,30 +29,23 @@ export async function register(name: string, password: string, imageField: File 
 }
 
 
-export async function updateMyProfile(
-    id: number,
-    name: string
-): Promise<UserBasicDTO> {
+export async function replaceUserImage(id: number, imageFile: File): Promise<void> {
+    const formData = new FormData();
 
-    const updateData = {
-        name: name
-    };
+    formData.append("imageFile", imageFile);
 
-    const response = await fetch(`${API_USERS_URL}/me`, {
+    const response = await fetch(`${API_USERS_URL}/${id}/media`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updateData)
+        body: formData
     });
 
     if (!response.ok) {
-        throw new Error("Error al actualizar el perfil.");
+        throw new Error("La imagen del objeto no ha podido ser actualizada.");
     }
-
-    return await response.json();
 }
 
+
+//función para obtener los objetos vistos por un usuario
 
 export async function getMyStats(): Promise<UserStatisticsDTO> {
   const response = await fetch(`${API_USERS_URL}/me/statistics`);

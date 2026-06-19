@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Route } from "./+types/profile-page";
 import { getUser, updateUser } from "~/services/admin-service";
+import { replaceUserImage } from "~/services/user-service";
 import { useUserStore } from "~/stores/user-store";
 import { requiredLoggedUser, checkPermission } from "~/services/route-guards-service";
 
@@ -76,6 +77,8 @@ export default function ProfilePage() {
         setUsername(event.target.value);
     }
 
+   
+
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (!targetUserId) return;
@@ -84,18 +87,20 @@ export default function ProfilePage() {
         setError(null);
 
         try {
-            await updateUser(targetUserId, username, false, selectedFile, userImageId);
 
-            if (selectedFile && userImageId) {
-                setImageVersion((prev) => prev + 1);
-            }
+        if (selectedFile) {
+            const uploadedImage = await replaceUserImage(targetUserId, selectedFile);   
+            setImageVersion((prev) => prev + 1); 
+        }
 
-            if (targetUserId === loggedUser?.id) {
-                await loadLoggedUser();
-            }
+        await updateUser(targetUserId, username);
 
-            const messageSuccess = "Perfil actualizado correctamente.";
-            navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+        if (targetUserId === loggedUser?.id) {
+            await loadLoggedUser();
+        }
+
+        const messageSuccess = "Perfil actualizado correctamente.";
+        navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
 
         } catch (err: any) {
             console.error(err);

@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import es.codeurjc.daw.museum.dto.CategoryStatsDTO;
 import es.codeurjc.daw.museum.dto.UserStatisticsDTO;
+import es.codeurjc.daw.museum.model.Image;
 import es.codeurjc.daw.museum.model.MuseumObject;
 import es.codeurjc.daw.museum.model.User;
 import es.codeurjc.daw.museum.repository.UserRepository;
@@ -37,8 +38,8 @@ public class UserService {
     @Autowired
     private MuseumObjectService objectService;
 
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow();
     }
 
     public Optional<User> findByUsername(String username) {
@@ -100,9 +101,9 @@ public class UserService {
 
             userRepository.save(userToEdit);
 
-            if (oldImageId != null) {
+            /*if (oldImageId != null) {
                 imageService.deleteImage(oldImageId);
-            }
+            }*/
 
         } else if (removeImage && userToEdit.getUserImage() != null) {
             Long imageId = userToEdit.getUserImage().getId();
@@ -113,6 +114,15 @@ public class UserService {
 
         return userRepository.save(userToEdit);
     }
+
+
+    public User addImageToUser(long id, Image image) {
+		User user = userRepository.findById(id).orElseThrow();
+		user.setUserImage(image);
+		return userRepository.save(user);
+	}
+
+
 
     public void deleteUser(Long id) {
 

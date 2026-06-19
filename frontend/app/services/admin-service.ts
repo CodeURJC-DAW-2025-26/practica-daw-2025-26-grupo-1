@@ -25,9 +25,7 @@ export async function getUsers(): Promise<UserBasicDTO[]> {
 export async function updateUser(
     id: number,
     name: string,
-    removeImage: boolean,
-    imageFile?: File | null,
-    userImageId?: number 
+    
 ): Promise<UserBasicDTO> {
     
     const updateData = { name: name };
@@ -42,20 +40,6 @@ export async function updateUser(
 
     if (!response.ok) {
         throw new Error("Se ha producido un error al editar los datos del usuario.");
-    }
-
-    if (imageFile && userImageId) {
-        const formData = new FormData();
-        formData.append("imageFile", imageFile);
-
-        const imgRes = await fetch(`/api/v1/images/${userImageId}/media`, {
-            method: "PUT",
-            body: formData
-        });
-
-        if (!imgRes.ok) {
-            throw new Error("Datos actualizados, pero falló el reemplazo de la imagen.");
-        }
     }
 
     return await response.json();
