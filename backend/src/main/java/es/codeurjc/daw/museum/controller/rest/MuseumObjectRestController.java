@@ -88,18 +88,6 @@ public class MuseumObjectRestController {
         return objectMapper.toDTO(objectService.getObject(id));
     }
 
-    // List of all objects without page
-    @GetMapping("/list")
-    public ResponseEntity<List<ElementDTO>> getObjectsWithoutPage() {
-        List<MuseumObject> objects = objectService.findAll();
-
-        List<ElementDTO> elementsDTOs = objects.stream()
-                .map(obj -> elementMapper.toDTO(obj))
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(elementsDTOs);
-    }
-
     @PostMapping("/")
     public ResponseEntity<MuseumObjectDTO> createObject(@RequestBody MuseumObjectDTO objectDTO) {
         MuseumObject obj = objectMapper.toEntity(objectDTO);

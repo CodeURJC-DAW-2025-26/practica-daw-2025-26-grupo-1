@@ -42,8 +42,8 @@ public class NoteService {
 		return noteRepository.findAll(pageable);
 	}
 
-	public List<Note> findAllByUser(User user) {
-		return noteRepository.findByUser(user);
+	public Page<Note> findAllByUser(User user, Pageable pageable) {
+		return noteRepository.findByUser(user, pageable);
 	}
 
 	public List<Note> findAllByObject(MuseumObject object) {
@@ -65,11 +65,7 @@ public class NoteService {
 		}
 
 		boolean isAuthor = note.getUser().getId().equals(user.getId());
-		boolean isAdmin = user.getRoles().contains("ADMIN");
-
-		if (isAdmin) {
-			return false;
-		}
+		
 
 		return isAuthor;
 	}

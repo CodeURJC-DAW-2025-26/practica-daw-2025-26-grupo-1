@@ -1,5 +1,6 @@
 import type { NoteDTO } from "~/dtos/NoteDTO";
 import type { NoteBasicDTO } from "~/dtos/NoteBasicDTO";
+import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 
 const API_NOTES_URL = "/api/v1/notes";
 const PAGE_SIZE = 10;
@@ -42,6 +43,22 @@ export async function getAllNotes(page: number): Promise<NotePageResult> {
     const data = await response.json();
 
     if (Array.isArray(data?.content)) {
+        return { items: data.content, hasNext: !data.last };
+    }
+
+    return { items: [], hasNext: false };
+}
+
+export async function getNotesByUser(page: number): Promise<{ items: NoteDTO[]; hasNext: boolean }> {
+    const response = await fetch(`${API_NOTES_URL}/user?page=${page}&size=${PAGE_SIZE}`);
+
+    if (!response.ok) {
+        throw new Error("No se han podido obtener las notas.");
+    }
+
+    const data = await response.json();
+
+    if (data && Array.isArray(data.content)) {
         return { items: data.content, hasNext: !data.last };
     }
 

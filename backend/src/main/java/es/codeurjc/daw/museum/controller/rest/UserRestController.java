@@ -76,7 +76,7 @@ public class UserRestController {
         return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
     }
 
-    @PutMapping("/me")
+    /*PutMapping("/me")
     public ResponseEntity<UserBasicDTO> updateProfile(
             @RequestBody UserBasicDTO userModifyDTO, 
             Principal principal) throws IOException, SQLException {
@@ -99,7 +99,7 @@ public class UserRestController {
         );
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<UserBasicDTO> updateUser(
@@ -168,6 +168,9 @@ public class UserRestController {
 
         return ResponseEntity.created(location).body(responseDTO);
     }
+
+
+    //endpoint para comprobar objetos vistos por un usuario
 
     @GetMapping("/me/statistics")
     public ResponseEntity<UserStatisticsDTO> getMyStats(Principal principal) {

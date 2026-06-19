@@ -4,7 +4,6 @@ import { ArrowLeft, Check2 } from "react-bootstrap-icons";
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Route } from "./+types/profile-page";
-import { updateMyProfile } from "~/services/user-service";
 import { getUser, updateUser } from "~/services/admin-service";
 import { useUserStore } from "~/stores/user-store";
 import { requiredLoggedUser, checkPermission } from "~/services/route-guards-service";
@@ -19,13 +18,6 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     return null;
 }
 
-const getUserAvatarUrl = (imageId: number | undefined) => {
-    if (imageId) {
-        return `/api/v1/images/${imageId}/media`;
-    }
-    return "/perfil-sin-foto.png";
-};
-
 export default function ProfilePage() {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -36,8 +28,19 @@ export default function ProfilePage() {
 
     const [targetUserId, setTargetUserId] = useState<number | null>(null);
     const [username, setUsername] = useState("");
+
+    const [imageVersion, setImageVersion] = useState(0);
+    const [userImageId, setUserImageId] = useState<number | undefined>(undefined);
+
     const [previewImage, setPreviewImage] = useState("/perfil-sin-foto.png");
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    const getUserAvatarUrl = (imageId: number | undefined, version: number) => {
+        if (imageId) {
+            return `/api/v1/images/${imageId}/media?v=${version}`;
+        }
+        return "/perfil-sin-foto.png";
+    };
 
     useEffect(() => {
         if (id) {
@@ -45,17 +48,19 @@ export default function ProfilePage() {
                 .then((fetchedUser) => {
                     setTargetUserId(fetchedUser.id);
                     setUsername(fetchedUser.name);
-                    setPreviewImage(getUserAvatarUrl(fetchedUser.userImage?.id));
+                    setUserImageId(fetchedUser.userImage?.id);
+                    setPreviewImage(getUserAvatarUrl(fetchedUser.userImage?.id, imageVersion));
                 })
                 .catch(() => setError("Error al cargar los datos del usuario seleccionado."));
         } else if (loggedUser) {
             setTargetUserId(loggedUser.id);
             setUsername(loggedUser.name);
-            setPreviewImage(getUserAvatarUrl(loggedUser.userImage?.id));
+            setUserImageId(loggedUser.userImage?.id);
+            setPreviewImage(getUserAvatarUrl(loggedUser.userImage?.id, imageVersion));
         }
-    }, [id, loggedUser]);
+    }, [id, loggedUser, imageVersion]);
 
-    async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const file = event.target.files?.[0];
         if (file) {
             setSelectedFile(file);
@@ -79,22 +84,22 @@ export default function ProfilePage() {
         setError(null);
 
         try {
-            const isEditingMyself = targetUserId === loggedUser?.id;
+            await updateUser(targetUserId, username, false, selectedFile, userImageId);
 
-            if (id && !isEditingMyself) {
-                await updateUser(targetUserId, username, false);
-                
-                const messageSuccess = "Perfil actualizado por el administrador.";
-                navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
-            } else {
-                await updateMyProfile(targetUserId, username);
-                await loadLoggedUser(); 
-                
-                const messageSuccess = "Perfil actualizado correctamente.";
-                navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+            if (selectedFile && userImageId) {
+                setImageVersion((prev) => prev + 1);
             }
-        } catch (err) {
-            setError("Error al actualizar el perfil del usuario.");
+
+            if (targetUserId === loggedUser?.id) {
+                await loadLoggedUser();
+            }
+
+            const messageSuccess = "Perfil actualizado correctamente.";
+            navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
+
+        } catch (err: any) {
+            console.error(err);
+            setError(err.message || "Error al actualizar el perfil del usuario.");
         } finally {
             setIsPending(false);
         }
@@ -134,8 +139,8 @@ export default function ProfilePage() {
                                                 type="file"
                                                 name="imageField"
                                                 id="imageField"
-                                                accept=".png"
-                                                onChange={handleImageChange}
+                                                accept="image/*"
+                                                onChange={handleFileChange}
                                                 disabled={isPending}
                                             />
                                         </Form.Group>

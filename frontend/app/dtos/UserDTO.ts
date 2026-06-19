@@ -1,3 +1,4 @@
+import type { ElementDTO } from "./ElemetDTO";
 import type {ImageDTO} from "./ImageDTO";
 
 export interface UserDTO {
@@ -5,5 +6,6 @@ export interface UserDTO {
     name: string;
     password: string;
     roles: string[];
+    seen: ElementDTO[];
     userImage?: ImageDTO;
 }

@@ -2,12 +2,12 @@ import { useParams, useNavigate, Link } from "react-router";
 import type { Route } from "./+types/object-page";
 import { Container, Card, Button, Row, Col, Badge, Form, Spinner } from "react-bootstrap";
 import { ArrowLeft, Check2, BookmarkPlus, CloudUpload, Trash } from "react-bootstrap-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "~/stores/user-store";
 import { getMuseumObject, replaceMuseumObject } from "~/services/museum-object-service";
 import { replaceImageFile } from "~/services/image-service";
 import { markObjectAsSeen } from "~/services/user-service";
-import { deleteNote } from "~/services/note-service";
+import { deleteNote, getNotesByUser } from "~/services/note-service";
 import type { MuseumObjectDTO } from "~/dtos/MuseumObjectDTO";
 
 
@@ -20,6 +20,8 @@ const subCategoriesConfig: Record<string, string[]> = {
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const data = await getMuseumObject(Number(params.id!));
+    //const que llame a la lista de notas del objeto
+    //devolver data y notas
     return Array.isArray(data) ? data[0] : data;
 }
 
@@ -34,9 +36,39 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const isLogged = user ? true : false;
 
     const [imageVersion, setImageVersion] = useState(0);
-    const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);
+    const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);    
     const [markingAsSeen, setMarkingAsSeen] = useState(false);
-    const [notesList, setNotesList] = useState(museumObject.notes || []);
+    const [notesList, setNotesList] = useState<any[]>([]);
+
+    useEffect(() => {
+        if (isLogged && user && user.seen && museumObject.id) {
+            const isAlreadySeen = user.seen.some((element) => element.id === museumObject.id);
+            if (isAlreadySeen) {
+                setIsSeenState(true);
+            }
+        }
+    }, [user, museumObject.id, isLogged]);
+
+    useEffect(() => {
+        async function fetchUserNotes() {
+            if (isLogged && museumObject.id) {
+                try {
+                    const result = await getNotesByUser(0);
+                    
+                    const filteredNotes = result.items.filter((note: any) => 
+                        note.museumObject && note.museumObject.id === museumObject.id);
+
+                    setNotesList(filteredNotes);
+                } catch (error) {
+                    console.error("Error cargando las notas del usuario:", error);
+                }
+            } else {
+                setNotesList([]);
+            }
+        }
+
+        fetchUserNotes();
+    }, [museumObject.id, isLogged]);
 
     const [editForm, setEditForm] = useState({
         objectName: museumObject.objectName,
@@ -108,6 +140,23 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
         try {
             await markObjectAsSeen(museumObject.id);
             setIsSeenState(true);
+            
+            if (user) {
+                if (!user.seen) {
+                    user.seen = [];
+                }
+                
+                const alreadyInList = user.seen.some((e: any) => e.id === museumObject.id);
+                
+                if (!alreadyInList) {
+                    user.seen.push({
+                        id: museumObject.id,
+                        nameElement: museumObject.objectName,
+                        category: museumObject.category,
+                        goToElement: `/objects/${type}/${museumObject.id}`
+                    });
+                }
+            }
         } catch (error) {
             console.error("Error al marcar el objeto como visto:", error);
         } finally {
