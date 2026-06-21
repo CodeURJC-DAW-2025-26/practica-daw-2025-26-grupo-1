@@ -2,8 +2,6 @@ package es.codeurjc.daw.museum.controller.rest;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.codeurjc.daw.museum.dto.ElementDTO;
-import es.codeurjc.daw.museum.dto.ElementMapper;
 import es.codeurjc.daw.museum.dto.ImageDTO;
 import es.codeurjc.daw.museum.dto.ImageMapper;
 import es.codeurjc.daw.museum.dto.MuseumObjectBasicDTO;
@@ -47,9 +43,6 @@ public class MuseumObjectRestController {
 
     @Autowired
     private MuseumObjectMapper objectMapper;
-
-    @Autowired
-    private ElementMapper elementMapper;
 
     @Autowired
     private ImageMapper imageMapper;
@@ -90,9 +83,9 @@ public class MuseumObjectRestController {
 
     @PostMapping("/")
     public ResponseEntity<MuseumObjectDTO> createObject(@RequestBody MuseumObjectDTO objectDTO) {
-        MuseumObject obj = objectMapper.toEntity(objectDTO);
-        MuseumObject newObj = objectService.createObject(obj);
-        MuseumObjectDTO resultDTO = objectMapper.toDTO(newObj);
+        MuseumObject object = objectMapper.toEntity(objectDTO);
+        MuseumObject newObject = objectService.createObject(object);
+        MuseumObjectDTO resultDTO = objectMapper.toDTO(newObject);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(resultDTO.id()).toUri();
         return ResponseEntity.created(location).body(resultDTO);
@@ -152,8 +145,8 @@ public class MuseumObjectRestController {
 
     @DeleteMapping("/{id}/image")
     public ImageDTO deleteObjectImage(@PathVariable long id) {
-        MuseumObject obj = objectService.getObject(id);
-        Image image = obj.getImage();
+        MuseumObject object = objectService.getObject(id);
+        Image image = object.getImage();
 
         objectService.removeImageFromObject(id);
 

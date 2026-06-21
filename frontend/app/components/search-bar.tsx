@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useLocation, useSearchParams } from "react-router"; 
-import { Form, Button, InputGroup, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, InputGroup, Row, Col } from "react-bootstrap";
 import { Search } from "react-bootstrap-icons"; 
 import { useUserStore } from "~/stores/user-store";
 
@@ -8,8 +7,6 @@ export default function SearchBar({currentType, onSearch, onFilter}: {
     currentType: string,
     onSearch: (query: string) => void, 
     onFilter: (filter: string) => void }) {
-    const location = useLocation(); 
-    const [useParams] = useSearchParams();
     const [query, setQuery] = useState("");
     const {user} = useUserStore();
 
@@ -64,7 +61,7 @@ export default function SearchBar({currentType, onSearch, onFilter}: {
                         <InputGroup>
                             <Form.Control
                                 type="text"
-                                placeholder="Buscar objeto..."
+                                placeholder="Search object..."
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                             />

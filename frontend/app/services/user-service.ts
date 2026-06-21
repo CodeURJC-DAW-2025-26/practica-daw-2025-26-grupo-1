@@ -1,11 +1,10 @@
-import type { UserDTO } from "~/dtos/UserDTO";
 import type { UserBasicDTO } from "~/dtos/UserBasicDTO";
 import type { UserStatisticsDTO } from "~/dtos/UserStatisticsDTO";
 import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 
 const API_USERS_URL = "/api/v1/users";
 
-export async function register(name: string, password: string, imageField: File | null): Promise<UserBasicDTO> {
+export async function register(name: string, password: string): Promise<UserBasicDTO> {
     
     const registerData = {
         name: name,
@@ -44,8 +43,6 @@ export async function replaceUserImage(id: number, imageFile: File): Promise<voi
     }
 }
 
-
-//función para obtener los objetos vistos por un usuario
 
 export async function getMyStats(): Promise<UserStatisticsDTO> {
   const response = await fetch(`${API_USERS_URL}/me/statistics`);

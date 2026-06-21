@@ -14,6 +14,35 @@
           "name": "ADMIN",
           "item": [
             {
+              "name": "Login Admin",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"adminpass\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/auth/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "Create Object",
               "request": {
                 "method": "POST",
@@ -103,7 +132,7 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "4b3de386-f590-43b1-9b12-850855b63b0d",
-                      "src": "/C:/Users/34607/Downloads/conclusion.png"
+                      "src": "/C:/Users/34607/Downloads/analysis.png"
                     }
                   ]
                 },
@@ -135,7 +164,7 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "60dcb511-090f-4c26-b5be-291a702ad33e",
-                      "src": "/C:/Users/34607/Downloads/presentation.png"
+                      "src": "/C:/Users/34607/Downloads/code-issue.png"
                     }
                   ]
                 },
@@ -196,7 +225,7 @@
                   ]
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/users/1",
+                  "raw": "{{baseURL}}/api/v1/users/2",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -204,7 +233,7 @@
                     "api",
                     "v1",
                     "users",
-                    "1"
+                    "2"
                   ]
                 }
               },
@@ -262,7 +291,7 @@
                       "key": "imageFile",
                       "type": "file",
                       "uuid": "896020f4-bb57-444f-bfee-326c13ae1869",
-                      "src": "/C:/Users/34607/Downloads/analysis.png"
+                      "src": "/C:/Users/34607/Downloads/service.png"
                     }
                   ]
                 },
@@ -277,35 +306,6 @@
                     "images",
                     "9",
                     "media"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Login Admin",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"adminpass\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/auth/login",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "auth",
-                    "login"
                   ]
                 }
               },
@@ -389,7 +389,7 @@
                   }
                 },
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/3",
+                  "raw": "{{baseURL}}/api/v1/notes/object/2",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -398,7 +398,7 @@
                     "v1",
                     "notes",
                     "object",
-                    "3"
+                    "2"
                   ]
                 }
               },
@@ -425,12 +425,52 @@
               "response": []
             },
             {
+              "name": "Get Note",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/2",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Notes By User",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/notes/user",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "notes",
+                    "user"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "Get Notes By Object",
               "request": {
                 "method": "GET",
                 "header": [],
                 "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/object/3",
+                  "raw": "{{baseURL}}/api/v1/notes/object/1",
                   "host": [
                     "{{baseURL}}"
                   ],
@@ -439,27 +479,7 @@
                     "v1",
                     "notes",
                     "object",
-                    "3"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get Note",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/notes/4",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "notes",
-                    "4"
+                    "1"
                   ]
                 }
               },
@@ -592,35 +612,6 @@
               "response": []
             },
             {
-              "name": "Update Profile",
-              "request": {
-                "method": "PUT",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"NombreActualizado\"    \r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/me",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
-                    "me"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
               "name": "Update User",
               "request": {
                 "method": "PUT",
@@ -644,6 +635,38 @@
                     "v1",
                     "users",
                     "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update User Image",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "imageFile",
+                      "type": "file",
+                      "uuid": "7c5cbadd-e2d9-4671-bd25-2112123a36d5",
+                      "src": "/C:/Users/34607/Downloads/analysis.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/2/media",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    "2",
+                    "media"
                   ]
                 }
               },
@@ -682,7 +705,36 @@
           "name": "ALL USERS",
           "item": [
             {
-              "name": "Get Objects Pageable",
+              "name": "Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"ana3\",\r\n    \"encodedPassword\": \"ana3\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": [],\r\n    \"image\": null\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/api/v1/users/",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Objects",
               "request": {
                 "method": "GET",
                 "header": [],
@@ -716,26 +768,6 @@
                     "v1",
                     "objects",
                     "2"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Get Objects NoPage",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/objects/list",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "objects",
-                    "list"
                   ]
                 }
               },
@@ -823,35 +855,6 @@
                     "api",
                     "v1",
                     "images",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "Register",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"name\": \"ana3\",\r\n    \"encodedPassword\": \"ana3\",\r\n    \"roles\": [\"USER\"],\r\n    \"favourites\": [],\r\n    \"seen\": [],\r\n    \"image\": null\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/api/v1/users/",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "api",
-                    "v1",
-                    "users",
                     ""
                   ]
                 }

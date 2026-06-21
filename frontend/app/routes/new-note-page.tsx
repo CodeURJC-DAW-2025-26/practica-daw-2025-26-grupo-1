@@ -31,7 +31,6 @@ export default function NewNotePage() {
 
             const message = "Nota creada con éxito.";
             const encodeMessage = encodeURIComponent(message);
-
             navigate(`/notification?type=confirmation&message=${encodeMessage}`);
         } catch (err) {
             setError("No se ha podido crear la nota. Inténtalo de nuevo.");

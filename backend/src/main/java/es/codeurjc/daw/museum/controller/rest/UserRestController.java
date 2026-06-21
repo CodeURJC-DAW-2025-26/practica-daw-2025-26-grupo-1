@@ -41,7 +41,6 @@ import es.codeurjc.daw.museum.service.MuseumObjectService;
 import es.codeurjc.daw.museum.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
-
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserRestController {
@@ -71,11 +70,11 @@ public class UserRestController {
 
         if (principal != null) {
             User user = userService.findByUsername(principal.getName()).orElseThrow();
-            
+
             if (user.getSeen() != null) {
-                user.getSeen().size(); 
+                user.getSeen().size();
             }
-            
+
             return userMapper.toBasicDTO(user);
         } else {
             throw new NoSuchElementException();
@@ -94,43 +93,61 @@ public class UserRestController {
         return ResponseEntity.created(location).body(userMapper.toBasicDTO(newUser));
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<UserBasicDTO> updateUser(
             @PathVariable long id,
-            @RequestBody UserBasicDTO userDTO, 
+            @RequestBody UserBasicDTO userDTO,
             Principal principal) throws IOException, SQLException {
 
         if (principal == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autenticado");
         }
 
+        User loggedInUser = userService.findByUsername(principal.getName()).orElseThrow();
+        boolean isAdmin = loggedInUser.getRoles().contains("ADMIN");
+
+        if (!isAdmin && loggedInUser.getId() != id) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No tienes permiso para modificar a otro usuario");
+        }
+
         User userToEdit = userService.findById(id);
 
-        String nombreAntiguo = userToEdit.getName();
+        String oldName = userToEdit.getName();
 
         userToEdit.setName(userDTO.name());
 
         User updatedUser = userService.editUser(
-                nombreAntiguo, 
+                oldName,
                 principal.getName(),
-                userToEdit, 
-                false, 
-                null
-        );
+                userToEdit,
+                false,
+                null);
 
         return ResponseEntity.ok(userMapper.toBasicDTO(updatedUser));
     }
 
-
     @PutMapping("/{id}/media")
-    public ResponseEntity<ImageDTO> updateUserImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
+    public ResponseEntity<ImageDTO> updateUserImage(@PathVariable long id, @RequestParam MultipartFile imageFile,
+            Principal principal)
             throws IOException {
+
+        if (principal == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "No autorizado");
+        }
+
+        User loggedInUser = userService.findByUsername(principal.getName()).orElseThrow();
+
+        boolean isAdmin = loggedInUser.getRoles().contains("ADMIN");
+
+        if (!isAdmin && loggedInUser.getId() != id) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "No tienes permiso para cambiar la imagen de otro usuario");
+        }
 
         if (imageFile.isEmpty())
             throw new IllegalArgumentException();
 
-       User user = userService.findById(id);
+        User user = userService.findById(id);
         Image oldImage = user.getUserImage();
 
         Image newImage = imageService.createImage(imageFile.getInputStream());
@@ -142,8 +159,6 @@ public class UserRestController {
 
         return ResponseEntity.ok(imageMapper.toDTO(newImage));
     }
-
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserBasicDTO> deleteUser(@PathVariable long id) {
@@ -185,7 +200,6 @@ public class UserRestController {
         return ResponseEntity.created(location).body(responseDTO);
     }
 
-
     @GetMapping("/me/statistics")
     public ResponseEntity<UserStatisticsDTO> getMyStats(Principal principal) {
 
@@ -200,7 +214,7 @@ public class UserRestController {
     @GetMapping("/{id}")
     public ResponseEntity<UserBasicDTO> getUser(@PathVariable long id) {
         User user = userService.findById(id);
-                
+
         return ResponseEntity.ok(userMapper.toBasicDTO(user));
     }
 

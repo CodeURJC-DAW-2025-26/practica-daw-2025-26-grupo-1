@@ -1,4 +1,4 @@
-import type { ElementDTO } from "./ElemetDTO";
+import type { ElementDTO } from "./ElementDTO";
 import type {ImageDTO} from "./ImageDTO";
 
 export interface UserDTO {

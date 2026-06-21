@@ -60,9 +60,6 @@ export async function getMuseumObjects(
 }
 
 
-
-
-
 export async function createMuseumObject(
     objectName: string, 
     groupName: string, 

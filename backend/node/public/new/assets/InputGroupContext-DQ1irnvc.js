@@ -1,0 +1,1 @@
+import{I as e,P as t}from"./jsx-runtime-BvSQTZy_.js";var n=e(t()).createContext(null);n.displayName=`InputGroupContext`;export{n as t};

@@ -61,13 +61,13 @@ export default function NewObjectPage() {
             return { success: true, error: null };
 
         } catch (error: any) {
-        console.error(error);
-        return {
-            success: false,
-            
-            error: error instanceof Error ? error.message : "Error desconocido al crear."
-        };
-    }
+            console.error(error);
+            return {
+                success: false,
+
+                error: error instanceof Error ? error.message : "Error desconocido al crear."
+            };
+        }
     }
 
     const [state, formAction, isPending] = useActionState(saveObjectAction, null);

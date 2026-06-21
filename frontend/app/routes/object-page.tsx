@@ -20,8 +20,6 @@ const subCategoriesConfig: Record<string, string[]> = {
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const data = await getMuseumObject(Number(params.id!));
-    //const que llame a la lista de notas del objeto
-    //devolver data y notas
     return Array.isArray(data) ? data[0] : data;
 }
 
@@ -151,15 +149,14 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     };
 
     const handleDeleteNote = async (noteId: number) => {
-        if (!confirm("¿Estás seguro de que quieres eliminar esta nota?")) return;
         try {
             await deleteNote(noteId);
             setNotesList((prevNotes) => prevNotes.filter((n) => n.id !== noteId));
             const messageSuccess = "Nota eliminada correctamente.";
             navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
         } catch (error) {
-            console.error("Error al eliminar la nota:", error);
-            alert("No se ha podido eliminar la nota.");
+            const messageSuccess = "No se ha podido eliminar la nota.";
+            navigate(`/notification?type=confirmation&message=${encodeURIComponent(messageSuccess)}`);
         }
     };
 
@@ -347,7 +344,7 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                                                     size="sm"
                                                     className="border-0 rounded-3 p-2 d-flex align-items-center justify-content-center"
                                                     onClick={() => handleDeleteNote(note.id)}
-                                                    title="Eliminar nota"
+                                                    title="Delete note"
                                                 >
                                                     <Trash size={18} />
                                                 </Button>

@@ -1,0 +1,1 @@
+import{I as e,P as t,t as n}from"./jsx-runtime-BvSQTZy_.js";import{o as r}from"./Container-DSLExojK.js";var i=e(t()),a=e(r()),o=n(),s=(e=>i.forwardRef((t,n)=>(0,o.jsx)(`div`,{...t,ref:n,className:(0,a.default)(t.className,e)})));export{s as t};

@@ -1,7 +1,4 @@
 import { Container, Card, Button, Badge } from "react-bootstrap";
-import { Link } from "react-router";
-import { useEffect } from "react";
-import { useUserStore } from "~/stores/user-store";
 import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 
 interface ObjectCardProps {

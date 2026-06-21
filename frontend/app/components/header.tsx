@@ -53,7 +53,7 @@ export default function Header() {
                                 <Dropdown.Toggle variant="dark" id="dropdown-user" className="border-0 p-0 d-flex align-items-center">
                                     <img 
                                         src={getUserAvatarUrl(user)} 
-                                        alt="Avatar de perfil" 
+                                        alt="Profile avatar" 
                                         className="rounded-circle"
                                         style={{ width: '40px', height: '40px', objectFit: 'cover' }}
                                         onError={(e) => {

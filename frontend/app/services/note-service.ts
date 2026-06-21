@@ -1,6 +1,5 @@
 import type { NoteDTO } from "~/dtos/NoteDTO";
 import type { NoteBasicDTO } from "~/dtos/NoteBasicDTO";
-import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 
 const API_NOTES_URL = "/api/v1/notes";
 const PAGE_SIZE = 10;

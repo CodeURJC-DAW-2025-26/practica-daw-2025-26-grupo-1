@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.daw.museum.dto.NoteBasicDTO;
-import es.codeurjc.daw.museum.dto.NoteDTO;
 import es.codeurjc.daw.museum.dto.NoteMapper;
 import es.codeurjc.daw.museum.service.NoteService;
 import es.codeurjc.daw.museum.service.UserService;
@@ -103,12 +102,12 @@ public class NoteRestController {
 
 
     @GetMapping("/user")
-    public ResponseEntity<Page<NoteDTO>> getNotesByUser(Pageable pageable, Principal principal) {
+    public ResponseEntity<Page<NoteBasicDTO>> getNotesByUser(Pageable pageable, Principal principal) {
         
         User user = userService.findByUsername(principal.getName()).orElseThrow();
 
         Page<Note> notes = noteService.findAllByUser(user, pageable);
-        Page<NoteDTO> notesDTOs = notes.map(noteMapper::toDTO);
+        Page<NoteBasicDTO> notesDTOs = notes.map(noteMapper::toBasicDTO);
 
         return ResponseEntity.ok(notesDTOs);
     }

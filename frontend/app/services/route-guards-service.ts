@@ -60,7 +60,6 @@ export function checkPermission(currentUser: UserDTO, ownerId?: number): void {
 }
 
 
-
 export function checkPermissionAlternative(currentUser: UserDTO, ownerId?: number): void {
   const isAdmin = currentUser.roles?.includes("ADMIN");
 

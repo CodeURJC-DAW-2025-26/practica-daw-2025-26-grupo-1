@@ -41,8 +41,6 @@ export default function ListUsersPage({ loaderData }: Route.ComponentProps) {
     };
 
     const handleEliminate = async (id: number) => {
-        const confirmDelete = window.confirm("¿Seguro que deseas eliminar a este usuario del sistema?");
-        if (!confirmDelete) return;
 
         try {
             await deleteUser(id);
@@ -94,9 +92,9 @@ export default function ListUsersPage({ loaderData }: Route.ComponentProps) {
                                     <td className="fw-bold">{user.name}</td>
                                     <td>
                                         <div className="d-flex gap-1">
-                                            {user.roles.map((rol) => (
-                                                <Badge key={rol} bg="secondary">
-                                                    {rol}
+                                            {user.roles.map((role) => (
+                                                <Badge key={role} bg="secondary">
+                                                    {role}
                                                 </Badge>
                                             ))}
                                         </div>

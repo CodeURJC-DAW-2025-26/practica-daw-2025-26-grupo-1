@@ -1,6 +1,6 @@
 services:
   web:
-    image: adrianvillalba26/museum:latest
+    image: adrianvillalba26/reactpractice:latest
     ports:
       - 8443:8443
     environment:

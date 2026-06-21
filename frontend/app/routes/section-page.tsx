@@ -97,8 +97,6 @@ export default function SectionPage({ loaderData }: Route.ComponentProps) {
     const filteredObjects = objects;
 
     const handleDelete = async (id: number) => {
-        const confirmDelete = window.confirm("¿Seguro que deseas eliminar este objeto de la colección del museo?");
-        if (!confirmDelete) return;
 
         try {
             await deleteMuseumObject(id);
@@ -107,8 +105,9 @@ export default function SectionPage({ loaderData }: Route.ComponentProps) {
             const encodeMessage = encodeURIComponent(message);
             navigate(`/notification?type=confirmation&message=${encodeMessage}`);
         } catch (error) {
-            console.error("Error al eliminar el objeto del museo:", error);
-            alert("No se pudo eliminar el objeto. Inténtalo de nuevo.");
+            const message = "Se ha producido un error al eliminar el objeto.";
+            const encodeMessage = encodeURIComponent(message);
+            navigate(`/notification?type=error&message=${encodeMessage}`);
         }
     };
 

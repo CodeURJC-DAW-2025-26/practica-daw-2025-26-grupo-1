@@ -77,8 +77,6 @@ export default function ProfilePage() {
         setUsername(event.target.value);
     }
 
-   
-
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (!targetUserId) return;
@@ -129,7 +127,7 @@ export default function ProfilePage() {
                                         <div className="d-flex justify-content-center mb-3">
                                             <img
                                                 src={previewImage}
-                                                alt="Avatar de perfil"
+                                                alt="Profile avatar"
                                                 className="rounded-circle"
                                                 style={{ height: '80px', width: '80px', objectFit: 'cover' }}
                                                 onError={(e) => {
@@ -182,7 +180,7 @@ export default function ProfilePage() {
                                     </Form>
 
                                     <small className="text-body-secondary text-center d-block">
-                                        Al hacer clic en "Aceptar", confirmas la edición del registro.
+                                        Al hacer clic en "Aceptar", confirmas la edición del perfil.
                                     </small>
                                 </div>
                             </div>

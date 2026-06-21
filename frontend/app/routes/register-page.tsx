@@ -12,24 +12,6 @@ export default function RegisterPage() {
     
     const [error, setError] = useState<string | null>(null);
 
-    const defaultAvatar = "/perfil-sin-foto.png";
-    const [previewImage, setPreviewImage] = useState<string>(defaultAvatar);
-
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-    async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
-        if (file) {
-            setSelectedFile(file); 
-            
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPreviewImage(reader.result as string);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
     const userStore = useUserStore(); 
 
 async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -42,7 +24,7 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     const password = formData.get("password") as string;
 
     try {
-        await register(username, password, selectedFile);
+        await register(username, password);
         
         await userStore.loginUser(username, password);
 
@@ -70,26 +52,14 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
                                     
                                     <Form onSubmit={handleSubmit} className="mb-4">
                                         
-                                        <div className="d-flex justify-content-center">
+                                        <div className="d-flex justify-content-center mb-4">
                                             <img 
-                                                src={previewImage} 
-                                                alt="Avatar de perfil" 
+                                                src="/perfil-sin-foto.png"
+                                                alt="Profile avatar" 
                                                 className="me-3 rounded-circle" 
                                                 style={{ height: '80px', width: '80px', objectFit: 'cover' }} 
                                             />
                                         </div>
-
-                                        <Form.Group className="mb-3">
-                                            <Form.Label htmlFor="imageField" className="fw-medium">Cambiar imagen:</Form.Label>
-                                            <Form.Control 
-                                                type="file" 
-                                                name="imageField" 
-                                                id="imageField" 
-                                                accept=".png" 
-                                                onChange={handleImageChange} 
-                                                disabled={isPending} 
-                                            />
-                                        </Form.Group>
 
                                         <Form.Floating className="mb-3">
                                             <Form.Control 
