@@ -6,6 +6,14 @@ import { createNote } from "~/services/note-service";
 import { requiredOnlyStandardUser } from "~/services/route-guards-service";
 import type { Route } from "./+types/new-note-page";
 
+
+// These imports are intended to ensure that the background images appear when accessing the page from /new
+import fishSecondBackground from "/fondo-marino-siluetas.png";
+import insectSecondBackground from "/fondo-insectos-siluetas.png";
+import fossilSecondBackground from "/fondo-fosiles-siluetas.png";
+import artSecondBackground from "/fondo-secundario-arte.png";
+
+
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     await requiredOnlyStandardUser();
     return null;
@@ -39,10 +47,10 @@ export default function NewNotePage() {
     };
 
     const backgrounds: Record<string, string> = {
-        fish: "/fondo-marino-siluetas.png",
-        insects: "/fondo-insectos-siluetas.png",
-        fossils: "/fondo-fosiles-siluetas.png",
-        art: "/fondo-secundario-arte.png",
+        fish: fishSecondBackground,
+        insects: insectSecondBackground,
+        fossils: fossilSecondBackground,
+        art: artSecondBackground,
     };
 
     const actualBack = backgrounds[type || "fish"] || backgrounds.fish;

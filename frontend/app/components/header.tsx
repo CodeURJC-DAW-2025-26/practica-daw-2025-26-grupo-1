@@ -4,11 +4,16 @@ import { Link, useNavigate } from "react-router";
 import { useEffect} from "react";
 import { useUserStore } from "~/stores/user-store";
 
+
+// These imports are intended to ensure that the images appear when accessing the page from /new
+import noImageProfile from "/perfil-sin-foto.png";
+
+
 const getUserAvatarUrl = (user: any) => {
     if (user?.userImage?.id) {
         return `/api/v1/images/${user.userImage.id}/media`; 
     }
-    return "/perfil-sin-foto.png"; 
+    return noImageProfile; 
 };
 
 export default function Header() {
@@ -57,7 +62,7 @@ export default function Header() {
                                         className="rounded-circle"
                                         style={{ width: '40px', height: '40px', objectFit: 'cover' }}
                                         onError={(e) => {
-                                            (e.target as HTMLImageElement).src = "/perfil-sin-foto.png";
+                                            (e.target as HTMLImageElement).src = noImageProfile;
                                         }}
                                     />
                                 </Dropdown.Toggle>

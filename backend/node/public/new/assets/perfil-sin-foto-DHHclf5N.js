@@ -1,0 +1,1 @@
+var e=`/new/perfil-sin-foto.png`;export{e as t};

@@ -410,7 +410,7 @@ A diferencia del caso anterior, en el que se mostraban los servicios utilizados 
 ## 🛠 **Práctica 3: Implementación de la web con arquitectura SPA**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](URL_del_video)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/kprAjTEilBY)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Preparación del Entorno de Desarrollo**

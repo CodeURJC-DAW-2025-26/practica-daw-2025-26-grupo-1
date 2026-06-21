@@ -1,0 +1,1 @@
+var e=`/new/fondo-marino-siluetas.png`,t=`/new/fondo-insectos-siluetas.png`,n=`/new/fondo-fosiles-siluetas.png`,r=`/new/fondo-secundario-arte.png`;export{e as i,n,t as r,r as t};

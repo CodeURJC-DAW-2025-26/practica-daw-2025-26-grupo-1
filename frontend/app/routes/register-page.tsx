@@ -54,7 +54,7 @@ async function handleSubmit(event: FormEvent<HTMLFormElement>) {
                                         
                                         <div className="d-flex justify-content-center mb-4">
                                             <img 
-                                                src="/perfil-sin-foto.png"
+                                                src="perfil-sin-foto.png"
                                                 alt="Profile avatar" 
                                                 className="me-3 rounded-circle" 
                                                 style={{ height: '80px', width: '80px', objectFit: 'cover' }} 

@@ -10,6 +10,21 @@ import SearchBar from "~/components/search-bar";
 import ObjectCard from "~/components/object-card";
 import { useNavigate } from "react-router";
 
+
+// These imports are intended to ensure that the background images and logos appear when accessing the page from /new
+import fishBackground from "/fondo-marino.png";
+import fishSecondBackground from "/fondo-marino-siluetas.png";
+import fishLogo from "/icons/logo-pez.png";
+import insectBackground from "/fondo-insectos.png";
+import insectSecondBackground from "/fondo-insectos-siluetas.png";
+import insectLogo from "/icons/logo-mariposa.png";
+import fossilBackground from "/fondo-fosiles.png";
+import fossilSecondBackground from "/fondo-fosiles-siluetas.png";
+import fossilLogo from "/icons/logo-fosil.png";
+import artBackground from "/fondo-arte.png";
+import artSecondBackground from "/fondo-secundario-arte.png";
+import artLogo from "/icons/logo-pintura.png";
+
 interface decorationConfig {
     mainBackground: string;
     secondaryBackground: string;
@@ -21,35 +36,35 @@ interface decorationConfig {
 
 const tematicConfig: Record<string, decorationConfig> = {
     fish: {
-        mainBackground: "/fondo-marino.png",
-        secondaryBackground: "/fondo-marino-siluetas.png",
+        mainBackground: fishBackground,
+        secondaryBackground: fishSecondBackground,
         title: "Peces y criaturas marinas",
         subtitle: "En esta sección, podrás sumergirte en el fascinante mundo de los peces. Explora su diversidad, colores y formas únicas en esta sección dedicada a las maravillas acuáticas.",
-        logo: "/icons/logo-pez.png",
+        logo: fishLogo,
         apiType: "peces"
     },
     insects: {
-        mainBackground: "/fondo-insectos.png",
-        secondaryBackground: "/fondo-insectos-siluetas.png",
+        mainBackground: insectBackground,
+        secondaryBackground: insectSecondBackground,
         title: "Insectos",
         subtitle: "Adéntrate en el mundo de los insectos, criaturas asombrosas que habitan nuestro planeta. Desde coloridas mariposas hasta fascinantes escarabajos, esta sección te invita a descubrir la diversidad y belleza de estos pequeños seres.",
-        logo: "/icons/logo-mariposa.png",
+        logo: insectLogo,
         apiType: "insectos"
     },
     fossils: {
-        mainBackground: "/fondo-fosiles.png",
-        secondaryBackground: "/fondo-fosiles-siluetas.png",
+        mainBackground: fossilBackground,
+        secondaryBackground: fossilSecondBackground,
         title: "Fósiles y minerales",
         subtitle: "Los fósiles son restos o impresiones de organismos que vivieron en el pasado, mientras que los minerales son sustancias sólidas inorgánicas con una composición química definida. En esta sección, podrás explorar la historia de la Tierra a través de sus fósiles y descubrir la belleza de los minerales que la componen.",
-        logo: "/icons/logo-fosil.png",
+        logo: fossilLogo,
         apiType: "fosiles"
     },
     art: {
-        mainBackground: "/fondo-arte.png",
-        secondaryBackground: "/fondo-secundario-arte.png",
+        mainBackground: artBackground,
+        secondaryBackground: artSecondBackground,
         title: "Obras de arte",
         subtitle: "En esta sección, podrás admirar una colección de obras de arte que abarcan diferentes estilos y epochs. Desde pinturas clásicas hasta esculturas contemporáneas, esta sección te invita a explorar la creatividad humana a través de sus expresiones artísticas.",
-        logo: "/icons/logo-pintura.png",
+        logo: artLogo,
         apiType: "arte"
     }
 };

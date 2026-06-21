@@ -9,6 +9,9 @@ import { replaceUserImage } from "~/services/user-service";
 import { useUserStore } from "~/stores/user-store";
 import { requiredLoggedUser, checkPermission } from "~/services/route-guards-service";
 
+// These imports are intended to ensure that the images appear when accessing the page from /new
+import noImageProfile from "/perfil-sin-foto.png";
+
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const currentUser = await requiredLoggedUser();
 
@@ -33,14 +36,14 @@ export default function ProfilePage() {
     const [imageVersion, setImageVersion] = useState(0);
     const [userImageId, setUserImageId] = useState<number | undefined>(undefined);
 
-    const [previewImage, setPreviewImage] = useState("/perfil-sin-foto.png");
+    const [previewImage, setPreviewImage] = useState(noImageProfile);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const getUserAvatarUrl = (imageId: number | undefined, version: number) => {
         if (imageId) {
             return `/api/v1/images/${imageId}/media?v=${version}`;
         }
-        return "/perfil-sin-foto.png";
+        return noImageProfile;
     };
 
     useEffect(() => {
@@ -131,7 +134,7 @@ export default function ProfilePage() {
                                                 className="rounded-circle"
                                                 style={{ height: '80px', width: '80px', objectFit: 'cover' }}
                                                 onError={(e) => {
-                                                    (e.target as HTMLImageElement).src = "/perfil-sin-foto.png";
+                                                    (e.target as HTMLImageElement).src = noImageProfile;
                                                 }}
                                             />
                                         </div>

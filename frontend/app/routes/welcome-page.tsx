@@ -41,7 +41,7 @@ export default function WelcomePage() {
                             <ObjectCard
                                 isMenu={true}
                                 title="Peces"
-                                image="/icons/logo-pez.png"
+                                image="icons/logo-pez.png"
                                 menuCategory={["Mar", "Agua dulce", "Abisales"]}
                                 onAccess={() => navigate("/objects/fish")}
                             />
@@ -51,7 +51,7 @@ export default function WelcomePage() {
                             <ObjectCard
                                 isMenu={true}
                                 title="Insectos"
-                                image="/icons/logo-mariposa.png"
+                                image="icons/logo-mariposa.png"
                                 menuCategory={["Terrestres", "Aéreos", "Acuáticos"]}
                                 onAccess={() => navigate("/objects/insects")}
                             />
@@ -61,7 +61,7 @@ export default function WelcomePage() {
                             <ObjectCard
                                 isMenu={true}
                                 title="Fósiles"
-                                image="/icons/logo-fosil.png"
+                                image="icons/logo-fosil.png"
                                 menuCategory={["Fósiles", "Minerales"]}
                                 onAccess={() => navigate("/objects/fossils")}
                             />
@@ -71,7 +71,7 @@ export default function WelcomePage() {
                             <ObjectCard
                                 isMenu={true}
                                 title="Obras de arte"
-                                image="/icons/logo-pintura.png"
+                                image="icons/logo-pintura.png"
                                 menuCategory={["Pintura", "Escultura", "Cerámica"]}
                                 onAccess={() => navigate("/objects/art")}
                             />

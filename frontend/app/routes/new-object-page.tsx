@@ -7,6 +7,13 @@ import type { Route } from "./+types/new-object-page.tsx"
 import { requiredAdmin } from "~/services/route-guards-service";
 
 
+// These imports are intended to ensure that the background images appear when accessing the page from /new
+import fishSecondBackground from "/fondo-marino-siluetas.png";
+import insectSecondBackground from "/fondo-insectos-siluetas.png";
+import fossilSecondBackground from "/fondo-fosiles-siluetas.png";
+import artSecondBackground from "/fondo-secundario-arte.png";
+
+
 export async function clientLoader(_: Route.ClientLoaderArgs) {
     await requiredAdmin();
     return null;
@@ -73,10 +80,10 @@ export default function NewObjectPage() {
     const [state, formAction, isPending] = useActionState(saveObjectAction, null);
 
     const backgrounds: Record<string, string> = {
-        fish: "/fondo-marino-siluetas.png",
-        insects: "/fondo-insectos-siluetas.png",
-        fossils: "/fondo-fosiles-siluetas.png",
-        art: "/fondo-secundario-arte.png",
+        fish: fishSecondBackground,
+        insects: insectSecondBackground,
+        fossils: fossilSecondBackground,
+        art: artSecondBackground,
     };
     const actualBack = backgrounds[type || "fish"] || backgrounds.fish;
 
@@ -164,7 +171,7 @@ export default function NewObjectPage() {
                     </Row>
 
                     {state?.error && (
-                        <p className="text-danger bg-white p-2 rounded shadow-sm small text-center mt-4 mx-auto style={{ maxWidth: '400px' }}">
+                        <p className="text-danger bg-white p-2 rounded shadow-sm small text-center mt-4 mx-auto" style={{ maxWidth: '400px' }}>
                             {state.error}
                         </p>
                     )}

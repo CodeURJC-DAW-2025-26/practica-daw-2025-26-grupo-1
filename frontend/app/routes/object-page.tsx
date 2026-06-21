@@ -10,6 +10,13 @@ import { markObjectAsSeen } from "~/services/user-service";
 import { deleteNote, getNotesByUser } from "~/services/note-service";
 import type { MuseumObjectDTO } from "~/dtos/MuseumObjectDTO";
 
+// These imports are intended to ensure that the background images and images appear when accessing the page from /new
+import fishSecondBackground from "/fondo-marino-siluetas.png";
+import insectSecondBackground from "/fondo-insectos-siluetas.png";
+import fossilSecondBackground from "/fondo-fosiles-siluetas.png";
+import artSecondBackground from "/fondo-secundario-arte.png";
+import noImage from "/no_image.png";
+
 
 const subCategoriesConfig: Record<string, string[]> = {
     fish: ["Agua dulce", "Mar", "Abisales"],
@@ -34,7 +41,7 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const isLogged = user ? true : false;
 
     const [imageVersion, setImageVersion] = useState(0);
-    const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);    
+    const [isSeenState, setIsSeenState] = useState(museumObject.isSeen);
     const [markingAsSeen, setMarkingAsSeen] = useState(false);
     const [notesList, setNotesList] = useState<any[]>([]);
 
@@ -52,11 +59,10 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
             if (isLogged && museumObject.id) {
                 try {
                     const result = await getNotesByUser(0);
-                    
-                    const filteredNotes = result.items.filter((note: any) => 
-                        note.museumObject && note.museumObject.id === museumObject.id);
 
-                    setNotesList(filteredNotes);
+                    if (result && result.items) {
+                        setNotesList(result.items);
+                    }
                 } catch (error) {
                     console.error("Error cargando las notas del usuario:", error);
                 }
@@ -79,10 +85,10 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
     const [saving, setSaving] = useState(false);
 
     const backgrounds: Record<string, string> = {
-        fish: "/fondo-marino-siluetas.png",
-        insects: "/fondo-insectos-siluetas.png",
-        fossils: "/fondo-fosiles-siluetas.png",
-        art: "/fondo-secundario-arte.png",
+        fish: fishSecondBackground,
+        insects: insectSecondBackground,
+        fossils: fossilSecondBackground,
+        art: artSecondBackground,
     };
 
 
@@ -138,9 +144,9 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
         try {
             await markObjectAsSeen(museumObject.id);
             setIsSeenState(true);
-            
-            await loadLoggedUser(); 
-            
+
+            await loadLoggedUser();
+
         } catch (error) {
             console.error("Error al marcar el objeto como visto:", error);
         } finally {
@@ -225,10 +231,10 @@ export default function ObjectDetail({ loaderData }: Route.ComponentProps) {
                     <Col md={6} xs={12}>
                         <Card className="shadow-lg border-0 rounded-4 overflow-hidden h-100 position-relative d-flex flex-column align-items-center justify-content-center bg-dark">
                             <Card.Img
-                                src={museumObject.image?.id ? `/api/v1/images/${museumObject.image.id}/media?v=${imageVersion}` : "/no_image.png"}
+                                src={museumObject.image?.id ? `/api/v1/images/${museumObject.image.id}/media?v=${imageVersion}` : noImage}
                                 className="w-100 h-100"
                                 style={{ objectFit: "cover", minHeight: "320px", maxHeight: "400px" }}
-                                onError={(e: any) => { e.target.src = "/no_image.png"; }}
+                                onError={(e: any) => { e.target.src = noImage; }}
                             />
 
                             {isAdmin && (
