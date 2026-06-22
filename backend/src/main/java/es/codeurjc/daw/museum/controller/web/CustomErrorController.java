@@ -1,4 +1,4 @@
-package es.codeurjc.daw.museum.controller.web; // He puesto tu paquete
+package es.codeurjc.daw.museum.controller.web; 
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;

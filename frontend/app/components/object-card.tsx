@@ -1,4 +1,4 @@
-import { Container, Card, Button, Badge } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 import type { MuseumObjectBasicDTO } from "~/dtos/MuseumObjectBasicDTO";
 
 interface ObjectCardProps {

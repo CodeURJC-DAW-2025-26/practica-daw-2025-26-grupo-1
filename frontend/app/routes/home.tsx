@@ -5,7 +5,7 @@ import Header from "~/components/header";
 import Footer from "~/components/footer";
 import type { Route } from "./+types/home";
 import Container from "react-bootstrap/esm/Container";
-import {ArrowLeft} from "react-bootstrap-icons";
+import { ArrowLeft } from "react-bootstrap-icons";
 
 
 export default function Home() {
@@ -40,40 +40,40 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <div
-            className="welcome-hero d-flex align-items-center py-5">
+      className="welcome-hero d-flex align-items-center py-5">
 
-            <Container className="px-4 px-lg-5 my-5">
-                <div className="row gx-4 gx-lg-5 align-items-center justify-content-center">
+      <Container className="px-4 px-lg-5 my-5">
+        <div className="row gx-4 gx-lg-5 align-items-center justify-content-center">
 
-                    <div className="col-md-6">
+          <div className="col-md-6">
 
-                        <div className="card mb-4 rounded-3 shadow-sm">
-                            <div className={`card-header py-3 text-center bg-danger text-white`}>
-                                <h4 className="my-0 fw-normal">Error en el sistema</h4>
-                            </div>
-                            <div className="card-body ">
+            <div className="card mb-4 rounded-3 shadow-sm">
+              <div className={`card-header py-3 text-center bg-danger text-white`}>
+                <h4 className="my-0 fw-normal">Error en el sistema</h4>
+              </div>
+              <div className="card-body ">
 
-                                <p className="card-text">{errorMessage}</p>
-                                <div className="d-flex justify-content-center gap-3 mt-3">
+                <p className="card-text">{errorMessage}</p>
+                <div className="d-flex justify-content-center gap-3 mt-3">
 
-                                    <div className="text-center">
-                                        <Link to="/sections" className={`btn btn-danger px-4 py-2 fs-5 d-flex align-items-center`}
-                                            >
-                                            <ArrowLeft className="me-2"/>
+                  <div className="text-center">
+                    <Link to="/sections" className={`btn btn-danger px-4 py-2 fs-5 d-flex align-items-center`}
+                    >
+                      <ArrowLeft className="me-2" />
 
-                                            Volver
-                                        </Link>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
+                      Volver
+                    </Link>
+                  </div>
 
                 </div>
-            </Container>
+
+              </div>
+            </div>
+
+          </div>
+
         </div>
+      </Container>
+    </div>
   );
 }
